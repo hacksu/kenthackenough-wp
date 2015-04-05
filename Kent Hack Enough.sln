@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kent Hack Enough", "Kent Hack Enough\Kent Hack Enough.csproj", "{A3B750A0-3533-49F9-887E-C9EAD7438734}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kent Hack Enough", "Kent Hack Enough\Kent Hack Enough.csproj", "{06E36E48-871F-4E60-9992-84F2F38696A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Debug|ARM.ActiveCfg = Debug|ARM
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Debug|ARM.Build.0 = Debug|ARM
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Debug|ARM.Deploy.0 = Debug|ARM
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Debug|x86.ActiveCfg = Debug|x86
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Debug|x86.Build.0 = Debug|x86
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Debug|x86.Deploy.0 = Debug|x86
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Release|ARM.ActiveCfg = Release|ARM
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Release|ARM.Build.0 = Release|ARM
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Release|ARM.Deploy.0 = Release|ARM
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Release|x86.ActiveCfg = Release|x86
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Release|x86.Build.0 = Release|x86
-		{A3B750A0-3533-49F9-887E-C9EAD7438734}.Release|x86.Deploy.0 = Release|x86
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Debug|ARM.ActiveCfg = Debug|ARM
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Debug|ARM.Build.0 = Debug|ARM
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Debug|ARM.Deploy.0 = Debug|ARM
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Debug|x86.ActiveCfg = Debug|x86
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Debug|x86.Build.0 = Debug|x86
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Debug|x86.Deploy.0 = Debug|x86
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Release|ARM.ActiveCfg = Release|ARM
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Release|ARM.Build.0 = Release|ARM
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Release|ARM.Deploy.0 = Release|ARM
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Release|x86.ActiveCfg = Release|x86
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Release|x86.Build.0 = Release|x86
+		{06E36E48-871F-4E60-9992-84F2F38696A3}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
