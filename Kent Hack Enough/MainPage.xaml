@@ -11,15 +11,18 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/share.png" Text="Share" />
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" />
+            <!--
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
                 <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
             </shell:ApplicationBar.MenuItems>
+            -->
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
@@ -92,13 +95,13 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,0,0,0" Canvas.ZIndex="2" Background="Black">
             <phone:Panorama>
-                <phone:PanoramaItem Header="Live Feed">
-                    This is where the messages will go...
+                <phone:PanoramaItem x:Name="LiveFeed" Header="Live Feed">
+                    
                 </phone:PanoramaItem>
-                <phone:PanoramaItem Header="Events" >
+                <phone:PanoramaItem x:Name="Events" Header="Events" >
                     This is where the list for the events will go...
                 </phone:PanoramaItem>
-                <phone:PanoramaItem Header="Calendar">
+                <phone:PanoramaItem x:Name="Calendar" Header="Calendar">
                     This is where the calendar will go...
                 </phone:PanoramaItem>
             </phone:Panorama>

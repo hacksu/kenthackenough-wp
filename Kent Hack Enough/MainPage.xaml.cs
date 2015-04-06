@@ -8,9 +8,12 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Kent_Hack_Enough.Resources;
+using Newtonsoft.Json;
 
 namespace Kent_Hack_Enough
 {
+
+    
     public partial class MainPage : PhoneApplicationPage
     {
         // Constructor
@@ -24,22 +27,33 @@ namespace Kent_Hack_Enough
 
         // Global Variables
         const int API_PORT = 80;
+        const string API_SERVER = "https://api.khe.io";
+
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+                       
+        }
+
+       
 
 
         // Application Bar
-        private void BuildLocalizedApplicationBar()
-        {
-            // Set the page's ApplicationBar to a new instance of ApplicationBar.
-            ApplicationBar = new ApplicationBar();
+        //private void BuildLocalizedApplicationBar()
+        //{
+        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
+        //    ApplicationBar = new ApplicationBar();
 
-            // Create a new button and set the text value to the localized string from AppResources.
-            ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/feature.settings.png", UriKind.Relative));
-            appBarButton.Text = AppResources.AppBarButtonText;
-            ApplicationBar.Buttons.Add(appBarButton);
+        //    // Create a new button and set the text value to the localized string from AppResources.
+        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/feature.settings.png", UriKind.Relative));
+        //    appBarButton.Text = AppResources.AppBarButtonText;
+        //    ApplicationBar.Buttons.Add(appBarButton);
 
-            // Create a new menu item with the localized string from AppResources.
-            ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-            ApplicationBar.MenuItems.Add(appBarMenuItem);
-        }
+        //    // Create a new menu item with the localized string from AppResources.
+        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
+        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
+        //}
+
+
     }
 }
