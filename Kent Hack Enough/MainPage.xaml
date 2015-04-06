@@ -32,7 +32,7 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -59,20 +59,49 @@
             CurrentUICulture of the app at run time.
          -->
 
-        <!--TitlePanel contains the name of the application and page title-->
+        <!--Header Background [START]-->
+        <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="4" Width="500" Height="100" Fill="#727272" RenderTransformOrigin="0.5,0.5" Opacity="0.6" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-20"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="4" Width="600" Height="100" Fill="#727272" RenderTransformOrigin="0.5,0.5" Opacity="0.6" >
+            <Rectangle.RenderTransform>
+                <CompositeTransform Rotation="-35"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <!--Header Background [END]-->
+
+
+
+        <!--TitlePanel [START]-->
         <StackPanel x:Name="TitlePanel" Grid.ColumnSpan="4" Grid.Row="0" Margin="12,0,0,0">
             <TextBlock Text="Kent Hack Enough - 2015" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,10,0,0" />
         </StackPanel>
-        
+        <!--TitlePanel [END]-->
+
+
+
+        <!--Card Suit Images [START]-->
         <Image x:Name="heart" Grid.Row="1" Grid.Column="0" Source="/Assets/CardSuits/heart.png" Height="50" />
         <Image x:Name="spade" Grid.Row="1" Grid.Column="1" Source="/Assets/CardSuits/spade_white.png" Height="50" />
         <Image x:Name="diamond" Grid.Row="1" Grid.Column="2" Source="/Assets/CardSuits/diamond.png" Height="50" />
         <Image x:Name="clover" Grid.Row="1" Grid.Column="3" Source="/Assets/CardSuits/clover_white.png" Height="50" />
-
+        <!--Card Suit Images [END]-->
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="2" Grid.ColumnSpan="4" Margin="12,0,12,0">
-
+        <Grid x:Name="ContentPanel" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,0,0,0" Canvas.ZIndex="2" Background="Black">
+            <phone:Panorama>
+                <phone:PanoramaItem Header="Events" >
+                    This is where the list for the events will go...
+                </phone:PanoramaItem>
+                <phone:PanoramaItem Header="Calendar">
+                    This is where the calendar will go...
+                </phone:PanoramaItem>
+                <phone:PanoramaItem Header="Messages">
+                    This is where the messages will go...
+                </phone:PanoramaItem>
+            </phone:Panorama>
         </Grid>
     </Grid>
 
