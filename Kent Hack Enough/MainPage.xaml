@@ -15,8 +15,8 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/share.png" Text="Share" />
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" />
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/share.png" Text="Share"/>
+            <shell:ApplicationBarIconButton x:Name="appSettings" IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="appSettings_Click" />
             <!--
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>

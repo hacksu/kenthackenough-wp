@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.IO.IsolatedStorage;
 
 namespace Kent_Hack_Enough
 {
@@ -51,7 +52,7 @@ namespace Kent_Hack_Enough
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            sldRefreshInterval.Value = 
+            sldRefreshInterval.Value = Convert.ToDouble(settings.RefreshIntervalSetting);
         }
     }
 }

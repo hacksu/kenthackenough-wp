@@ -20,81 +20,81 @@ namespace Kent_Hack_Enough
             request = (HttpWebRequest)WebRequest.Create(API_SERVER);
         }
 
-        public void On(string query, string result, List<string> headers){
+   //     public void On(string query, string result, List<string> headers){
 
-            Timer = new System.Threading.Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
+   //         Timer = new System.Threading.Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
 
-            for(int i = 0; i < headers.Count; i++){
-                request.Headers = headers[i].ToString();
-            }
-        }
+   //         for(int i = 0; i < headers.Count; i++){
+   //             request.Headers = headers[i].ToString();
+   //         }
+   //     }
 
-   void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-            Dispatcher.BeginInvoke(() =>
-                {
-                    prog.IsVisible = false;
-                });
-            try
-            {
-                string data = e.Result;
+   //void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+   //     {
+   //         Dispatcher.BeginInvoke(() =>
+   //             {
+   //                 prog.IsVisible = false;
+   //             });
+   //         try
+   //         {
+   //             string data = e.Result;
 
-                Dispatcher.BeginInvoke(() =>
-                {
-                    string[] lines;
-                    double temp;
+   //             Dispatcher.BeginInvoke(() =>
+   //             {
+   //                 string[] lines;
+   //                 double temp;
 
-                    lines = Regex.Split(data, "\n");
+   //                 lines = Regex.Split(data, "\n");
 
-                    temp = Convert.ToDouble(lines[3]);
-                    temp = Math.Round(temp, 0);
+   //                 temp = Convert.ToDouble(lines[3]);
+   //                 temp = Math.Round(temp, 0);
 
-                    curLoad1.Text = lines[0] + "%";
-                    curLoad5.Text = lines[1] + "%";
-                    curLoad15.Text = lines[2] + "%";
-                    curRAM.Text = Convert.ToString(temp) + "%";
-                    curDisk.Text = lines[4] + "%";
-                    curFanStatus.Text = lines[5];
+   //                 curLoad1.Text = lines[0] + "%";
+   //                 curLoad5.Text = lines[1] + "%";
+   //                 curLoad15.Text = lines[2] + "%";
+   //                 curRAM.Text = Convert.ToString(temp) + "%";
+   //                 curDisk.Text = lines[4] + "%";
+   //                 curFanStatus.Text = lines[5];
 
-                    if (lines[5] == "ON")
-                    {
-                        stkLightStatus.Background = new SolidColorBrush(Colors.Green);
-                    }
-                    else
-                    {
-                        stkLightStatus.Background = new SolidColorBrush(Colors.DarkGray);
-                    }
-                    curLightStatus.Text = lines[6];
+   //                 if (lines[5] == "ON")
+   //                 {
+   //                     stkLightStatus.Background = new SolidColorBrush(Colors.Green);
+   //                 }
+   //                 else
+   //                 {
+   //                     stkLightStatus.Background = new SolidColorBrush(Colors.DarkGray);
+   //                 }
+   //                 curLightStatus.Text = lines[6];
                     
-                });            
-            }
-            catch
-            {
-                return;
-            }   
-        }
+   //             });            
+   //         }
+   //         catch
+   //         {
+   //             return;
+   //         }   
+   //     }
 
-        private void TimerCallback(object state)
-        {
-            Dispatcher.BeginInvoke(() =>
-                {
-                    prog.IsVisible = true;
-                });
+   //     private void TimerCallback(object state)
+   //     {
+   //         Dispatcher.BeginInvoke(() =>
+   //             {
+   //                 prog.IsVisible = true;
+   //             });
 
-            WebClient webClient = new WebClient();
-            webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClient_DownloadStringCompleted);
-            webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
+   //         WebClient webClient = new WebClient();
+   //         webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClient_DownloadStringCompleted);
+   //         webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
 
-            if (settings.RaspberryPiAddressSetting != "e.x. 192.168.1.14")
-            {
-                webClient.DownloadStringAsync(new Uri("http://" + settings.RaspberryPiAddressSetting + "/mobile/status.php"));
-            }
-        }
+   //         if (settings.RaspberryPiAddressSetting != "e.x. 192.168.1.14")
+   //         {
+   //             webClient.DownloadStringAsync(new Uri("http://" + settings.RaspberryPiAddressSetting + "/mobile/status.php"));
+   //         }
+   //     }
 
 
-        NetworkCredential credentials = new NetworkCredential(userName.Text + ":^",password.Text + "=");
-        request.Credentials = credentials;
+   //     //NetworkCredential credentials = new NetworkCredential(userName.Text + ":^",password.Text + "=");
+   //     //request.Credentials = credentials;
 
-        request.BeginGetResponse(new AsyncCallback(GetSomeResponse), request);
+   //     request.BeginGetResponse(new AsyncCallback(GetSomeResponse), request);
     }
 }

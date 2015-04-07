@@ -22,7 +22,7 @@
 -->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="Save" />
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" Text="Save" Click="appBarSave_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

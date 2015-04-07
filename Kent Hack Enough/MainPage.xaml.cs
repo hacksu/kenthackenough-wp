@@ -35,6 +35,15 @@ namespace Kent_Hack_Enough
                        
         }
 
+        void appSettings_Click(object sender, EventArgs e)
+        {
+
+            
+            MainPage reloadPage = new MainPage();
+
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+        }
+
        
 
 
