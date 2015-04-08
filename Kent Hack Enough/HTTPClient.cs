@@ -6,6 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Windows.Web.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Threading;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Kent_Hack_Enough
 {
@@ -15,86 +20,80 @@ namespace Kent_Hack_Enough
         const string API_SERVER = "http://api.khe.pdilyard.com/v1.0/";
         HttpWebRequest request;
         System.Threading.Timer Timer;
+        private AppSettings settings = new AppSettings();
 
-        public void Connect(){
+
+
+        public void Connect(string server, int port){
             request = (HttpWebRequest)WebRequest.Create(API_SERVER);
         }
 
-   //     public void On(string query, string result, List<string> headers){
+        public void On()
+        {
+            Timer = new System.Threading.Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
+        }
 
-   //         Timer = new System.Threading.Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
-
-   //         for(int i = 0; i < headers.Count; i++){
-   //             request.Headers = headers[i].ToString();
-   //         }
-   //     }
-
-   //void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
-   //     {
-   //         Dispatcher.BeginInvoke(() =>
-   //             {
-   //                 prog.IsVisible = false;
-   //             });
-   //         try
-   //         {
-   //             string data = e.Result;
-
-   //             Dispatcher.BeginInvoke(() =>
-   //             {
-   //                 string[] lines;
-   //                 double temp;
-
-   //                 lines = Regex.Split(data, "\n");
-
-   //                 temp = Convert.ToDouble(lines[3]);
-   //                 temp = Math.Round(temp, 0);
-
-   //                 curLoad1.Text = lines[0] + "%";
-   //                 curLoad5.Text = lines[1] + "%";
-   //                 curLoad15.Text = lines[2] + "%";
-   //                 curRAM.Text = Convert.ToString(temp) + "%";
-   //                 curDisk.Text = lines[4] + "%";
-   //                 curFanStatus.Text = lines[5];
-
-   //                 if (lines[5] == "ON")
-   //                 {
-   //                     stkLightStatus.Background = new SolidColorBrush(Colors.Green);
-   //                 }
-   //                 else
-   //                 {
-   //                     stkLightStatus.Background = new SolidColorBrush(Colors.DarkGray);
-   //                 }
-   //                 curLightStatus.Text = lines[6];
+        void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
                     
-   //             });            
-   //         }
-   //         catch
-   //         {
-   //             return;
-   //         }   
-   //     }
+                   // main.prog.Visibility = System.Windows.Visibility.Collapsed;
+                });
+            try
+            {
+                string data = e.Result;
 
-   //     private void TimerCallback(object state)
-   //     {
-   //         Dispatcher.BeginInvoke(() =>
-   //             {
-   //                 prog.IsVisible = true;
-   //             });
+              //  Dispatcher.BeginInvoke(() =>
+               // {
+                var results = JsonConvert.DeserializeObject<dynamic>(e.Result);
 
-   //         WebClient webClient = new WebClient();
-   //         webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClient_DownloadStringCompleted);
-   //         webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
+                //LiveFeed feed;
 
-   //         if (settings.RaspberryPiAddressSetting != "e.x. 192.168.1.14")
-   //         {
-   //             webClient.DownloadStringAsync(new Uri("http://" + settings.RaspberryPiAddressSetting + "/mobile/status.php"));
-   //         }
-   //     }
+                //feed = results.;
+
+                //string id = results._id;
+               // string text = results.messages.text;
+                //int v = results.__v;
+                //DateTime date = results.created;
 
 
-   //     //NetworkCredential credentials = new NetworkCredential(userName.Text + ":^",password.Text + "=");
-   //     //request.Credentials = credentials;
+               RootObject Result = JsonConvert.DeserializeObject<RootObject>(e.Result);
 
-   //     request.BeginGetResponse(new AsyncCallback(GetSomeResponse), request);
+
+
+               // });
+
+                //Deployment.Current.Dispatcher.BeginInvoke(() =>
+                //{
+               settings.LiveFeedSetting = Result;
+               settings.Save();
+                //});
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void TimerCallback(object state)
+        {
+            //Dispatcher.BeginInvoke(() =>
+              //  {
+            
+
+
+            //        main.prog.Visibility = System.Windows.Visibility.Visible;
+              //  });
+
+            WebClient webClient = new WebClient();
+
+            webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClient_DownloadStringCompleted);
+
+            webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
+
+            
+            webClient.DownloadStringAsync(new Uri(API_SERVER + "/messages"));
+        }
     }
 }

@@ -13,6 +13,7 @@
 using System;
 using System.IO.IsolatedStorage;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Kent_Hack_Enough
 {
@@ -25,11 +26,13 @@ namespace Kent_Hack_Enough
         // The isolated storage key names of our settings
         const string FirstRunKeyName = "FirstRunDefault";
         const string RefreshIntervalKeyName = "RefreshInterval";
+        const string LiveFeedKeyName = "LiveFeed";
 
 
         // The default value of our settings
         const bool FirstRunDefault = true;
         const double RefreshIntervalDefault = 5;
+        const RootObject LiveFeedDefault = null;
 
         // Constructor that gets the application settings.
         public AppSettings()
@@ -128,6 +131,23 @@ namespace Kent_Hack_Enough
             set
             {
                 if (AddOrUpdateValue(RefreshIntervalKeyName, value))
+                {
+                    Save();
+                }
+            }
+        }
+
+
+        // Property to get and set LiveFeed Setting Key.
+        public RootObject LiveFeedSetting
+        {
+            get
+            {
+                return GetValueOrDefault<RootObject>(LiveFeedKeyName, LiveFeedDefault);
+            }
+            set
+            {
+                if (AddOrUpdateValue(LiveFeedKeyName, value))
                 {
                     Save();
                 }

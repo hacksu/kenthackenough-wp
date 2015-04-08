@@ -16,7 +16,8 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/share.png" Text="Share"/>
-            <shell:ApplicationBarIconButton x:Name="appSettings" IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="appSettings_Click" />
+            <shell:ApplicationBarIconButton x:Name="appBarRefresh" IconUri="/Assets/AppBar/sync.png" Text="Refresh" Click="appBarRefresh_Click" />
+            <shell:ApplicationBarIconButton x:Name="appSettings" IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="appBarSettings_Click" />
             <!--
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
@@ -78,6 +79,7 @@
 
 
         <!--TitlePanel [START]-->
+        <ProgressBar x:Name="prog" Margin="0,-15,0,0" Width="Auto"/>
         <StackPanel x:Name="TitlePanel" Grid.ColumnSpan="4" Grid.Row="0" Margin="12,0,0,0">
             <TextBlock Text="Kent Hack Enough - 2015" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,10,0,0" />
         </StackPanel>
@@ -96,7 +98,15 @@
         <Grid x:Name="ContentPanel" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,0,0,0" Canvas.ZIndex="2" Background="Black">
             <phone:Panorama>
                 <phone:PanoramaItem x:Name="LiveFeed" Header="Live Feed">
-                    
+                    <ScrollViewer x:Name="LiveFeedScroll">
+                        <StackPanel x:Name="LiveFeedItems">
+                            <TextBlock>MEOW MEOW</TextBlock>
+                            <TextBlock>MEOW MEOW
+                            </TextBlock>
+                            <TextBlock>MEOW MEOW
+                            </TextBlock>
+                        </StackPanel>
+                    </ScrollViewer>
                 </phone:PanoramaItem>
                 <phone:PanoramaItem x:Name="Events" Header="Events" >
                     This is where the list for the events will go...

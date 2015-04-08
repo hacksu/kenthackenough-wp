@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="AppSettings.cs" />
     <Compile Include="HTTPClient.cs" />
+    <Compile Include="LiveFeed.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

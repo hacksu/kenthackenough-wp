@@ -16,6 +16,8 @@ namespace Kent_Hack_Enough
     
     public partial class MainPage : PhoneApplicationPage
     {
+        private AppSettings settings = new AppSettings();
+
         // Constructor
         public MainPage()
         {
@@ -27,21 +29,37 @@ namespace Kent_Hack_Enough
 
         // Global Variables
         const int API_PORT = 80;
-        const string API_SERVER = "https://api.khe.io";
+        const string API_SERVER = "http://api.khe.pdilyard.com/v1.0/";
 
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-                       
+            HTTPClient client = new HTTPClient();
+
+            client.Connect(API_SERVER, API_PORT);
+            client.On();
+
+
+
         }
 
-        void appSettings_Click(object sender, EventArgs e)
+        void appBarSettings_Click(object sender, EventArgs e)
         {
-
-            
-            MainPage reloadPage = new MainPage();
-
             NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+        }
+
+        private void appBarRefresh_Click(object sender, EventArgs e)
+        {
+            LiveFeedItems.Children.Clear();
+
+            for (int i = 0; i < settings.LiveFeedSetting.messages.Count(); i++)
+            {
+                TextBlock txtBlk = new TextBlock();
+
+                txtBlk.Text = settings.LiveFeedSetting.messages[i].text.ToString();
+
+                LiveFeedItems.Children.Add(txtBlk);
+            }
         }
 
        
