@@ -78,8 +78,9 @@ namespace Kent_Hack_Enough
         private void refreshLiveFeed()
         {
             LiveFeedItems.Children.Clear();
+            int j = settings.LiveFeedSetting.messages.Count()-1;
 
-            for (int i = 0; i < settings.LiveFeedSetting.messages.Count(); i++)
+            for (int i = j; i > 0; i--)
             {
                 TextBlock txtMsg = new TextBlock();
                 TextBlock txtDate = new TextBlock();
@@ -87,13 +88,14 @@ namespace Kent_Hack_Enough
                 
 
                 stkContainer.Height = 100;
-                stkContainer.Background = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255));
+                stkContainer.Background = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
                 stkContainer.Margin = new System.Windows.Thickness(5.0);
                 
 
                 txtMsg.Text = settings.LiveFeedSetting.messages[i].text.ToString();
                 txtDate.Text = settings.LiveFeedSetting.messages[i].created.ToString();
                 txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
 
                 stkContainer.Children.Add(txtMsg);
                 stkContainer.Children.Add(txtDate);
