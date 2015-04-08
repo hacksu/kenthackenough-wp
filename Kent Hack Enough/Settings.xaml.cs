@@ -54,5 +54,10 @@ namespace Kent_Hack_Enough
         {
             sldRefreshInterval.Value = Convert.ToDouble(settings.RefreshIntervalSetting);
         }
+
+        private void btnClearCache_Click(object sender, RoutedEventArgs e)
+        {
+            settings.LiveFeedSetting = null;
+        }
     }
 }
