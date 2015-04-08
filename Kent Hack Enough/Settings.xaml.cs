@@ -20,7 +20,6 @@ namespace Kent_Hack_Enough
             InitializeComponent();
 
             sldRefreshInterval.ValueChanged += new RoutedPropertyChangedEventHandler<double>(sldRefreshInterval_ValueChanged);
-
         }
 
 
@@ -30,17 +29,9 @@ namespace Kent_Hack_Enough
             set;
         }
 
-        /// <summary>
-        /// Done button clicked event handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void appBarSave_Click(object sender, EventArgs e)
         {
-            
             settings.RefreshIntervalSetting = Convert.ToInt32(Math.Round(sldRefreshInterval.Value, 0));
-
-            MainPage reloadPage = new MainPage();
 
             NavigationService.GoBack();
         }

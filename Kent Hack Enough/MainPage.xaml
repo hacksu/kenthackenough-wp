@@ -15,7 +15,7 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/share.png" Text="Share"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/share.png" Text="Share" IsEnabled="False"/>
             <shell:ApplicationBarIconButton x:Name="appBarRefresh" IconUri="/Assets/AppBar/sync.png" Text="Refresh" Click="appBarRefresh_Click" />
             <shell:ApplicationBarIconButton x:Name="appSettings" IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="appBarSettings_Click" />
             <!--
@@ -43,25 +43,6 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
-        <!-- LOCALIZATION NOTE:
-            To localize the displayed strings copy their values to appropriately named
-            keys in the app's neutral language resource file (AppResources.resx) then
-            replace the hard-coded text value between the attributes' quotation marks
-            with the binding clause whose path points to that string name.
-
-            For example:
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            This binding points to the template's string resource named "ApplicationTitle".
-
-            Adding supported languages in the Project Properties tab will create a
-            new resx file per language that can carry the translated values of your
-            UI strings. The binding in these examples will cause the value of the
-            attributes to be drawn from the .resx file that matches the
-            CurrentUICulture of the app at run time.
-         -->
 
         <!--Header Background [START]-->
         <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="4" Width="500" Height="100" Fill="#727272" RenderTransformOrigin="0.5,0.5" Opacity="0.6" >

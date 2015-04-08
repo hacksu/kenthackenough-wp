@@ -10,6 +10,8 @@ using Microsoft.Phone.Shell;
 using Kent_Hack_Enough.Resources;
 using Newtonsoft.Json;
 using System.Windows.Threading;
+using System.Windows.Media;
+
 
 namespace Kent_Hack_Enough
 {  
@@ -79,11 +81,25 @@ namespace Kent_Hack_Enough
 
             for (int i = 0; i < settings.LiveFeedSetting.messages.Count(); i++)
             {
-                TextBlock txtBlk = new TextBlock();
+                TextBlock txtMsg = new TextBlock();
+                TextBlock txtDate = new TextBlock();
+                StackPanel stkContainer = new StackPanel();
+                
 
-                txtBlk.Text = settings.LiveFeedSetting.messages[i].text.ToString();
+                stkContainer.Height = 100;
+                stkContainer.Background = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255));
+                stkContainer.Margin = new System.Windows.Thickness(5.0);
+                
 
-                LiveFeedItems.Children.Add(txtBlk);
+                txtMsg.Text = settings.LiveFeedSetting.messages[i].text.ToString();
+                txtDate.Text = settings.LiveFeedSetting.messages[i].created.ToString();
+                txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+
+                stkContainer.Children.Add(txtMsg);
+                stkContainer.Children.Add(txtDate);
+
+
+                LiveFeedItems.Children.Add(stkContainer);
             }
         }
 

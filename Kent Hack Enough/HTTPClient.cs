@@ -66,7 +66,6 @@ namespace Kent_Hack_Enough
             webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClient_DownloadStringCompleted);
 
             webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
-
             
             webClient.DownloadStringAsync(new Uri(API_SERVER + "/messages"));
         }
