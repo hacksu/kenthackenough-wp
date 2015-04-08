@@ -97,6 +97,8 @@
                 <TextBlock Text="Refresh Interval (seconds):"></TextBlock>
                 <TextBlock Height="25" Width="30" VerticalAlignment="Top" Margin="20,25,0,0" HorizontalAlignment="Left" Name="blkRefreshInterval"></TextBlock>
             <Slider Minimum="1" Maximum="60" Margin="50,10,-10,0" VerticalAlignment="Top" Name="sldRefreshInterval" SmallChange="1"></Slider>
+            
+         
         </Grid>
     </Grid>
 

@@ -7,22 +7,19 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Windows.Web.Http;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Kent_Hack_Enough
 {
-
     class HTTPClient
     {
         const string API_SERVER = "http://api.khe.pdilyard.com/v1.0/";
         HttpWebRequest request;
         System.Threading.Timer Timer;
         private AppSettings settings = new AppSettings();
-
-
+        
 
         public void Connect(string server, int port){
             request = (HttpWebRequest)WebRequest.Create(API_SERVER);
@@ -35,40 +32,21 @@ namespace Kent_Hack_Enough
 
         void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
+            //Deployment.Current.Dispatcher.BeginInvoke(() =>
+            //    {
                     
-                   // main.prog.Visibility = System.Windows.Visibility.Collapsed;
-                });
+            //       // main.prog.Visibility = System.Windows.Visibility.Collapsed;
+            //    });
             try
             {
                 string data = e.Result;
 
-              //  Dispatcher.BeginInvoke(() =>
-               // {
                 var results = JsonConvert.DeserializeObject<dynamic>(e.Result);
 
-                //LiveFeed feed;
-
-                //feed = results.;
-
-                //string id = results._id;
-               // string text = results.messages.text;
-                //int v = results.__v;
-                //DateTime date = results.created;
-
-
                RootObject Result = JsonConvert.DeserializeObject<RootObject>(e.Result);
-
-
-
-               // });
-
-                //Deployment.Current.Dispatcher.BeginInvoke(() =>
-                //{
+               
                settings.LiveFeedSetting = Result;
                settings.Save();
-                //});
             }
             catch
             {
@@ -80,9 +58,6 @@ namespace Kent_Hack_Enough
         {
             //Dispatcher.BeginInvoke(() =>
               //  {
-            
-
-
             //        main.prog.Visibility = System.Windows.Visibility.Visible;
               //  });
 

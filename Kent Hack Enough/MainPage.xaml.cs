@@ -9,14 +9,14 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Kent_Hack_Enough.Resources;
 using Newtonsoft.Json;
+using System.Windows.Threading;
 
 namespace Kent_Hack_Enough
-{
-
-    
+{  
     public partial class MainPage : PhoneApplicationPage
     {
         private AppSettings settings = new AppSettings();
+        ProgressIndicator prog;
 
         // Constructor
         public MainPage()
@@ -37,10 +37,19 @@ namespace Kent_Hack_Enough
             HTTPClient client = new HTTPClient();
 
             client.Connect(API_SERVER, API_PORT);
+            SystemTray.SetIsVisible(this, true);
+            SystemTray.SetOpacity(this, 0);
+
+            prog = new ProgressIndicator();
+            prog.IsIndeterminate = true;
+            prog.IsVisible = true;
+
+            SystemTray.SetProgressIndicator(this, prog);
             client.On();
 
+            refreshLiveFeed();
 
-
+            prog.IsVisible = false;
         }
 
         void appBarSettings_Click(object sender, EventArgs e)
@@ -49,6 +58,22 @@ namespace Kent_Hack_Enough
         }
 
         private void appBarRefresh_Click(object sender, EventArgs e)
+        {
+            HTTPClient client = new HTTPClient();
+
+            client.Connect(API_SERVER, API_PORT);
+            prog.IsVisible = true;
+
+            SystemTray.SetProgressIndicator(this, prog);
+            client.On();
+
+            refreshLiveFeed();
+
+           // prog.IsVisible = false;
+        }
+
+
+        private void refreshLiveFeed()
         {
             LiveFeedItems.Children.Clear();
 
@@ -61,9 +86,6 @@ namespace Kent_Hack_Enough
                 LiveFeedItems.Children.Add(txtBlk);
             }
         }
-
-       
-
 
         // Application Bar
         //private void BuildLocalizedApplicationBar()
