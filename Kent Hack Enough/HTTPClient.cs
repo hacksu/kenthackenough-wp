@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Windows.Web.Http;
-using System.Threading;
-using System.Windows.Threading;
+using System.Threading; 
+using System.Threading.Tasks; 
+using System.Windows.Threading; 
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,14 +22,46 @@ namespace Kent_Hack_Enough
         private AppSettings settings = new AppSettings();
         
 
+
         public void Connect(string server, int port){
             request = (HttpWebRequest)WebRequest.Create(API_SERVER);
         }
 
-        public void On()
+        public async Task On()
         {
-            Timer = new System.Threading.Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
+            await MethodAsync();
         }
+
+        async Task<int> MethodAsync()
+        {
+            // start the Method task
+            var task1 = Task.Run(() => getData());
+
+            // start the timeout task
+            var task2 = Task.Delay((Convert.ToInt16(settings.RefreshIntervalSetting * 1000)));
+
+            // either task1 or task2
+            //var task = await Task.WhenAny(task1, task2);
+
+            wait Task.Wait(task1);
+            while (!task1.IsCompleted)
+            {
+
+            }
+
+            throw new TaskCanceledException();
+
+
+            
+        }
+
+        //async Task<Timer> On()
+        //{
+
+
+        //    Timer = new Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
+        //    await Task.Run(Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
+        //}
 
         void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
@@ -54,7 +87,7 @@ namespace Kent_Hack_Enough
             }
         }
 
-        private void TimerCallback(object state)
+        private void getData()
         {
             //Dispatcher.BeginInvoke(() =>
               //  {
