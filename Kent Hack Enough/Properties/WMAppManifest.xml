@@ -2,7 +2,7 @@
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2014/deployment" AppPlatformVersion="8.1">
   <DefaultLanguage xmlns="" code="en-US"/>
-  <App xmlns="" ProductID="{06e36e48-871f-4e60-9992-84f2f38696a3}" Title="Kent Hack Enough" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="Kent_Hack_Enough author" Description="Sample description" SDOptOut ="false" BackUpOptOut ="false" Publisher="Kent_Hack_Enough" PublisherID="{922460a1-edf7-49e4-85aa-6c4926dcd44a}">
+  <App xmlns="" ProductID="{06e36e48-871f-4e60-9992-84f2f38696a3}" Title="Kent Hack Enough" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="Blake Warrington" Description="Sample description" SDOptOut ="false" BackUpOptOut ="false" Publisher="Kent State University - Hacksu" PublisherID="{922460a1-edf7-49e4-85aa-6c4926dcd44a}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING"/>
@@ -20,7 +20,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>Kent_Hack_Enough</Title>
+          <Title>Kent Hack Enough</Title>
           <BackContent></BackContent>
           <BackBackgroundImageURI></BackBackgroundImageURI>
           <BackTitle></BackTitle>
