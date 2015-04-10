@@ -51,10 +51,10 @@ namespace Kent_Hack_Enough
         private void appBarRefresh_Click(object sender, EventArgs e)
         {
             HTTPClient client = new HTTPClient();
-
+            string data = null;
             client.Connect(API_SERVER, API_PORT);
 
-           // client.On();
+           client.On("/messages", "", data);
         }
 
         // Application Bar
