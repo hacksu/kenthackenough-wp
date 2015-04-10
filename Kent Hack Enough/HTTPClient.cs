@@ -30,9 +30,11 @@ namespace Kent_Hack_Enough
         }
 
 
-        public void On()
+        public void On(string nsp, string cmd, string data)
         {
-            Timer = new Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
+            SocketRequest obj = new SocketRequest(nsp, cmd, data);
+
+            Timer = new Timer(TimerCallback, obj, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
 
@@ -102,6 +104,7 @@ namespace Kent_Hack_Enough
             });
         }
 
+        #region WebCleint
 
         void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
@@ -112,6 +115,8 @@ namespace Kent_Hack_Enough
                 var results = JsonConvert.DeserializeObject<dynamic>(e.Result);
 
                 RootObject Result = JsonConvert.DeserializeObject<RootObject>(e.Result);
+
+
 
                 refreshLiveFeed();
 
@@ -141,7 +146,6 @@ namespace Kent_Hack_Enough
                 {
                     //throw;
                 }
-            
             });
 
             
@@ -150,8 +154,12 @@ namespace Kent_Hack_Enough
             webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClient_DownloadStringCompleted);
 
             webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
-            
-            webClient.DownloadStringAsync(new Uri(API_SERVER + "/messages"));
+
+            SocketRequest obj = (SocketRequest)state;
+
+            webClient.DownloadStringAsync(new Uri(API_SERVER + obj.getNsp()));
         }
+
+        #endregion
     }
 }

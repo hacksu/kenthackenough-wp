@@ -38,8 +38,8 @@ namespace Kent_Hack_Enough
             HTTPClient client = new HTTPClient();
 
             client.Connect(API_SERVER, API_PORT);
-
-            client.On();
+            string data = null;
+            client.On("/messages", "", data);
         }
 
         void appBarSettings_Click(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace Kent_Hack_Enough
 
             client.Connect(API_SERVER, API_PORT);
 
-            client.On();
+           // client.On();
         }
 
         // Application Bar
