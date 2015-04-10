@@ -18,9 +18,6 @@ namespace Kent_Hack_Enough
     public partial class MainPage : PhoneApplicationPage
     {
         private AppSettings settings = new AppSettings();
-        ProgressIndicator prog;
-
-
 
         // Constructor
         public MainPage()
@@ -55,47 +52,9 @@ namespace Kent_Hack_Enough
             HTTPClient client = new HTTPClient();
 
             client.Connect(API_SERVER, API_PORT);
-            //prog.IsVisible = true;
-
-            //SystemTray.SetProgressIndicator(this, prog);
 
             client.On();
-
-            //refreshLiveFeed();
-
-           // prog.IsVisible = false;
         }
-
-
-        //private void refreshLiveFeed()
-        //{
-        //    LiveFeedItems.Children.Clear();
-        //    int j = settings.LiveFeedSetting.messages.Count() - 1;
-
-        //    for (int i = j; i > 0; i--)
-        //    {
-        //        TextBlock txtMsg = new TextBlock();
-        //        TextBlock txtDate = new TextBlock();
-        //        StackPanel stkContainer = new StackPanel();
-
-
-        //        stkContainer.Height = 100;
-        //        stkContainer.Background = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
-        //        stkContainer.Margin = new System.Windows.Thickness(5.0);
-
-
-        //        txtMsg.Text = settings.LiveFeedSetting.messages[i].text.ToString();
-        //        txtDate.Text = settings.LiveFeedSetting.messages[i].created.ToString();
-        //        txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-        //        txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-
-        //        stkContainer.Children.Add(txtMsg);
-        //        stkContainer.Children.Add(txtDate);
-
-
-        //        LiveFeedItems.Children.Add(stkContainer);
-        //    }
-        //}
 
         // Application Bar
         //private void BuildLocalizedApplicationBar()

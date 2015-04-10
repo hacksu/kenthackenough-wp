@@ -23,17 +23,18 @@ namespace Kent_Hack_Enough
         HttpWebRequest request;
         System.Threading.Timer Timer;
         private AppSettings settings = new AppSettings();
-        ProgressIndicator prog;
 
 
         public void Connect(string server, int port){
             request = (HttpWebRequest)WebRequest.Create(API_SERVER);
         }
 
+
         public void On()
         {
             Timer = new Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
+
 
         private void toggleProg()
         {
@@ -54,12 +55,9 @@ namespace Kent_Hack_Enough
                 }
                 catch (Exception)
                 {
-                    
                  //   throw;
                 }
             });
-
-          
         }
 
         private void refreshLiveFeed()
@@ -99,11 +97,11 @@ namespace Kent_Hack_Enough
                 }
                 catch (Exception)
                 {
-                    
                  //   throw;
                 }
             });
         }
+
 
         void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
@@ -128,33 +126,25 @@ namespace Kent_Hack_Enough
             toggleProg();
         }
 
+
         private void TimerCallback(object state)
         {
-            //Dispatcher.BeginInvoke(() =>
-              //  {
-            //        main.prog.Visibility = System.Windows.Visibility.Visible;
-              //  });
-
-        Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,() =>
-        {
-            // Your UI update code goes here!
-            try
+            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,() =>
             {
-                MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-                toggleProg();
-            }
-            catch (Exception)
-            {
-
-                //throw;
-            }
+                // Your UI update code goes here!
+                try
+                {
+                    MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
+                    toggleProg();
+                }
+                catch (Exception)
+                {
+                    //throw;
+                }
             
-        });
+            });
 
-
-
-
-
+            
             WebClient webClient = new WebClient();
 
             webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClient_DownloadStringCompleted);

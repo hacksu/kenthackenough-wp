@@ -34,6 +34,7 @@ namespace Kent_Hack_Enough
         const double RefreshIntervalDefault = 5;
         const RootObject LiveFeedDefault = null;
 
+
         // Constructor that gets the application settings.
         public AppSettings()
         {
