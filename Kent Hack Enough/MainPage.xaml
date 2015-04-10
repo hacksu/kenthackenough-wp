@@ -46,7 +46,7 @@
 
 
 
-        <ProgressBar x:Name="progBar" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.ColumnSpan="4" IsIndeterminate="True" />
+        <ProgressBar x:Name="progBar" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.ColumnSpan="4" IsIndeterminate="True" Visibility="Collapsed"/>
 
         <!--Header Background [START]-->
         <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="4" Width="500" Height="100" Fill="#727272" RenderTransformOrigin="0.5,0.5" Opacity="0.6" >

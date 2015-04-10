@@ -71,9 +71,9 @@ namespace Kent_Hack_Enough
                      // Your UI update code goes here!
                 MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content; 
                 main.LiveFeedItems.Children.Clear();
-                int j = settings.LiveFeedSetting.messages.Count() - 1;
+                int j = settings.LiveFeedSetting.messages.Count()-1;
 
-                for (int i = j; i > 0; i--)
+                for (int i = j; i >= 0; i--)
                 {
                     TextBlock txtMsg = new TextBlock();
                     TextBlock txtDate = new TextBlock();
@@ -103,14 +103,10 @@ namespace Kent_Hack_Enough
                  //   throw;
                 }
             });
-
-            toggleProg();
         }
 
         void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            toggleProg();
-
             try
             {
                 string data = e.Result;
@@ -128,6 +124,8 @@ namespace Kent_Hack_Enough
             {
                 return;
             }
+
+            toggleProg();
         }
 
         private void TimerCallback(object state)
@@ -143,12 +141,11 @@ namespace Kent_Hack_Enough
             try
             {
                 MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-                main.progBar.Visibility = Visibility.Visible;
-                MessageBox.Show("UPDATING");
+                toggleProg();
             }
             catch (Exception)
             {
-                
+
                 //throw;
             }
             
