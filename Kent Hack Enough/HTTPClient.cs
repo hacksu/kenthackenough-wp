@@ -114,14 +114,16 @@ namespace Kent_Hack_Enough
 
                 var results = JsonConvert.DeserializeObject<dynamic>(e.Result);
 
+                //e.Result.Contains("start");
+
                 RootObject Result = JsonConvert.DeserializeObject<RootObject>(e.Result);
-
-
-
-                refreshLiveFeed();
 
                 settings.LiveFeedSetting = Result;
                 settings.Save();
+
+                refreshLiveFeed();
+
+                
             }
             catch
             {

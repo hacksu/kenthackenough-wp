@@ -17,5 +17,9 @@ namespace Kent_Hack_Enough
     public class RootObject
     {
         public List<LiveFeed> messages { get; set; }
+        public void parseText()
+        {
+
+        }
     }
 }

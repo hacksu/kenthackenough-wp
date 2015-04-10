@@ -40,6 +40,7 @@ namespace Kent_Hack_Enough
             client.Connect(API_SERVER, API_PORT);
             string data = null;
             client.On("/messages", "", data);
+            //client.On("/events", "", data);
         }
 
         void appBarSettings_Click(object sender, EventArgs e)
