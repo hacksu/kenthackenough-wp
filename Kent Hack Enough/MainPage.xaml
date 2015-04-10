@@ -27,7 +27,7 @@
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
-
+    
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -43,6 +43,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+
+
+        <ProgressBar x:Name="progBar" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.ColumnSpan="4" IsIndeterminate="True" />
 
         <!--Header Background [START]-->
         <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="4" Width="500" Height="100" Fill="#727272" RenderTransformOrigin="0.5,0.5" Opacity="0.6" >

@@ -20,6 +20,8 @@ namespace Kent_Hack_Enough
         private AppSettings settings = new AppSettings();
         ProgressIndicator prog;
 
+
+
         // Constructor
         public MainPage()
         {
@@ -39,19 +41,8 @@ namespace Kent_Hack_Enough
             HTTPClient client = new HTTPClient();
 
             client.Connect(API_SERVER, API_PORT);
-            SystemTray.SetIsVisible(this, true);
-            SystemTray.SetOpacity(this, 0);
 
-            prog = new ProgressIndicator();
-            prog.IsIndeterminate = true;
-            prog.IsVisible = true;
-
-            SystemTray.SetProgressIndicator(this, prog);
             client.On();
-
-            refreshLiveFeed();
-
-            prog.IsVisible = false;
         }
 
         void appBarSettings_Click(object sender, EventArgs e)
@@ -64,47 +55,47 @@ namespace Kent_Hack_Enough
             HTTPClient client = new HTTPClient();
 
             client.Connect(API_SERVER, API_PORT);
-            prog.IsVisible = true;
+            //prog.IsVisible = true;
 
-            SystemTray.SetProgressIndicator(this, prog);
+            //SystemTray.SetProgressIndicator(this, prog);
 
             client.On();
 
-            refreshLiveFeed();
+            //refreshLiveFeed();
 
            // prog.IsVisible = false;
         }
 
 
-        private void refreshLiveFeed()
-        {
-            LiveFeedItems.Children.Clear();
-            int j = settings.LiveFeedSetting.messages.Count() - 1;
+        //private void refreshLiveFeed()
+        //{
+        //    LiveFeedItems.Children.Clear();
+        //    int j = settings.LiveFeedSetting.messages.Count() - 1;
 
-            for (int i = j; i > 0; i--)
-            {
-                TextBlock txtMsg = new TextBlock();
-                TextBlock txtDate = new TextBlock();
-                StackPanel stkContainer = new StackPanel();
-
-
-                stkContainer.Height = 100;
-                stkContainer.Background = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
-                stkContainer.Margin = new System.Windows.Thickness(5.0);
+        //    for (int i = j; i > 0; i--)
+        //    {
+        //        TextBlock txtMsg = new TextBlock();
+        //        TextBlock txtDate = new TextBlock();
+        //        StackPanel stkContainer = new StackPanel();
 
 
-                txtMsg.Text = settings.LiveFeedSetting.messages[i].text.ToString();
-                txtDate.Text = settings.LiveFeedSetting.messages[i].created.ToString();
-                txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-
-                stkContainer.Children.Add(txtMsg);
-                stkContainer.Children.Add(txtDate);
+        //        stkContainer.Height = 100;
+        //        stkContainer.Background = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
+        //        stkContainer.Margin = new System.Windows.Thickness(5.0);
 
 
-                LiveFeedItems.Children.Add(stkContainer);
-            }
-        }
+        //        txtMsg.Text = settings.LiveFeedSetting.messages[i].text.ToString();
+        //        txtDate.Text = settings.LiveFeedSetting.messages[i].created.ToString();
+        //        txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+        //        txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+
+        //        stkContainer.Children.Add(txtMsg);
+        //        stkContainer.Children.Add(txtDate);
+
+
+        //        LiveFeedItems.Children.Add(stkContainer);
+        //    }
+        //}
 
         // Application Bar
         //private void BuildLocalizedApplicationBar()

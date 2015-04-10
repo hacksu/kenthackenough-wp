@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Windows.Web.Http;
 using System.Threading; 
-using System.Threading.Tasks; 
 using System.Windows.Threading; 
 using System.Windows;
 using System.Windows.Controls;
+using Windows.UI.Core;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using System.Windows.Media;
 
 namespace Kent_Hack_Enough
 {
@@ -20,66 +23,106 @@ namespace Kent_Hack_Enough
         HttpWebRequest request;
         System.Threading.Timer Timer;
         private AppSettings settings = new AppSettings();
-        
+        ProgressIndicator prog;
 
 
         public void Connect(string server, int port){
             request = (HttpWebRequest)WebRequest.Create(API_SERVER);
         }
 
-        public async Task On()
+        public void On()
         {
-            await MethodAsync();
+            Timer = new Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
-        async Task<int> MethodAsync()
+        private void toggleProg()
         {
-            // start the Method task
-            var task1 = Task.Run(() => getData());
-
-            // start the timeout task
-            var task2 = Task.Delay((Convert.ToInt16(settings.RefreshIntervalSetting * 1000)));
-
-            // either task1 or task2
-            //var task = await Task.WhenAny(task1, task2);
-
-            wait Task.Wait(task1);
-            while (!task1.IsCompleted)
+            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
+                // Your UI update code goes here!
+                try
+                {
+                    MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
+                    if (main.progBar.Visibility == Visibility.Collapsed)
+                    {
+                        main.progBar.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        main.progBar.Visibility = Visibility.Collapsed;
+                    }
+                }
+                catch (Exception)
+                {
+                    
+                 //   throw;
+                }
+            });
 
-            }
-
-            throw new TaskCanceledException();
-
-
-            
+          
         }
 
-        //async Task<Timer> On()
-        //{
+        private void refreshLiveFeed()
+        {
+            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                try
+                {
+                     // Your UI update code goes here!
+                MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content; 
+                main.LiveFeedItems.Children.Clear();
+                int j = settings.LiveFeedSetting.messages.Count() - 1;
+
+                for (int i = j; i > 0; i--)
+                {
+                    TextBlock txtMsg = new TextBlock();
+                    TextBlock txtDate = new TextBlock();
+                    StackPanel stkContainer = new StackPanel();
 
 
-        //    Timer = new Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
-        //    await Task.Run(Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
-        //}
+                    stkContainer.Height = 100;
+                    stkContainer.Background = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
+                    stkContainer.Margin = new System.Windows.Thickness(5.0);
+
+
+                    txtMsg.Text = settings.LiveFeedSetting.messages[i].text.ToString();
+                    txtDate.Text = settings.LiveFeedSetting.messages[i].created.ToString();
+                    txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                    txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+
+                    stkContainer.Children.Add(txtMsg);
+                    stkContainer.Children.Add(txtDate);
+
+
+                    main.LiveFeedItems.Children.Add(stkContainer);
+                }
+                }
+                catch (Exception)
+                {
+                    
+                 //   throw;
+                }
+            });
+
+            toggleProg();
+        }
 
         void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            //Deployment.Current.Dispatcher.BeginInvoke(() =>
-            //    {
-                    
-            //       // main.prog.Visibility = System.Windows.Visibility.Collapsed;
-            //    });
+            toggleProg();
+
             try
             {
                 string data = e.Result;
 
                 var results = JsonConvert.DeserializeObject<dynamic>(e.Result);
 
-               RootObject Result = JsonConvert.DeserializeObject<RootObject>(e.Result);
-               
-               settings.LiveFeedSetting = Result;
-               settings.Save();
+                RootObject Result = JsonConvert.DeserializeObject<RootObject>(e.Result);
+
+                refreshLiveFeed();
+
+                settings.LiveFeedSetting = Result;
+                settings.Save();
             }
             catch
             {
@@ -87,12 +130,33 @@ namespace Kent_Hack_Enough
             }
         }
 
-        private void getData()
+        private void TimerCallback(object state)
         {
             //Dispatcher.BeginInvoke(() =>
               //  {
             //        main.prog.Visibility = System.Windows.Visibility.Visible;
               //  });
+
+        Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,() =>
+        {
+            // Your UI update code goes here!
+            try
+            {
+                MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
+                main.progBar.Visibility = Visibility.Visible;
+                MessageBox.Show("UPDATING");
+            }
+            catch (Exception)
+            {
+                
+                //throw;
+            }
+            
+        });
+
+
+
+
 
             WebClient webClient = new WebClient();
 
