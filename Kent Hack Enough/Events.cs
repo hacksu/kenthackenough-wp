@@ -14,7 +14,7 @@ using Windows.UI.Core;
 
 namespace Kent_Hack_Enough
 {
-    class Events
+    public class Events
     {
         public string _id { get; set; }
         public string name { get; set; }
@@ -24,7 +24,7 @@ namespace Kent_Hack_Enough
         public bool notify { get; set; }
     }
 
-    class RootEvents
+    public class RootEvents
     {
         public List<Events> events { get; set; }
     }
@@ -157,6 +157,7 @@ namespace Kent_Hack_Enough
 
 
 
+
         #region WebCleint
 
         void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -208,6 +209,6 @@ namespace Kent_Hack_Enough
 
             webClient.DownloadStringAsync(new Uri(API_SERVER + "/events"));
         }
-    }
         #endregion
+    }
 }
