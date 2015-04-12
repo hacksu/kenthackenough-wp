@@ -29,22 +29,22 @@ namespace Kent_Hack_Enough
         public List<Events> events { get; set; }
     }
 
-     public class Event
+    public class Event
     {
         const string API_SERVER = "http://api.khe.pdilyard.com/v1.0/";
         HttpWebRequest request;
         System.Threading.Timer Timer;
         private AppSettings settings = new AppSettings();
-        
-        
-        
+
+
+
         public Event() { }
 
         Event(string eventId, string eventName, DateTime eventStart, DateTime eventEnd, String eventGroup, bool eventNotify)
         {
             RootEvents rootEvent = new RootEvents();
             Events events = new Events();
-            
+
             events._id = eventId;
             events.name = eventName;
             events.start = eventStart;
@@ -208,6 +208,6 @@ namespace Kent_Hack_Enough
 
             webClient.DownloadStringAsync(new Uri(API_SERVER + "/events"));
         }
-
+    }
         #endregion
 }
