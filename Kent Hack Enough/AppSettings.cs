@@ -157,7 +157,7 @@ namespace Kent_Hack_Enough
         }
 
         // Property to get and set Events Setting Key.
-        public RootEvents LiveFeedSetting
+        public RootEvents EventsSetting
         {
             get
             {
