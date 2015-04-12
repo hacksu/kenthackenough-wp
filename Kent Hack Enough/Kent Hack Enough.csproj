@@ -96,7 +96,6 @@
     </Compile>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Events.cs" />
-    <Compile Include="EventsFeed.cs" />
     <Compile Include="LiveFeed.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
