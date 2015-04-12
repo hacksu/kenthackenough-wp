@@ -112,7 +112,7 @@ namespace Kent_Hack_Enough
                 {
                     // Your UI update code goes here!
                     MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-                    main.LiveFeedItems.Children.Clear();
+                    main.EventsItems.Children.Clear();
                     int j = settings.EventsSetting.events.Count() - 1;
 
                     for (int i = j; i >= 0; i--)
