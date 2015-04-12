@@ -139,7 +139,10 @@ namespace Kent_Hack_Enough
 
 
                         txtMsg = parseText(settings.LiveFeedSetting.messages[i]);
+                        txtMsg.Margin = new System.Windows.Thickness(5.0);
+
                         txtDate.Text = parseDate(settings.LiveFeedSetting.messages[i]).ToString();
+                        txtDate.Margin = new System.Windows.Thickness(5.0);
                         txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                         txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
 
