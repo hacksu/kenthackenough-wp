@@ -30,14 +30,6 @@ namespace Kent_Hack_Enough
 
                 try
                 {
-
-
-
-
-                    start = 0;
-                    end = 0;
-
-
                     // Single asterisk
                     if ((msg.text[i] == '*') && (msg.text[i + 1] != '*'))
                     {
@@ -68,11 +60,8 @@ namespace Kent_Hack_Enough
                         i = end + 1;
                         def = false;
                     }
-
-
-
                     // Double Asterisk or Double underscore
-                    if ((msg.text[i] == '*') && (msg.text[i + 1] == '*'))
+                    else if ((msg.text[i] == '*') && (msg.text[i + 1] == '*'))
                     {
                         start = msg.text.IndexOf('*', i) + 2;
                         end = msg.text.IndexOf('*', start) - 2;
@@ -128,10 +117,7 @@ namespace Kent_Hack_Enough
                         i = end + start + 1;
                         def = false;
                     }
-
-
-                  
-                } 
+                }
                     
                 catch (Exception)
                 {
