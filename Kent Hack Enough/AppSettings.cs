@@ -27,13 +27,14 @@ namespace Kent_Hack_Enough
         const string FirstRunKeyName = "FirstRunDefault";
         const string RefreshIntervalKeyName = "RefreshInterval";
         const string LiveFeedKeyName = "LiveFeed";
+        const string EventsKeyName = "Events";
 
 
         // The default value of our settings
         const bool FirstRunDefault = true;
         const double RefreshIntervalDefault = 5;
         const RootMessages LiveFeedDefault = null;
-
+        const RootEvents EventsDefault = null;
 
         // Constructor that gets the application settings.
         public AppSettings()
@@ -149,6 +150,22 @@ namespace Kent_Hack_Enough
             set
             {
                 if (AddOrUpdateValue(LiveFeedKeyName, value))
+                {
+                    Save();
+                }
+            }
+        }
+
+        // Property to get and set Events Setting Key.
+        public RootEvents LiveFeedSetting
+        {
+            get
+            {
+                return GetValueOrDefault<RootEvents>(EventsKeyName, EventsDefault);
+            }
+            set
+            {
+                if (AddOrUpdateValue(EventsKeyName, value))
                 {
                     Save();
                 }
