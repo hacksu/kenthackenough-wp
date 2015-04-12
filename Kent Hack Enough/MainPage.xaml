@@ -90,10 +90,7 @@
                     </ScrollViewer>
                 </phone:PanoramaItem>
                 <phone:PanoramaItem x:Name="Events" Header="Events" >
-                    This is where the list for the events will go...
-                </phone:PanoramaItem>
-                <phone:PanoramaItem x:Name="Calendar" Header="Calendar">
-                    This is where the calendar will go...
+                    
                 </phone:PanoramaItem>
             </phone:Panorama>
         </Grid>
