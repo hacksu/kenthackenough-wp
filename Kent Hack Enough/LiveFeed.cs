@@ -64,7 +64,7 @@ namespace Kent_Hack_Enough
             TextBlock result = new TextBlock();
             Markdown md = new Markdown();
 
-            result = md.parseMarkdown(msg);
+            result = md.parseMarkdown(msg.text);
 
             return result;
         }
