@@ -46,8 +46,15 @@ namespace Kent_Hack_Enough
 
         private void appBarRefresh_Click(object sender, EventArgs e)
         {
-            LiveFeed feed = new LiveFeed();
-            feed.getFeed();
+            if (panorama.SelectedIndex == 0)
+            {
+                LiveFeed feed = new LiveFeed();
+                feed.getFeed();
+            }
+            else
+            {
+                // Events Feed
+            }
         }
 
         // Application Bar
