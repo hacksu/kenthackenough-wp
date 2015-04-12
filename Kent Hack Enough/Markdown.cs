@@ -41,8 +41,8 @@ namespace Kent_Hack_Enough
                     // Single asterisk
                     if ((msg.text[i] == '*') && (msg.text[i + 1] != '*'))
                     {
-                        start = index(msg.text, '*', i) + 1;
-                        end = index(msg.text, '*', (start + 1));
+                        start = msg.text.IndexOf('*', i) + 1;
+                        end = msg.text.IndexOf('*', start);
                         tmp = msg.text.Substring(start, (end - start));
                         // MessageBox.Show(end.ToString());
 
@@ -110,7 +110,7 @@ namespace Kent_Hack_Enough
                             textRun.FontWeight = FontWeights.Bold;
                             result.Inlines.Add(textRun);
 
-                            i = end + start + 3;
+                            i = end + start + 2;
                             def = false;
                         }
                     }
@@ -148,24 +148,6 @@ namespace Kent_Hack_Enough
                     result.Text = msg.text;
                 }
             return result;
-        }
-
-        public int index(string txt, char s, int start)
-        {
-           int i = start;
-            //while(i != txt.Length)
-           // {
-                //string cur = txt.Substring(i, 1);
-               
-                if (txt.IndexOf(s, i) != -1)
-                {
-                    return txt.IndexOf(s, i);
-                }
-              
-                //i++;
-             
-           // }
-            return -1;
         }
     }
 
