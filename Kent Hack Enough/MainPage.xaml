@@ -90,7 +90,9 @@
                     </ScrollViewer>
                 </phone:PanoramaItem>
                 <phone:PanoramaItem x:Name="Events" Header="Events" >
-                    
+                    <ScrollViewer x:Name="EventsScroll" Margin="0,-30, 0, 0">
+                        <StackPanel x:Name="EventsItems" />
+                    </ScrollViewer>
                 </phone:PanoramaItem>
             </phone:Panorama>
         </Grid>
