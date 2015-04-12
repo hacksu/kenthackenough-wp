@@ -38,7 +38,7 @@ namespace Kent_Hack_Enough
                     end = 0;
 
 
-                    // Single asterisk or double asterisk
+                    // Single asterisk
                     if ((msg.text[i] == '*') && (msg.text[i + 1] != '*'))
                     {
                         start = index(msg.text, '*', i) + 1;
