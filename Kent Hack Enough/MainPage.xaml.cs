@@ -35,12 +35,8 @@ namespace Kent_Hack_Enough
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            HTTPClient client = new HTTPClient();
-
-            client.Connect(API_SERVER, API_PORT);
-            string data = null;
-            client.On("/messages", "", data);
-            //client.On("/events", "", data);
+            LiveFeed feed = new LiveFeed();
+            feed.getFeed();
         }
 
         void appBarSettings_Click(object sender, EventArgs e)
