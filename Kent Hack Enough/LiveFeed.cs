@@ -210,8 +210,6 @@ namespace Kent_Hack_Enough
 
             webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
 
-            SocketRequest obj = (SocketRequest)state;
-
             webClient.DownloadStringAsync(new Uri(API_SERVER + "/messages"));
         }
 
