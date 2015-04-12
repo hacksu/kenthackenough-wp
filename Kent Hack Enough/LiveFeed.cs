@@ -62,20 +62,9 @@ namespace Kent_Hack_Enough
         public TextBlock parseText(LiveFeedMessages msg)
         {
             TextBlock result = new TextBlock();
-            //Run textRun = new Run();
-           // textRun.Text = "The text contents of this text run.";
-            //textRun.FontStyle = FontStyles.Italic;
             Markdown md = new Markdown();
+
             result = md.parseMarkdown(msg);
-
-
-
-
-
-           // result.Inlines.Add(textRun);
-            //string text = msg.text;
-
-            
 
             return result;
         }
