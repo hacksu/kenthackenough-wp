@@ -32,7 +32,7 @@ namespace Kent_Hack_Enough
         // The default value of our settings
         const bool FirstRunDefault = true;
         const double RefreshIntervalDefault = 5;
-        const RootObject LiveFeedDefault = null;
+        const RootMessages LiveFeedDefault = null;
 
 
         // Constructor that gets the application settings.
@@ -140,11 +140,11 @@ namespace Kent_Hack_Enough
 
 
         // Property to get and set LiveFeed Setting Key.
-        public RootObject LiveFeedSetting
+        public RootMessages LiveFeedSetting
         {
             get
             {
-                return GetValueOrDefault<RootObject>(LiveFeedKeyName, LiveFeedDefault);
+                return GetValueOrDefault<RootMessages>(LiveFeedKeyName, LiveFeedDefault);
             }
             set
             {
