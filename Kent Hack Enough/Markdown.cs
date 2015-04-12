@@ -12,7 +12,7 @@ namespace Kent_Hack_Enough
 {
     class Markdown
     {
-        public TextBlock parseMarkdown(LiveFeedMessages msg)
+        public TextBlock parseMarkdown(string msg)
         {
             TextBlock result = new TextBlock();
             
@@ -25,17 +25,17 @@ namespace Kent_Hack_Enough
 
 
 
-            while (i < msg.text.Length)
+            while (i < msg.Length)
             {
 
                 try
                 {
                     // Single asterisk
-                    if ((msg.text[i] == '*') && (msg.text[i + 1] != '*'))
+                    if ((msg[i] == '*') && (msg[i + 1] != '*'))
                     {
-                        start = msg.text.IndexOf('*', i) + 1;
-                        end = msg.text.IndexOf('*', start);
-                        tmp = msg.text.Substring(start, (end - start));
+                        start = msg.IndexOf('*', i) + 1;
+                        end = msg.IndexOf('*', start);
+                        tmp = msg.Substring(start, (end - start));
                         // MessageBox.Show(end.ToString());
 
                         Run textRun = new Run();
@@ -47,11 +47,11 @@ namespace Kent_Hack_Enough
                         def = false;
                     }
                     // Single underline
-                    else if ((msg.text[i] == '_') && (msg.text[i + 1] != '_'))
+                    else if ((msg[i] == '_') && (msg[i + 1] != '_'))
                     {
-                        start = msg.text.IndexOf('_', i - 1);
-                        end = msg.text.IndexOf('_', start);
-                        tmp = msg.text.Substring(start, end);
+                        start = msg.IndexOf('_', i - 1);
+                        end = msg.IndexOf('_', start);
+                        tmp = msg.Substring(start, end);
                         Run textRun = new Run();
                         textRun.Text = tmp + " ";
                         textRun.FontStyle = FontStyles.Italic;
@@ -61,11 +61,11 @@ namespace Kent_Hack_Enough
                         def = false;
                     }
                     // Double Asterisk or Double underscore
-                    else if ((msg.text[i] == '*') && (msg.text[i + 1] == '*'))
+                    else if ((msg[i] == '*') && (msg[i + 1] == '*'))
                     {
-                        start = msg.text.IndexOf('*', i) + 2;
-                        end = msg.text.IndexOf('*', start) - 2;
-                        tmp = msg.text.Substring(start, end);
+                        start = msg.IndexOf('*', i) + 2;
+                        end = msg.IndexOf('*', start) - 2;
+                        tmp = msg.Substring(start, end);
 
                         // Bold and italic
                         if (tmp.Contains("_"))
@@ -104,11 +104,11 @@ namespace Kent_Hack_Enough
                         }
                     }
                     // Double Underline
-                    else if ((msg.text[i] == '_') && (msg.text[i + 1] == '_'))
+                    else if ((msg[i] == '_') && (msg[i + 1] == '_'))
                     {
-                        start = msg.text.IndexOf('_', i + 1);
-                        end = msg.text.IndexOf('_', start);
-                        tmp = msg.text.Substring(start, end);
+                        start = msg.IndexOf('_', i + 1);
+                        end = msg.IndexOf('_', start);
+                        tmp = msg.Substring(start, end);
                         Run textRun = new Run();
                         textRun.Text = tmp + " ";
                         textRun.FontWeight = FontWeights.Bold;
@@ -131,7 +131,7 @@ namespace Kent_Hack_Enough
 
             if (def)
                 {
-                    result.Text = msg.text;
+                    result.Text = msg;
                 }
             return result;
         }
