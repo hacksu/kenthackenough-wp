@@ -36,7 +36,6 @@ namespace Kent_Hack_Enough
                         start = msg.IndexOf('*', i) + 1;
                         end = msg.IndexOf('*', start);
                         tmp = msg.Substring(start, (end - start));
-                        // MessageBox.Show(end.ToString());
 
                         Run textRun = new Run();
                         textRun.Text = tmp + " ";
@@ -49,9 +48,10 @@ namespace Kent_Hack_Enough
                     // Single underline
                     else if ((msg[i] == '_') && (msg[i + 1] != '_'))
                     {
-                        start = msg.IndexOf('_', i - 1);
+                        start = msg.IndexOf('_', i) + 1;
                         end = msg.IndexOf('_', start);
-                        tmp = msg.Substring(start, end);
+                        tmp = msg.Substring(start, (end-start));
+
                         Run textRun = new Run();
                         textRun.Text = tmp + " ";
                         textRun.FontStyle = FontStyles.Italic;
