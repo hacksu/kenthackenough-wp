@@ -57,7 +57,7 @@ namespace Kent_Hack_Enough
 
         public void getEvent()
         {
-            Timer = new Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
+            Timer = new Timer(TimerCallback2, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
         public TextBlock parseText(Events msg)
@@ -160,7 +160,7 @@ namespace Kent_Hack_Enough
 
         #region WebCleint
 
-        void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        void webClientEvents_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             try
             {
@@ -168,9 +168,9 @@ namespace Kent_Hack_Enough
 
                 var results = JsonConvert.DeserializeObject<dynamic>(e.Result);
 
-                RootMessages Result = JsonConvert.DeserializeObject<RootMessages>(e.Result);
+                RootEvents Result = JsonConvert.DeserializeObject<RootEvents>(e.Result);
 
-                settings.LiveFeedSetting = Result;
+                settings.EventsSetting = Result;
                 settings.Save();
 
                 refreshEvents();
@@ -184,7 +184,7 @@ namespace Kent_Hack_Enough
         }
 
 
-        private void TimerCallback(object state)
+        private void TimerCallback2(object state)
         {
             Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
@@ -201,13 +201,13 @@ namespace Kent_Hack_Enough
             });
 
 
-            WebClient webClient = new WebClient();
+            WebClient webClientEvents = new WebClient();
 
-            webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClient_DownloadStringCompleted);
+            webClientEvents.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClientEvents_DownloadStringCompleted);
 
-            webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
+            webClientEvents.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
 
-            webClient.DownloadStringAsync(new Uri(API_SERVER + "/events"));
+            webClientEvents.DownloadStringAsync(new Uri(API_SERVER + "/events"));
         }
         #endregion
     }
