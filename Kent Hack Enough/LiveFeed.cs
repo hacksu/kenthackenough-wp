@@ -19,7 +19,7 @@ namespace Kent_Hack_Enough
         public string _id { get; set; }
         public string text { get; set; }
         public int __v { get; set; }
-        public string created { get; set; }
+        public DateTime created { get; set; }
     }
 
     public class RootMessages
@@ -38,7 +38,7 @@ namespace Kent_Hack_Enough
         
         public LiveFeed() { }
 
-        LiveFeed(string msgId, string msgTxt, int msgV, string msgCreated)
+        LiveFeed(string msgId, string msgTxt, int msgV, DateTime msgCreated)
         {
             RootMessages rootMsg = new RootMessages();
             LiveFeedMessages liveMsg = new LiveFeedMessages();
@@ -63,14 +63,6 @@ namespace Kent_Hack_Enough
             result = md.parseMarkdown(msg.text);
 
             return result;
-        }
-
-        public DateTime parseDate(LiveFeedMessages msg)
-        {
-            DateTime dt = Convert.ToDateTime(msg.created.ToString());
-            DateTimeOffset dateAndOffset = new DateTimeOffset(dt, TimeZoneInfo.Local.GetUtcOffset(dt));
-
-            return dateAndOffset.DateTime;
         }
 
 
@@ -125,7 +117,7 @@ namespace Kent_Hack_Enough
                         txtMsg = parseText(settings.LiveFeedSetting.messages[i]);
                         txtMsg.Margin = new System.Windows.Thickness(5.0);
 
-                        txtDate.Text = parseDate(settings.LiveFeedSetting.messages[i]).ToString();
+                        txtDate.Text = settings.LiveFeedSetting.messages[i].created.ToLocalTime().ToString();
                         txtDate.Margin = new System.Windows.Thickness(5.0);
                         txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                         txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;

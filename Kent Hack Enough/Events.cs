@@ -70,15 +70,6 @@ namespace Kent_Hack_Enough
             return result;
         }
 
-        public DateTime parseDate(DateTime msg)
-        {
-            DateTime dt = Convert.ToDateTime(msg.ToString());
-            DateTimeOffset dateAndOffset = new DateTimeOffset(dt, TimeZoneInfo.Local.GetUtcOffset(dt));
-
-            return dateAndOffset.DateTime;
-        }
-
-
         private void toggleProg()
         {
             Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -131,12 +122,12 @@ namespace Kent_Hack_Enough
                         txtMsg = parseText(settings.EventsSetting.events[i]);
                         txtMsg.Margin = new System.Windows.Thickness(5.0);
 
-                        txtStart.Text = parseDate(settings.EventsSetting.events[i].start).ToString();
+                        txtStart.Text = settings.EventsSetting.events[i].start.ToLocalTime().ToString();
                         txtStart.Margin = new System.Windows.Thickness(5.0);
                         txtStart.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                         txtStart.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
 
-                        txtEnd.Text = parseDate(settings.EventsSetting.events[i].start).ToString();
+                        txtEnd.Text = settings.EventsSetting.events[i].start.ToLocalTime().ToString();
                         txtEnd.Margin = new System.Windows.Thickness(5.0);
                         txtEnd.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                         txtEnd.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
