@@ -28,6 +28,8 @@ namespace Kent_Hack_Enough
         const string RefreshIntervalKeyName = "RefreshInterval";
         const string LiveFeedKeyName = "LiveFeed";
         const string EventsKeyName = "Events";
+        const string APIPortKeyName = "APIPort";
+        const string APIServerKeyName = "APIServer";
 
 
         // The default value of our settings
@@ -35,6 +37,8 @@ namespace Kent_Hack_Enough
         const double RefreshIntervalDefault = 5;
         const RootMessages LiveFeedDefault = null;
         const RootEvents EventsDefault = null;
+        const int APIPortDefault = 80;
+        const string APIServerDefault = "http://api.khe.pdilyard.com/v1.0/";
 
         // Constructor that gets the application settings.
         public AppSettings()
@@ -166,6 +170,40 @@ namespace Kent_Hack_Enough
             set
             {
                 if (AddOrUpdateValue(EventsKeyName, value))
+                {
+                    Save();
+                }
+            }
+        }
+
+
+        // Property to get and set the API Port Setting Key.
+        public int APIPortSetting
+        {
+            get
+            {
+                return GetValueOrDefault<int>(APIPortKeyName, APIPortDefault);
+            }
+            set
+            {
+                if (AddOrUpdateValue(APIPortKeyName, value))
+                {
+                    Save();
+                }
+            }
+        }
+
+
+        // Property to get and set the API Server Setting Key.
+        public string APIServerSetting
+        {
+            get
+            {
+                return GetValueOrDefault<string>(APIServerKeyName, APIServerDefault);
+            }
+            set
+            {
+                if (AddOrUpdateValue(APIServerKeyName, value))
                 {
                     Save();
                 }
