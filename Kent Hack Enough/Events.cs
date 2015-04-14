@@ -123,12 +123,10 @@ namespace Kent_Hack_Enough
                         txtMsg.Margin = new System.Windows.Thickness(5.0);
 
                         txtStart.Text = settings.EventsSetting.events[i].start.ToLocalTime().ToString();
-                        txtStart.Margin = new System.Windows.Thickness(5.0);
                         txtStart.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                         txtStart.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
 
                         txtEnd.Text = settings.EventsSetting.events[i].end.ToLocalTime().ToString();
-                        txtEnd.Margin = new System.Windows.Thickness(5.0);
                         txtEnd.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                         txtEnd.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
 
