@@ -44,6 +44,7 @@ namespace Kent_Hack_Enough
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             sldRefreshInterval.Value = Convert.ToDouble(settings.RefreshIntervalSetting);
+            blkRefreshInterval.Text = settings.RefreshIntervalSetting.ToString();
         }
 
         private void btnClearCache_Click(object sender, RoutedEventArgs e)
