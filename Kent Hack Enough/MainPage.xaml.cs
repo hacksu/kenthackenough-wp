@@ -35,8 +35,7 @@ namespace Kent_Hack_Enough
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            LiveFeed feed = new LiveFeed();
-            feed.getFeed();
+            updateView();
         }
 
         void appBarSettings_Click(object sender, EventArgs e)
@@ -46,13 +45,15 @@ namespace Kent_Hack_Enough
 
         private void appBarRefresh_Click(object sender, EventArgs e)
         {
-            LiveFeed feed = new LiveFeed();
-            feed.getFeed();
-            Event events = new Event();
-            events.getEvent();
+            updateView();
         }
 
         private void panorama_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            updateView();
+        }
+
+        public void updateView()
         {
             LiveFeed feed = new LiveFeed();
             feed.getFeed();
