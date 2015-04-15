@@ -57,25 +57,25 @@ namespace Kent_Hack_Enough
         public void getEvent()
         {
             object obj = new object();
-            obj = settings.APIServerSetting;
-           // string[] tmp = null;
-         //   bool portAdded = false;
+           // obj = settings.APIServerSetting;
+            string[] tmp = null;
+            bool portAdded = false;
 
-          //  tmp = settings.APIServerSetting.Split('/');
+            tmp = settings.APIServerSetting.Split('/');
 
-            //for (int i = 0; i < tmp.Length; i++)
-            //{
-            //    if (!portAdded)
-            //    {
-            //        obj = "http://" + tmp[2] + ":" + settings.APIPortSetting;
-            //        portAdded = true;
-            //        i = 4;
-            //    }
-            //    else
-            //    {
-            //        obj = obj + "/" + tmp[i];
-            //    }
-            //}
+            for (int i = 0; i < tmp.Length; i++)
+            {
+                if (!portAdded)
+                {
+                    obj = "http://" + tmp[2] + ":" + settings.APIPortSetting;
+                    portAdded = true;
+                    i = 2;
+                }
+                else
+                {
+                    obj = obj + "/" + tmp[i];
+                }
+            }
 
             Timer = new Timer(TimerCallback2, obj, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
@@ -215,8 +215,8 @@ namespace Kent_Hack_Enough
             webClientEvents.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClientEvents_DownloadStringCompleted);
 
             webClientEvents.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
-            
-            webClientEvents.DownloadStringAsync(new Uri(state.ToString() + "/events"));
+           // state.ToString()
+            webClientEvents.DownloadStringAsync(new Uri(state.ToString() + "events"));
         }
         #endregion
     }

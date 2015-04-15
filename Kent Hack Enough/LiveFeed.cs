@@ -54,21 +54,24 @@ namespace Kent_Hack_Enough
         {
             object obj = new object();
             obj = settings.APIServerSetting;
-            //string[] tmp = null;
-            //bool portAdded = false;
+            string[] tmp = null;
+            bool portAdded = false;
 
-            //tmp = settings.APIServerSetting.Split('/');
+            tmp = settings.APIServerSetting.Split('/');
 
-            //for(int i = 0; i < tmp.Length; i++){
-            //    if(!portAdded){
-            //        obj = "http://" + tmp[2] + ":" + settings.APIPortSetting;
-            //        portAdded = true;
-            //    }
-            //    else
-            //    {
-            //        obj = obj + tmp[i] + "/";
-            //    }
-            //}
+            for (int i = 0; i < tmp.Length; i++)
+            {
+                if (!portAdded)
+                {
+                    obj = "http://" + tmp[2] + ":" + settings.APIPortSetting;
+                    portAdded = true;
+                    i = 2;
+                }
+                else
+                {
+                    obj = obj + "/" + tmp[i];
+                }
+            }
 
            
 
@@ -270,7 +273,7 @@ namespace Kent_Hack_Enough
 
             webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
 
-            webClient.DownloadStringAsync(new Uri(state.ToString() + "/messages"));
+            webClient.DownloadStringAsync(new Uri(state.ToString() + "messages"));
         }
 
         #endregion
