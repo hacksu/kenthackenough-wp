@@ -52,7 +52,27 @@ namespace Kent_Hack_Enough
 
         public void getFeed()
         {
-            Timer = new Timer(TimerCallback, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
+            object obj = new object();
+            obj = settings.APIServerSetting;
+            //string[] tmp = null;
+            //bool portAdded = false;
+
+            //tmp = settings.APIServerSetting.Split('/');
+
+            //for(int i = 0; i < tmp.Length; i++){
+            //    if(!portAdded){
+            //        obj = "http://" + tmp[2] + ":" + settings.APIPortSetting;
+            //        portAdded = true;
+            //    }
+            //    else
+            //    {
+            //        obj = obj + tmp[i] + "/";
+            //    }
+            //}
+
+           
+
+            Timer = new Timer(TimerCallback, obj, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
         public TextBlock parseText(LiveFeedMessages msg)
@@ -63,6 +83,71 @@ namespace Kent_Hack_Enough
             result = md.parseMarkdown(msg.text);
 
             return result;
+        }
+
+        public string parseDate(DateTime dt)
+        {
+            DateTime dtNow = new DateTime();
+            dt = dt.ToLocalTime();
+            
+            string result = null;
+
+            dtNow = DateTime.Now.ToLocalTime();
+
+            int timeDif = dtNow.Hour - dt.Hour - dtNow.Minute + dt.Minute;
+            timeDif = 100 - timeDif;
+
+
+            if (dt.ToLocalTime().Day == dtNow.Day)
+            {
+                // Same day so lets check the hour
+                if (dt.Hour < dtNow.Hour)
+                {
+                    DateTime tmp = new DateTime();
+                    tmp.AddMinutes(dt.Minute);
+
+                    if ((dtNow.Hour - dt.Hour) == 1)
+                    {
+                        result = "an hour ago";
+                        return result;
+                    }
+                    result = (dtNow.Hour - dt.Hour).ToString() + " hours ago";
+                }
+                // Count the minutes
+                else if(((dtNow.Minute - dt.Minute) > 0) && ((dtNow.Minute - dt.Minute) < 60) && (dtNow.Hour == dt.Hour) || (dtNow.Hour == dt.Hour + 1)){
+                    if((dtNow.Minute - dt.Minute) == 1){
+                        result = "a minute ago";
+                    }else{
+                        result = (dtNow.Minute - dt.Minute).ToString() + " minutes ago";
+                    }
+                }
+                // Looks like this post was just now!
+                else
+                {
+                    result = "just now";
+                }
+            }
+                // Check to see if in same month
+            else if (dt.Month == dtNow.Month)
+            {
+                // Same month lets check the day
+                if (dt.ToLocalTime().Day < dtNow.Day)
+                {
+                    if ((dtNow.ToLocalTime().Day - dt.Day).ToString() == "1")
+                    {
+                        result = "a day ago";
+                        return result;
+                    }
+                    result = (dtNow.ToLocalTime().Day - dt.Day).ToString() + " days ago";
+                }
+            }
+            else
+            {
+
+            }
+
+            return result;
+
         }
 
 
@@ -117,10 +202,10 @@ namespace Kent_Hack_Enough
                         txtMsg = parseText(settings.LiveFeedSetting.messages[i]);
                         txtMsg.Margin = new System.Windows.Thickness(5.0);
 
-                        txtDate.Text = settings.LiveFeedSetting.messages[i].created.ToLocalTime().ToString();
-                        txtDate.Margin = new System.Windows.Thickness(5.0);
+                        txtDate.Text = parseDate(settings.LiveFeedSetting.messages[i].created);
                         txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                         txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                        
 
                         stkContainer.Children.Add(txtMsg);
                         stkContainer.Children.Add(txtDate);
@@ -166,7 +251,7 @@ namespace Kent_Hack_Enough
         private void TimerCallback(object state)
         {
             Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
+            {              
                 // Your UI update code goes here!
                 try
                 {
@@ -177,8 +262,7 @@ namespace Kent_Hack_Enough
                 {
                     //throw;
                 }
-            });
-
+            });       
 
             WebClient webClient = new WebClient();
 
@@ -186,7 +270,7 @@ namespace Kent_Hack_Enough
 
             webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
 
-            webClient.DownloadStringAsync(new Uri(API_SERVER + "/messages"));
+            webClient.DownloadStringAsync(new Uri(state.ToString() + "/messages"));
         }
 
         #endregion

@@ -31,7 +31,6 @@ namespace Kent_Hack_Enough
 
     public class Event
     {
-        const string API_SERVER = "http://api.khe.pdilyard.com/v1.0/";
         HttpWebRequest request;
         System.Threading.Timer Timer;
         private AppSettings settings = new AppSettings();
@@ -57,7 +56,28 @@ namespace Kent_Hack_Enough
 
         public void getEvent()
         {
-            Timer = new Timer(TimerCallback2, null, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
+            object obj = new object();
+            obj = settings.APIServerSetting;
+           // string[] tmp = null;
+         //   bool portAdded = false;
+
+          //  tmp = settings.APIServerSetting.Split('/');
+
+            //for (int i = 0; i < tmp.Length; i++)
+            //{
+            //    if (!portAdded)
+            //    {
+            //        obj = "http://" + tmp[2] + ":" + settings.APIPortSetting;
+            //        portAdded = true;
+            //        i = 4;
+            //    }
+            //    else
+            //    {
+            //        obj = obj + "/" + tmp[i];
+            //    }
+            //}
+
+            Timer = new Timer(TimerCallback2, obj, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
         public TextBlock parseText(Events msg)
@@ -195,8 +215,8 @@ namespace Kent_Hack_Enough
             webClientEvents.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClientEvents_DownloadStringCompleted);
 
             webClientEvents.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
-
-            webClientEvents.DownloadStringAsync(new Uri(API_SERVER + "/events"));
+            
+            webClientEvents.DownloadStringAsync(new Uri(state.ToString() + "/events"));
         }
         #endregion
     }
