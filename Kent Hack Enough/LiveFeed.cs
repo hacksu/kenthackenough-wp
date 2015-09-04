@@ -144,6 +144,25 @@ namespace Kent_Hack_Enough
                     result = (dtNow.ToLocalTime().Day - dt.Day).ToString() + " days ago";
                 }
             }
+            else if (dt.Month != dtNow.Month && dt.Year == dtNow.Year)
+            {
+                if ((dtNow.ToLocalTime().Month - dt.Month).ToString() == "1")
+                {
+                    result = "a month ago";
+                    return result;
+                }
+                result = (dtNow.ToLocalTime().Month - dt.Month).ToString() + " months ago";
+            }
+            // Check the year
+            else if (dt.Year < dtNow.Year)
+            {
+                if ((dtNow.ToLocalTime().Year - dt.Year).ToString() == "1")
+                {
+                    result = "a year ago";
+                    return result;
+                }
+                result = (dtNow.ToLocalTime().Year - dt.Year).ToString() + " years ago";
+            }
             else
             {
 
