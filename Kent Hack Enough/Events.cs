@@ -17,11 +17,15 @@ namespace Kent_Hack_Enough
     public class Events
     {
         public string _id { get; set; }
-        public string name { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
         public DateTime start { get; set; }
         public DateTime end { get; set; }
-        public string group { get; set; }
+        public string type { get; set; }
+        public string location { get; set; }
+        public string __v { get; set; }
         public bool notify { get; set; }
+        public string group { get; set; }
     }
 
     public class RootEvents
@@ -39,17 +43,21 @@ namespace Kent_Hack_Enough
 
         public Event() { }
 
-        Event(string eventId, string eventName, DateTime eventStart, DateTime eventEnd, String eventGroup, bool eventNotify)
+        Event(string eventId, string eventTitle, string eventDescription, DateTime eventStart, DateTime eventEnd, String eventType, string eventLocation, string eventV, bool eventNotify, string eventGroup)
         {
             RootEvents rootEvent = new RootEvents();
             Events events = new Events();
 
             events._id = eventId;
-            events.name = eventName;
+            events.title = eventTitle;
+            events.description = eventDescription;
             events.start = eventStart;
             events.end = eventEnd;
-            events.group = eventGroup;
+            events.type = eventType;
+            events.location = eventLocation;
+            events.__v = eventV;
             events.notify = eventNotify;
+            events.group = eventGroup;
 
             rootEvent.events.Add(events);
         }
@@ -80,12 +88,14 @@ namespace Kent_Hack_Enough
             Timer = new Timer(TimerCallback2, obj, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
-        public TextBlock parseText(Events msg)
+        public TextBlock parseText(string txt)
         {
             TextBlock result = new TextBlock();
             Markdown md = new Markdown();
 
-            result = md.parseMarkdown(msg.name);
+            result.Text = txt;
+
+           // result = md.parseMarkdown(msg.description);
 
             return result;
         }
@@ -115,53 +125,81 @@ namespace Kent_Hack_Enough
         }
 
 
-        private void refreshEvents()
+        private async void refreshEvents()
         {
-            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                try
-                {
-                    // Your UI update code goes here!
-                    MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-                    main.EventsItems.Children.Clear();
-                    int j = settings.EventsSetting.events.Count() - 1;
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+             {
+                 try
+                 {
+                     // Your UI update code goes here!
+                     MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
+                     main.EventsItems.Children.Clear();
 
-                    for (int i = j; i >= 0; i--)
-                    {
-                        TextBlock txtMsg = new TextBlock();
-                        TextBlock txtStart = new TextBlock();
-                        TextBlock txtEnd = new TextBlock();
-                        StackPanel stkContainer = new StackPanel();
+                    // int j = settings.EventsSetting.events.Count() - 1;
+
+                     for (int i = 0; i < settings.EventsSetting.events.Count(); i++)
+                     {
+                         TextBlock txtTitle = new TextBlock();
+                         TextBlock txtDescription = new TextBlock();
+                         TextBlock txtStart = new TextBlock();
+                         TextBlock txtEnd = new TextBlock();
+                         TextBlock txtType = new TextBlock();
+                         TextBlock txtLocation = new TextBlock();
+                         StackPanel stkContainer = new StackPanel();
+
+                       //  stkContainer.Height = 100;
+                         stkContainer.Background = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
+                         stkContainer.Margin = new System.Windows.Thickness(5.0);
 
 
-                        stkContainer.Height = 100;
-                        stkContainer.Background = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
-                        stkContainer.Margin = new System.Windows.Thickness(5.0);
+                         //   txtTitle = parseText(settings.EventsSetting.events[i]);
+                         txtTitle = parseText(settings.EventsSetting.events[i].title);
+                         txtTitle.Margin = new System.Windows.Thickness(5.0);
+
+                         //   txtDescription = parseText(settings.EventsSetting.events[i]);
+                         txtDescription = parseText(settings.EventsSetting.events[i].description);
+                         txtDescription.Margin = new System.Windows.Thickness(5.0);
+
+                         txtStart.Text = settings.EventsSetting.events[i].start.ToLocalTime().ToString();
+                         txtStart.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                         txtStart.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                       //  txtStart.FontSize = 13;
+
+                         txtEnd.Text = settings.EventsSetting.events[i].end.ToLocalTime().ToString();
+                         txtEnd.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                         txtEnd.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                       //  txtEnd.FontSize = 13;
+
+                         //   txtType = parseText(settings.EventsSetting.events[i]);
+                         txtType = parseText(settings.EventsSetting.events[i].type);
+                         txtType.Margin = new System.Windows.Thickness(5.0);
+                         txtType.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                         txtType.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                         txtType.FontSize = 14;
+
+                         //   txtLocation = parseText(settings.EventsSetting.events[i]);
+                         txtLocation = parseText(settings.EventsSetting.events[i].location);
+                         txtLocation.Margin = new System.Windows.Thickness(5.0);
+                         txtLocation.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                         txtLocation.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                         txtLocation.FontSize = 14;
+
+                         stkContainer.Children.Add(txtTitle);
+                         stkContainer.Children.Add(txtDescription);
+                         stkContainer.Children.Add(txtStart);
+                         stkContainer.Children.Add(txtEnd);
+                         stkContainer.Children.Add(txtType);
+                         stkContainer.Children.Add(txtLocation);
 
 
-                        txtMsg = parseText(settings.EventsSetting.events[i]);
-                        txtMsg.Margin = new System.Windows.Thickness(5.0);
-
-                        txtStart.Text = settings.EventsSetting.events[i].start.ToLocalTime().ToString();
-                        txtStart.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                        txtStart.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-
-                        txtEnd.Text = settings.EventsSetting.events[i].end.ToLocalTime().ToString();
-                        txtEnd.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                        txtEnd.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-
-                        stkContainer.Children.Add(txtMsg);
-                        stkContainer.Children.Add(txtStart);
-                        stkContainer.Children.Add(txtEnd);
-
-                        main.EventsItems.Children.Add(stkContainer);
-                    }
-                }
-                catch (Exception)
-                {
-                    //   throw;
-                }
-            });
+                         main.EventsItems.Children.Add(stkContainer);
+                     }
+                 }
+                 catch (Exception)
+                 {
+                     //   throw;
+                 }
+             });
         }
 
 

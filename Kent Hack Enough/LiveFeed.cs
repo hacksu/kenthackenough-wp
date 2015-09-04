@@ -198,48 +198,50 @@ namespace Kent_Hack_Enough
         }
 
 
-        private void refreshLiveFeed()
+        private async void refreshLiveFeed()
         {
-            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                try
-                {
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+             {
+                 try
+                 {
                     // Your UI update code goes here!
                     MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-                    main.LiveFeedItems.Children.Clear();
-                    int j = settings.LiveFeedSetting.messages.Count() - 1;
+                     main.LiveFeedItems.Children.Clear();
+                     int j = settings.LiveFeedSetting.messages.Count() - 1;
 
-                    for (int i = j; i >= 0; i--)
-                    {
-                        TextBlock txtMsg = new TextBlock();
-                        TextBlock txtDate = new TextBlock();
-                        StackPanel stkContainer = new StackPanel();
-
-
-                        stkContainer.Height = 100;
-                        stkContainer.Background = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
-                        stkContainer.Margin = new System.Windows.Thickness(5.0);
+                     for (int i = j; i >= 0; i--)
+                     {
+                         TextBlock txtMsg = new TextBlock();
+                         TextBlock txtDate = new TextBlock();
+                         StackPanel stkContainer = new StackPanel();
 
 
-                        txtMsg = parseText(settings.LiveFeedSetting.messages[i]);
-                        txtMsg.Margin = new System.Windows.Thickness(5.0);
+                         stkContainer.MinHeight = 50;
+                         stkContainer.Background = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
+                         stkContainer.Margin = new System.Windows.Thickness(5.0);
 
-                        txtDate.Text = parseDate(settings.LiveFeedSetting.messages[i].created);
-                        txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                        txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-                        
 
-                        stkContainer.Children.Add(txtMsg);
-                        stkContainer.Children.Add(txtDate);
+                         txtMsg = parseText(settings.LiveFeedSetting.messages[i]);
+                         txtMsg.Margin = new System.Windows.Thickness(5.0);
+                         
 
-                        main.LiveFeedItems.Children.Add(stkContainer);
-                    }
-                }
-                catch (Exception)
-                {
+                         txtDate.Text = parseDate(settings.LiveFeedSetting.messages[i].created);
+                         txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                         txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                         txtDate.Margin = new System.Windows.Thickness(3.0);
+                         txtDate.FontSize = 13;
+
+                         stkContainer.Children.Add(txtMsg);
+                         stkContainer.Children.Add(txtDate);
+
+                         main.LiveFeedItems.Children.Add(stkContainer);
+                     }
+                 }
+                 catch (Exception)
+                 {
                     //   throw;
                 }
-            });
+             });
         }
 
 
