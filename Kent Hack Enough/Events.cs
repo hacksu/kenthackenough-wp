@@ -35,7 +35,6 @@ namespace Kent_Hack_Enough
 
     public class Event
     {
-        HttpWebRequest request;
         System.Threading.Timer Timer;
         private AppSettings settings = new AppSettings();
 
@@ -100,28 +99,28 @@ namespace Kent_Hack_Enough
             return result;
         }
 
-        private void toggleProg()
+        private async void toggleProg()
         {
-            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+             {
                 // Your UI update code goes here!
                 try
-                {
-                    MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-                    if (main.progBar.Visibility == Visibility.Collapsed)
-                    {
-                        main.progBar.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        main.progBar.Visibility = Visibility.Collapsed;
-                    }
-                }
-                catch (Exception)
-                {
+                 {
+                     MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
+                     if (main.progBar.Visibility == Visibility.Collapsed)
+                     {
+                         main.progBar.Visibility = Visibility.Visible;
+                     }
+                     else
+                     {
+                         main.progBar.Visibility = Visibility.Collapsed;
+                     }
+                 }
+                 catch (Exception)
+                 {
                     //   throw;
                 }
-            });
+             });
         }
 
 
@@ -137,7 +136,7 @@ namespace Kent_Hack_Enough
 
                     // int j = settings.EventsSetting.events.Count() - 1;
 
-                     for (int i = 0; i < settings.EventsSetting.events.Count(); i++)
+                     for (int i = 0; i < settings.EventsSetting.events.Count()+1; i++)
                      {
                          TextBlock txtTitle = new TextBlock();
                          TextBlock txtDescription = new TextBlock();
@@ -231,9 +230,9 @@ namespace Kent_Hack_Enough
         }
 
 
-        private void TimerCallback2(object state)
+        private async void TimerCallback2(object state)
         {
-            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 // Your UI update code goes here!
                 try

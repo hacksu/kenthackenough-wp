@@ -30,7 +30,6 @@ namespace Kent_Hack_Enough
     public class LiveFeed
     {
         const string API_SERVER = "http://api.khe.pdilyard.com/v1.0/";
-        HttpWebRequest request;
         System.Threading.Timer Timer;
         private AppSettings settings = new AppSettings();
         
@@ -173,9 +172,9 @@ namespace Kent_Hack_Enough
         }
 
 
-        private void toggleProg()
+        private async void toggleProg()
         {
-            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 // Your UI update code goes here!
                 try
@@ -272,9 +271,9 @@ namespace Kent_Hack_Enough
         }
 
 
-        private void TimerCallback(object state)
+        private async void TimerCallback(object state)
         {
-            Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {              
                 // Your UI update code goes here!
                 try
