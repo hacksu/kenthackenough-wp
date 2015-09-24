@@ -82,7 +82,24 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="2" Grid.ColumnSpan="4" Margin="0,0,0,0" Background="Black">
-            <phone:Panorama x:Name="panorama">
+            <phone:Pivot FontSize="14.667">
+                <phone:PivotItem CacheMode="{x:Null}" Header="Home">
+                    <Grid/>
+                </phone:PivotItem>
+                <phone:PivotItem CacheMode="{x:Null}" Header="Feed">
+                    <ScrollViewer x:Name="LiveFeedScroll" Margin="0,-30, 0, 0">
+                        <StackPanel x:Name="LiveFeedItems" />
+                    </ScrollViewer>
+                </phone:PivotItem>
+                <phone:PivotItem CacheMode="{x:Null}" Header="Schedule">
+                    <ScrollViewer x:Name="EventsScroll" Margin="0,-30, 0, 0">
+                        <StackPanel x:Name="EventsItems" />
+                    </ScrollViewer>
+                </phone:PivotItem>
+
+            </phone:Pivot>
+            
+         <!--   <phone:Panorama x:Name="panorama">
                 <phone:PanoramaItem x:Name="LiveFeed" Header="Live Feed">
                     <ScrollViewer x:Name="LiveFeedScroll" Margin="0,-30, 0, 0">
                         <StackPanel x:Name="LiveFeedItems" />
@@ -93,7 +110,7 @@
                         <StackPanel x:Name="EventsItems" />
                     </ScrollViewer>
                 </phone:PanoramaItem>
-            </phone:Panorama>
+            </phone:Panorama>-->
         </Grid>
     </Grid>
 
