@@ -14,7 +14,7 @@ using Windows.UI.Core;
 
 namespace Kent_Hack_Enough
 {
-    public class LiveFeedMessages
+    public class UpdateMessages
     {
         public string _id { get; set; }
         public string text { get; set; }
@@ -24,7 +24,7 @@ namespace Kent_Hack_Enough
 
     public class RootMessages
     {
-        public List<LiveFeedMessages> messages { get; set; }
+        public List<UpdateMessages> messages { get; set; }
     }
 
     public class LiveFeed
@@ -40,7 +40,7 @@ namespace Kent_Hack_Enough
         LiveFeed(string msgId, string msgTxt, int msgV, DateTime msgCreated)
         {
             RootMessages rootMsg = new RootMessages();
-            LiveFeedMessages liveMsg = new LiveFeedMessages();
+            UpdateMessages liveMsg = new UpdateMessages();
             liveMsg._id = msgId;
             liveMsg.text = msgTxt;
             liveMsg.__v = msgV;
@@ -77,7 +77,7 @@ namespace Kent_Hack_Enough
             Timer = new Timer(TimerCallback, obj, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
-        public TextBlock parseText(LiveFeedMessages msg)
+        public TextBlock parseText(UpdateMessages msg)
         {
             TextBlock result = new TextBlock();
             Markdown md = new Markdown();
@@ -205,7 +205,7 @@ namespace Kent_Hack_Enough
                  {
                     // Your UI update code goes here!
                     MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-                     main.LiveFeedItems.Children.Clear();
+                     main.UpdatesItems.Children.Clear();
                      int j = settings.LiveFeedSetting.messages.Count() - 1;
 
                      for (int i = j; i >= 0; i--)
@@ -233,7 +233,7 @@ namespace Kent_Hack_Enough
                          stkContainer.Children.Add(txtMsg);
                          stkContainer.Children.Add(txtDate);
 
-                         main.LiveFeedItems.Children.Add(stkContainer);
+                         main.UpdatesItems.Children.Add(stkContainer);
                      }
                  }
                  catch (Exception)

@@ -36,17 +36,17 @@ namespace Kent_Hack_Enough
                 //Debug.WriteLine("WiFi");
             if (currentList.Intersect(new NetworkInterfaceSubType[]
             {
-    NetworkInterfaceSubType.Cellular_EVDO,
-    NetworkInterfaceSubType.Cellular_3G,
-    NetworkInterfaceSubType.Cellular_HSPA,
-    NetworkInterfaceSubType.Cellular_EVDV,
+                NetworkInterfaceSubType.Cellular_EVDO,
+                NetworkInterfaceSubType.Cellular_3G,
+                NetworkInterfaceSubType.Cellular_HSPA,
+                NetworkInterfaceSubType.Cellular_EVDV,
             }).Any())
                // Debug.WriteLine("3G");
             if (currentList.Intersect(new NetworkInterfaceSubType[]
             {
-    NetworkInterfaceSubType.Cellular_GPRS,
-    NetworkInterfaceSubType.Cellular_1XRTT,
-    NetworkInterfaceSubType.Cellular_EDGE,
+                NetworkInterfaceSubType.Cellular_GPRS,
+                NetworkInterfaceSubType.Cellular_1XRTT,
+                NetworkInterfaceSubType.Cellular_EDGE,
             }).Any())
                // Debug.WriteLine("2G");
 
@@ -74,6 +74,12 @@ namespace Kent_Hack_Enough
             feed.getFeed();
             Event events = new Event();
             events.getEvent();
+        }
+
+
+        private void webBrowser_Loaded(object sender, RoutedEventArgs e)
+        {
+            webBrowser.Navigate(new Uri("https://khe.io"));
         }
 
         // Application Bar

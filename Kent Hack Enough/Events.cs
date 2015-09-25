@@ -14,7 +14,7 @@ using Windows.UI.Core;
 
 namespace Kent_Hack_Enough
 {
-    public class Events
+    public class Schedule
     {
         public string _id { get; set; }
         public string title { get; set; }
@@ -30,7 +30,7 @@ namespace Kent_Hack_Enough
 
     public class RootEvents
     {
-        public List<Events> events { get; set; }
+        public List<Schedule> events { get; set; }
     }
 
     public class Event
@@ -45,7 +45,7 @@ namespace Kent_Hack_Enough
         Event(string eventId, string eventTitle, string eventDescription, DateTime eventStart, DateTime eventEnd, String eventType, string eventLocation, string eventV, bool eventNotify, string eventGroup)
         {
             RootEvents rootEvent = new RootEvents();
-            Events events = new Events();
+            Schedule events = new Schedule();
 
             events._id = eventId;
             events.title = eventTitle;
@@ -132,7 +132,7 @@ namespace Kent_Hack_Enough
                  {
                      // Your UI update code goes here!
                      MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-                     main.EventsItems.Children.Clear();
+                     main.ScheduleItems.Children.Clear();
 
                     // int j = settings.EventsSetting.events.Count() - 1;
 
@@ -191,7 +191,7 @@ namespace Kent_Hack_Enough
                          stkContainer.Children.Add(txtLocation);
 
 
-                         main.EventsItems.Children.Add(stkContainer);
+                         main.ScheduleItems.Children.Add(stkContainer);
                      }
                  }
                  catch (Exception)
