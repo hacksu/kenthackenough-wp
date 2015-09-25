@@ -70,7 +70,7 @@ namespace Kent_Hack_Enough
 
         public void updateView()
         {
-            LiveFeed feed = new LiveFeed();
+            Updates feed = new Updates();
             feed.getFeed();
             Event events = new Event();
             events.getEvent();

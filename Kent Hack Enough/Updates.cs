@@ -27,7 +27,7 @@ namespace Kent_Hack_Enough
         public List<UpdateMessages> messages { get; set; }
     }
 
-    public class LiveFeed
+    public class Updates
     {
         const string API_SERVER = "http://api.khe.pdilyard.com/v1.0/";
         System.Threading.Timer Timer;
@@ -35,9 +35,9 @@ namespace Kent_Hack_Enough
         
         
         
-        public LiveFeed() { }
+        public Updates() { }
 
-        LiveFeed(string msgId, string msgTxt, int msgV, DateTime msgCreated)
+        Updates(string msgId, string msgTxt, int msgV, DateTime msgCreated)
         {
             RootMessages rootMsg = new RootMessages();
             UpdateMessages liveMsg = new UpdateMessages();
