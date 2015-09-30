@@ -132,14 +132,31 @@ namespace Kent_Hack_Enough
                  {
                      // Your UI update code goes here!
                      MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-                     main.ScheduleDay.Children.Clear();
-                     main.ScheduleItemsLeft.Children.Clear();
-                     main.ScheduleItemsRight.Children.Clear();
+                     main.ScheduleItems.Children.Clear();
+                   //  main.ScheduleDay.Children.Clear();
+                   //  main.ScheduleItemsLeft.Children.Clear();
+                  //   main.ScheduleItemsRight.Children.Clear();
                      // int j = settings.EventsSetting.events.Count() - 1;
 
                      string curDayOfWeek = "";
                      int days = 0;
-                
+
+                     Grid DynamicGrid = new Grid();
+                     ColumnDefinition gridCol1 = new ColumnDefinition();
+                     ColumnDefinition gridCol2 = new ColumnDefinition();
+                     ColumnDefinition gridCol3 = new ColumnDefinition();
+                     DynamicGrid.ColumnDefinitions.Add(gridCol1);
+                     DynamicGrid.ColumnDefinitions.Add(gridCol2);
+                     DynamicGrid.ColumnDefinitions.Add(gridCol3);
+                     RowDefinition gridRow1 = new RowDefinition();
+                     RowDefinition gridRow2 = new RowDefinition();
+                     RowDefinition gridRow3 = new RowDefinition();
+                     DynamicGrid.RowDefinitions.Add(gridRow1);
+                     DynamicGrid.RowDefinitions.Add(gridRow2);
+                     DynamicGrid.RowDefinitions.Add(gridRow3);
+
+
+
 
                      for (int i = 0; i < settings.EventsSetting.events.Count()+1; i++)
                      {
@@ -169,7 +186,7 @@ namespace Kent_Hack_Enough
 
                                  stkDay.Width = 200;
                                  stkDay.Height = 75;
-                                 stkDay.Background = new SolidColorBrush(Color.FromArgb(0, 242, 49, 242));
+                                 stkDay.Background = new SolidColorBrush(Color.FromArgb(100, 242, 49, 242));
 
                                  txtDay.Text = curDayOfWeek.ToString();
                                  txtDay.HorizontalAlignment = HorizontalAlignment.Center;
@@ -191,16 +208,21 @@ namespace Kent_Hack_Enough
                          stkItemsRight.MinWidth = 200;
 
                          txtTitle.Text = settings.EventsSetting.events[i].title.ToString();
-                         txtTitle.Margin = new Thickness(0, 25, 0, 0);
+                         txtTitle.Margin = new Thickness(200, 25, 0, 0);
                          txtTitle.Padding = new Thickness(0, 25, 0, 0);
                          txtTitle.FontWeight = FontWeights.Bold;
                          txtTitle.FontSize = 20;
+                         txtTitle.TextWrapping = TextWrapping.Wrap;
 
                          txtDescription = parseText(settings.EventsSetting.events[i].description);
                          txtDescription.Margin = new System.Windows.Thickness(0, 15, 0, 0);
                          txtDescription.FontWeight = FontWeights.Bold;
                          txtDescription.FontSize = 20;
                          txtDescription.Padding = new Thickness(15, 0, 0, 0);
+                         txtDescription.TextWrapping = TextWrapping.Wrap;
+                         Grid.SetRow(txtDescription, 2);
+                         Grid.SetColumn(txtDescription, 2);
+
 
                          txtStart.Text = settings.EventsSetting.events[i].start.ToLocalTime().ToString();
                          txtStart.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
@@ -215,11 +237,17 @@ namespace Kent_Hack_Enough
                          txtLocation.Padding = new Thickness(0, 0, 15, 0);
                          txtLocation.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                          txtLocation.FontSize = 15;
+                         txtLocation.TextWrapping = TextWrapping.Wrap;
 
-                         main.ScheduleItemsLeft.Children.Add(txtStart);
-                         main.ScheduleItemsLeft.Children.Add(txtLocation);
-                         main.ScheduleItemsRight.Children.Add(txtTitle);
-                         main.ScheduleItemsRight.Children.Add(txtDescription);
+
+                         stkItemsLeft.Children.Add(txtStart);
+                         stkItemsLeft.Children.Add(txtLocation);
+
+                         stkItemsRight.Children.Add(txtTitle);
+                         stkItemsRight.Children.Add(txtDescription);
+
+                         main.ScheduleItems.Children.Add(stkItemsLeft);
+                         main.ScheduleItems.Children.Add(stkItemsRight);
                          
                          
                      }
