@@ -132,8 +132,9 @@ namespace Kent_Hack_Enough
                  {
                      // Your UI update code goes here!
                      MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
-                     main.ScheduleItems.Children.Clear();
-
+                     main.ScheduleDay.Children.Clear();
+                     main.ScheduleItemsLeft.Children.Clear();
+                     main.ScheduleItemsRight.Children.Clear();
                      // int j = settings.EventsSetting.events.Count() - 1;
 
                      string curDayOfWeek = "";
@@ -215,12 +216,10 @@ namespace Kent_Hack_Enough
                          txtLocation.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                          txtLocation.FontSize = 15;
 
-                        stkItemsLeft.Children.Add(txtLocation);
-                         stkItemsRight.Children.Add(txtTitle);
-                         stkItemsRight.Children.Add(txtDescription);
-
-                         main.ScheduleItems.Children.Add(stkItemsLeft);
-                         main.ScheduleItems.Children.Add(stkItemsRight);
+                         main.ScheduleItemsLeft.Children.Add(txtStart);
+                         main.ScheduleItemsLeft.Children.Add(txtLocation);
+                         main.ScheduleItemsRight.Children.Add(txtTitle);
+                         main.ScheduleItemsRight.Children.Add(txtDescription);
                          
                          
                      }
