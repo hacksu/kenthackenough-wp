@@ -124,7 +124,7 @@ namespace Kent_Hack_Enough
         }
 
 
-        private async void refreshEvents()
+        private async void refreshSchedule()
         {
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
              {
@@ -134,64 +134,95 @@ namespace Kent_Hack_Enough
                      MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
                      main.ScheduleItems.Children.Clear();
 
-                    // int j = settings.EventsSetting.events.Count() - 1;
+                     // int j = settings.EventsSetting.events.Count() - 1;
+
+                     string curDayOfWeek = "";
+                     int days = 0;
+                
 
                      for (int i = 0; i < settings.EventsSetting.events.Count()+1; i++)
                      {
-                         TextBlock txtTitle = new TextBlock();
-                         TextBlock txtDescription = new TextBlock();
-                         TextBlock txtStart = new TextBlock();
-                         TextBlock txtEnd = new TextBlock();
-                         TextBlock txtType = new TextBlock();
-                         TextBlock txtLocation = new TextBlock();
-                         StackPanel stkContainer = new StackPanel();
+                        TextBlock txtTitle = new TextBlock();
+                        TextBlock txtDescription = new TextBlock();
+                        TextBlock txtStart = new TextBlock();
+                        TextBlock txtEnd = new TextBlock();
+                        TextBlock txtLocation = new TextBlock();
+                        StackPanel stkDay = new StackPanel();
+                         StackPanel stkItemsLeft = new StackPanel();
+                         StackPanel stkItemsRight = new StackPanel();
+                        TextBlock txtDay = new TextBlock();
+                                                 
+                         
+                         if(i == 0)
+                         {
+                             curDayOfWeek = settings.EventsSetting.events[i].start.ToString("dddd");
+                         }
+                         else
+                         {
+                             if (curDayOfWeek != settings.EventsSetting.events[i].start.ToString("dddd"))
+                             {
+                                 curDayOfWeek = settings.EventsSetting.events[i].start.ToString("dddd");
+                                 days += 1;
 
-                       //  stkContainer.Height = 100;
-                         stkContainer.Background = new SolidColorBrush(Color.FromArgb(125, 255, 0, 0));
-                         stkContainer.Margin = new System.Windows.Thickness(5.0);
+                                 // Add in new day of the week
 
+                                 stkDay.Width = 200;
+                                 stkDay.Height = 75;
+                                 stkDay.Background = new SolidColorBrush(Color.FromArgb(0, 242, 49, 242));
 
-                         //   txtTitle = parseText(settings.EventsSetting.events[i]);
-                         txtTitle = parseText(settings.EventsSetting.events[i].title);
-                         txtTitle.Margin = new System.Windows.Thickness(5.0);
+                                 txtDay.Text = curDayOfWeek.ToString();
+                                 txtDay.HorizontalAlignment = HorizontalAlignment.Center;
+                                 txtDay.FontSize = 50;
+                                 txtDay.TextDecorations = TextDecorations.Underline;
+                                 txtDay.FontWeight = FontWeights.Bold;
 
-                         //   txtDescription = parseText(settings.EventsSetting.events[i]);
+                                 stkDay.Children.Add(txtDay);
+                                 main.ScheduleItems.Children.Add(stkDay);
+
+                             }
+                         }
+
+                      
+                         stkItemsLeft.HorizontalAlignment = HorizontalAlignment.Left;
+                         stkItemsLeft.MinWidth = 200;
+ 
+                         stkItemsRight.HorizontalAlignment = HorizontalAlignment.Left;
+                         stkItemsRight.MinWidth = 200;
+
+                         txtTitle.Text = settings.EventsSetting.events[i].title.ToString();
+                         txtTitle.Margin = new Thickness(0, 25, 0, 0);
+                         txtTitle.Padding = new Thickness(0, 25, 0, 0);
+                         txtTitle.FontWeight = FontWeights.Bold;
+                         txtTitle.FontSize = 20;
+
                          txtDescription = parseText(settings.EventsSetting.events[i].description);
-                         txtDescription.Margin = new System.Windows.Thickness(5.0);
+                         txtDescription.Margin = new System.Windows.Thickness(0, 15, 0, 0);
+                         txtDescription.FontWeight = FontWeights.Bold;
+                         txtDescription.FontSize = 20;
+                         txtDescription.Padding = new Thickness(15, 0, 0, 0);
 
                          txtStart.Text = settings.EventsSetting.events[i].start.ToLocalTime().ToString();
                          txtStart.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                          txtStart.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-                       //  txtStart.FontSize = 13;
 
                          txtEnd.Text = settings.EventsSetting.events[i].end.ToLocalTime().ToString();
                          txtEnd.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                          txtEnd.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-                       //  txtEnd.FontSize = 13;
 
-                         //   txtType = parseText(settings.EventsSetting.events[i]);
-                         txtType = parseText(settings.EventsSetting.events[i].type);
-                         txtType.Margin = new System.Windows.Thickness(5.0);
-                         txtType.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                         txtType.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-                         txtType.FontSize = 14;
 
-                         //   txtLocation = parseText(settings.EventsSetting.events[i]);
                          txtLocation = parseText(settings.EventsSetting.events[i].location);
-                         txtLocation.Margin = new System.Windows.Thickness(5.0);
+                         txtLocation.Padding = new Thickness(0, 0, 15, 0);
                          txtLocation.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                         txtLocation.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-                         txtLocation.FontSize = 14;
+                         txtLocation.FontSize = 15;
 
-                         stkContainer.Children.Add(txtTitle);
-                         stkContainer.Children.Add(txtDescription);
-                         stkContainer.Children.Add(txtStart);
-                         stkContainer.Children.Add(txtEnd);
-                         stkContainer.Children.Add(txtType);
-                         stkContainer.Children.Add(txtLocation);
+                        stkItemsLeft.Children.Add(txtLocation);
+                         stkItemsRight.Children.Add(txtTitle);
+                         stkItemsRight.Children.Add(txtDescription);
 
-
-                         main.ScheduleItems.Children.Add(stkContainer);
+                         main.ScheduleItems.Children.Add(stkItemsLeft);
+                         main.ScheduleItems.Children.Add(stkItemsRight);
+                         
+                         
                      }
                  }
                  catch (Exception)
@@ -219,7 +250,7 @@ namespace Kent_Hack_Enough
                 settings.EventsSetting = Result;
                 settings.Save();
 
-                refreshEvents();
+                refreshSchedule();
             }
             catch
             {

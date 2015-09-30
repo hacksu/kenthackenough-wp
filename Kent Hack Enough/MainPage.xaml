@@ -99,20 +99,63 @@
                     <Grid>
                         <Rectangle Width="3" Height="600" Fill="Red"/>
                         <ScrollViewer x:Name="ScheduleScroll" Margin="0,-30, 0, 0">
-                            <StackPanel x:Name="ScheduleItems">
-                                <StackPanel Width="Auto" Height="75" Background="#FF231F20" Canvas.ZIndex="2">
-                                    <TextBlock Text="Monday" HorizontalAlignment="Center" FontSize="50" TextDecorations="Underline"  FontWeight="Bold" />
-                                </StackPanel>
-                                <StackPanel Height="Auto" Background="Transparent" Canvas.ZIndex="2">
-                                    <TextBlock Text="5:00pm - 9:00pm" HorizontalAlignment="Center" FontWeight="Bold" FontSize="25" Width="410" />
-                                </StackPanel>
+                            <StackPanel x:Name="ScheduleItems" HorizontalAlignment="Center">
 
+                                <Grid x:Name="grdSchedule" Height="Auto" Width="Auto">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="3"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <!-- Schedule Day Header [Start] -->
+                                    <StackPanel x:Name="ScheduleDay" Grid.Row="0" Grid.ColumnSpan="3" Width="200" Height="75" Background="#FF231F20" Canvas.ZIndex="2">
+                                        <TextBlock Text="Monday" HorizontalAlignment="Center" FontSize="50" TextDecorations="Underline"  FontWeight="Bold" />
+                                    </StackPanel>
+                                    <!-- Schedule Day Header [End] -->
+
+                                    <!-- Schedule Items Left [Start] -->
+                                    <StackPanel x:Name="ScheduleItemsLeft" Grid.Row="1" Grid.Column="0" Height="Auto" Background="Transparent" HorizontalAlignment="Left" MinWidth="200">
+                                        <TextBlock Text="5:00pm - 9:00pm" FontWeight="Bold" FontSize="20" Margin="0, 25, 0, 0" Padding="0, 0, 15, 0" HorizontalAlignment="Right" />
+                                        <TextBlock Text="Library Lobby" FontSize="15" Padding="0, 0, 15, 0" HorizontalAlignment="Right" />
+
+                                        <TextBlock Text="7:30pm - 8:30pm" FontWeight="Bold" FontSize="20" Margin="0, 25, 0, 0" Padding="0, 0, 15, 0" HorizontalAlignment="Right" />
+                                        <TextBlock Text="Library - Quiet Study Area" FontSize="15" Padding="0, 0, 15, 0" HorizontalAlignment="Right" />
+                                    </StackPanel>
+                                    <!-- Schedule Items Left [End] -->
+
+
+                                    <!-- Schedule Items Right [Start] -->
+                                    <StackPanel x:Name="ScheduleItemsRight" Grid.Row="1" Grid.Column="2" Height="Auto" Background="Transparent" HorizontalAlignment="Left" MinWidth="200">
+                                        <TextBlock Text="CHECK-IN" FontWeight="Bold" FontSize="20"  Margin="0, 35, 0, 0" Padding="15, 0, 0, 0" />
+                                        <TextBlock Text="" FontWeight="Bold" FontSize="25" Padding="15, 0, 0, 0" />
+
+                                        <TextBlock Text="OPENING CEREMONY" FontWeight="Bold" FontSize="20"  Margin="0, 15, 0, 0" Padding="15, 0, 0, 0" />
+                                        <TextBlock Text="" FontWeight="Bold" FontSize="25" Padding="15, 0, 0, 0" />
+                                    </StackPanel>
+                                    <!-- Schedule Items Right [End] -->
+                                </Grid>
+
+
+                                
+
+
+                                
+
+                                
 
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>
                 </phone:PivotItem>
-                <phone:PivotItem CacheMode="{x:Null}" FontSize="6" Header="Links" GotFocus="PivotItem_GotFocus">
+                <phone:PivotItem CacheMode="{x:Null}" FontSize="6" Header="Links" >
                     <phone:WebBrowser x:Name="webBrowser" IsScriptEnabled="True" Loaded="webBrowser_Loaded"/>
                 </phone:PivotItem>
             </phone:Pivot>
