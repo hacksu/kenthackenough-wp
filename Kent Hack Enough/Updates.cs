@@ -222,6 +222,7 @@ namespace Kent_Hack_Enough
 
                          txtMsg = parseText(settings.LiveFeedSetting.messages[i]);
                          txtMsg.Margin = new System.Windows.Thickness(5.0);
+                         txtMsg.TextWrapping = TextWrapping.Wrap;
                          
 
                          txtDate.Text = parseDate(settings.LiveFeedSetting.messages[i].created);
