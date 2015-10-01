@@ -176,6 +176,25 @@ namespace Kent_Hack_Enough
                      string curDayOfWeek = "";
                      int days = 0;
 
+                     List<Schedule> root = settings.EventsSetting.events;
+
+                     for (int j = 0; j < root.Count(); j++)
+                     {
+                         for (int k = j + 1; k < root.Count(); k++)
+                         {
+                             if (root[j].start > root[k].start)
+                             {
+                                 root.Insert(j, root[k]);
+                                 root.RemoveAt(k+1);
+                                 break;
+                             }
+                         }
+                     }
+                     
+                     settings.EventsSetting.events = root;
+                     settings.Save();
+
+
                      for (int i = 0; i < settings.EventsSetting.events.Count(); i++)
                      {
                          TextBlock txtTitle = new TextBlock();
@@ -189,7 +208,8 @@ namespace Kent_Hack_Enough
                          TextBlock txtDay = new TextBlock();
                          RowDefinition gridRow = new RowDefinition();
 
-
+                         
+                         
                          if (curDayOfWeek != settings.EventsSetting.events[i].start.ToString("dddd"))
                          {
                              days++;
@@ -247,13 +267,12 @@ namespace Kent_Hack_Enough
                          txtTitle.Margin = new Thickness(0, 0, 0, 0);
                          txtTitle.Padding = new Thickness(15, 0, 0, 0);
                          txtTitle.FontWeight = FontWeights.Bold;
-                         txtTitle.FontSize = 17;
+                         txtTitle.FontSize = 20;
                          txtTitle.TextWrapping = TextWrapping.Wrap;
 
 
                          txtDescription = parseText(settings.EventsSetting.events[i].description);
                          txtDescription.Margin = new Thickness(0, 3, 0, 0);
-                         txtDescription.FontWeight = FontWeights.Bold;
                          txtDescription.FontSize = 15;
                          txtDescription.Padding = new Thickness(15, 0, 0, 0);
                          txtDescription.TextWrapping = TextWrapping.Wrap;
@@ -319,12 +338,13 @@ namespace Kent_Hack_Enough
                     Result.events[i].start = Result.events[i].start.ToLocalTime();
                 }
 
+                //if(Result != settings.EventsSetting)
+                //{
+                    settings.EventsSetting = Result;
+                    settings.Save();
 
-
-                settings.EventsSetting = Result;
-                settings.Save();
-
-                refreshSchedule();
+                    refreshSchedule();
+                //}
             }
             catch
             {
