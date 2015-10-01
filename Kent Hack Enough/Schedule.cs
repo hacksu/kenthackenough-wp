@@ -1,5 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,10 +62,33 @@ namespace Kent_Hack_Enough
             rootEvent.events.Add(events);
         }
 
+
+        public void sortEvent(RootEvents root)
+        {
+            for (int i = 0; i < root.events.Count(); i++)
+            {
+                for (int j = i; j < root.events.Count(); j++)
+                {
+                    if (root.events[i].start > root.events[j].start)
+                    {
+                        root.events[j].start.AddHours(5.0);
+                        root.events.Insert(i, root.events[j]);
+                    }
+                }
+
+
+                root.events.Insert(i, root.events[i]);
+            }
+
+            settings.EventsSetting = root;
+            settings.Save();
+        }
+
+
         public void getEvent()
         {
             object obj = new object();
-           // obj = settings.APIServerSetting;
+            // obj = settings.APIServerSetting;
             string[] tmp = null;
             bool portAdded = false;
 
@@ -94,7 +118,7 @@ namespace Kent_Hack_Enough
 
             result.Text = txt;
 
-           // result = md.parseMarkdown(msg.description);
+            // result = md.parseMarkdown(msg.description);
 
             return result;
         }
@@ -103,8 +127,8 @@ namespace Kent_Hack_Enough
         {
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
              {
-                // Your UI update code goes here!
-                try
+                 // Your UI update code goes here!
+                 try
                  {
                      MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
                      if (main.progBar.Visibility == Visibility.Collapsed)
@@ -118,14 +142,16 @@ namespace Kent_Hack_Enough
                  }
                  catch (Exception)
                  {
-                    //   throw;
-                }
+                     //   throw;
+                 }
              });
         }
 
 
         private async void refreshSchedule()
         {
+          //  sortEvent(settings.EventsSetting);
+
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
              {
                  try
@@ -133,100 +159,108 @@ namespace Kent_Hack_Enough
                      // Your UI update code goes here!
                      MainPage main = (MainPage)((PhoneApplicationFrame)Application.Current.RootVisual).Content;
                      main.ScheduleItems.Children.Clear();
-                   //  main.ScheduleDay.Children.Clear();
-                   //  main.ScheduleItemsLeft.Children.Clear();
-                  //   main.ScheduleItemsRight.Children.Clear();
-                     // int j = settings.EventsSetting.events.Count() - 1;
-
-                     string curDayOfWeek = "";
-                     int days = 0;
 
                      Grid DynamicGrid = new Grid();
                      ColumnDefinition gridCol1 = new ColumnDefinition();
                      ColumnDefinition gridCol2 = new ColumnDefinition();
                      ColumnDefinition gridCol3 = new ColumnDefinition();
+                     gridCol1.Width = new GridLength(100, GridUnitType.Star);
+                     gridCol2.Width = new GridLength(3, GridUnitType.Pixel);
+                     gridCol3.Width = new GridLength(100, GridUnitType.Star);
+
                      DynamicGrid.ColumnDefinitions.Add(gridCol1);
                      DynamicGrid.ColumnDefinitions.Add(gridCol2);
                      DynamicGrid.ColumnDefinitions.Add(gridCol3);
-                     RowDefinition gridRow1 = new RowDefinition();
-                     RowDefinition gridRow2 = new RowDefinition();
-                     RowDefinition gridRow3 = new RowDefinition();
-                     DynamicGrid.RowDefinitions.Add(gridRow1);
-                     DynamicGrid.RowDefinitions.Add(gridRow2);
-                     DynamicGrid.RowDefinitions.Add(gridRow3);
 
 
+                     string curDayOfWeek = "";
+                     int days = 0;
 
-
-                     for (int i = 0; i < settings.EventsSetting.events.Count()+1; i++)
+                     for (int i = 0; i < settings.EventsSetting.events.Count(); i++)
                      {
-                        TextBlock txtTitle = new TextBlock();
-                        TextBlock txtDescription = new TextBlock();
-                        TextBlock txtStart = new TextBlock();
-                        TextBlock txtEnd = new TextBlock();
-                        TextBlock txtLocation = new TextBlock();
-                        StackPanel stkDay = new StackPanel();
+                         TextBlock txtTitle = new TextBlock();
+                         TextBlock txtDescription = new TextBlock();
+                         TextBlock txtStart = new TextBlock();
+                         TextBlock txtEnd = new TextBlock();
+                         TextBlock txtLocation = new TextBlock();
+                         StackPanel stkDay = new StackPanel();
                          StackPanel stkItemsLeft = new StackPanel();
                          StackPanel stkItemsRight = new StackPanel();
-                        TextBlock txtDay = new TextBlock();
-                                                 
-                         
-                         if(i == 0)
+                         TextBlock txtDay = new TextBlock();
+                         RowDefinition gridRow = new RowDefinition();
+
+
+                         if (curDayOfWeek != settings.EventsSetting.events[i].start.ToString("dddd"))
                          {
+                             days++;
                              curDayOfWeek = settings.EventsSetting.events[i].start.ToString("dddd");
-                         }
-                         else
-                         {
-                             if (curDayOfWeek != settings.EventsSetting.events[i].start.ToString("dddd"))
+                             RowDefinition gridRow2 = new RowDefinition();
+                             gridRow2.Height = new GridLength(75, GridUnitType.Pixel);
+                             DynamicGrid.RowDefinitions.Add(gridRow2);
+
+                             // Add in new day of the week
+
+                             stkDay.Width = 300;
+                             stkDay.Height = 75;
+                             stkDay.Background = new SolidColorBrush(Color.FromArgb(255, 35, 31, 32));
+                             Canvas.SetZIndex(stkDay, 2);
+                             if (i == 0)
                              {
-                                 curDayOfWeek = settings.EventsSetting.events[i].start.ToString("dddd");
-                                 days += 1;
-
-                                 // Add in new day of the week
-
-                                 stkDay.Width = 200;
-                                 stkDay.Height = 75;
-                                 stkDay.Background = new SolidColorBrush(Color.FromArgb(100, 242, 49, 242));
-
-                                 txtDay.Text = curDayOfWeek.ToString();
-                                 txtDay.HorizontalAlignment = HorizontalAlignment.Center;
-                                 txtDay.FontSize = 50;
-                                 txtDay.TextDecorations = TextDecorations.Underline;
-                                 txtDay.FontWeight = FontWeights.Bold;
-
-                                 stkDay.Children.Add(txtDay);
-                                 main.ScheduleItems.Children.Add(stkDay);
-
+                                 Grid.SetRow(stkDay, i);
                              }
+                             else
+                             {
+                                 Grid.SetRow(stkDay, days -1);
+                             }
+
+                             Grid.SetColumnSpan(stkDay, 3);
+                             Grid.SetColumn(stkDay, 0);
+
+                             txtDay.Text = curDayOfWeek.ToString();
+                             txtDay.HorizontalAlignment = HorizontalAlignment.Center;
+                             txtDay.FontSize = 40;
+                             txtDay.TextDecorations = TextDecorations.Underline;
+                             txtDay.FontWeight = FontWeights.Bold;
+
+                             stkDay.Children.Add(txtDay);
+                             DynamicGrid.Children.Add(stkDay);
                          }
 
-                      
+                         gridRow.Height = new GridLength(125, GridUnitType.Star);
+                         gridRow.MinHeight = 125;
+                         DynamicGrid.RowDefinitions.Add(gridRow);
+
+
                          stkItemsLeft.HorizontalAlignment = HorizontalAlignment.Left;
                          stkItemsLeft.MinWidth = 200;
- 
+                         Grid.SetRow(stkItemsLeft, days);
+                         Grid.SetColumn(stkItemsLeft, 0);
+
+
                          stkItemsRight.HorizontalAlignment = HorizontalAlignment.Left;
                          stkItemsRight.MinWidth = 200;
+                         Grid.SetRow(stkItemsRight, days);
+                         Grid.SetColumn(stkItemsRight, 3);
+
 
                          txtTitle.Text = settings.EventsSetting.events[i].title.ToString();
-                         txtTitle.Margin = new Thickness(200, 25, 0, 0);
-                         txtTitle.Padding = new Thickness(0, 25, 0, 0);
+                         txtTitle.Margin = new Thickness(0, 0, 0, 0);
+                         txtTitle.Padding = new Thickness(15, 0, 0, 0);
                          txtTitle.FontWeight = FontWeights.Bold;
-                         txtTitle.FontSize = 20;
+                         txtTitle.FontSize = 17;
                          txtTitle.TextWrapping = TextWrapping.Wrap;
 
+
                          txtDescription = parseText(settings.EventsSetting.events[i].description);
-                         txtDescription.Margin = new System.Windows.Thickness(0, 15, 0, 0);
+                         txtDescription.Margin = new Thickness(0, 3, 0, 0);
                          txtDescription.FontWeight = FontWeights.Bold;
-                         txtDescription.FontSize = 20;
+                         txtDescription.FontSize = 15;
                          txtDescription.Padding = new Thickness(15, 0, 0, 0);
                          txtDescription.TextWrapping = TextWrapping.Wrap;
-                         Grid.SetRow(txtDescription, 2);
-                         Grid.SetColumn(txtDescription, 2);
 
 
                          txtStart.Text = settings.EventsSetting.events[i].start.ToLocalTime().ToString();
                          txtStart.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                         txtStart.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
 
                          txtEnd.Text = settings.EventsSetting.events[i].end.ToLocalTime().ToString();
                          txtEnd.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
@@ -246,21 +280,24 @@ namespace Kent_Hack_Enough
                          stkItemsRight.Children.Add(txtTitle);
                          stkItemsRight.Children.Add(txtDescription);
 
-                         main.ScheduleItems.Children.Add(stkItemsLeft);
-                         main.ScheduleItems.Children.Add(stkItemsRight);
-                         
-                         
+
+
+
+                         DynamicGrid.Children.Add(stkItemsLeft);
+                         DynamicGrid.Children.Add(stkItemsRight);
+
+
+                         days++;
                      }
+
+                     main.ScheduleItems.Children.Add(DynamicGrid);
                  }
-                 catch (Exception)
+                 catch (Exception ex)
                  {
                      //   throw;
                  }
              });
         }
-
-
-
 
         #region WebCleint
 
@@ -272,7 +309,17 @@ namespace Kent_Hack_Enough
 
                 var results = JsonConvert.DeserializeObject<dynamic>(e.Result);
 
+                //   var jObj = (JObject)JsonConvert.DeserializeObject(e.Result);
+                //  Sort(jObj);
+
                 RootEvents Result = JsonConvert.DeserializeObject<RootEvents>(e.Result);
+
+                for (int i = 0; i < Result.events.Count(); i++)
+                {
+                    Result.events[i].start = Result.events[i].start.ToLocalTime();
+                }
+
+
 
                 settings.EventsSetting = Result;
                 settings.Save();
@@ -310,7 +357,7 @@ namespace Kent_Hack_Enough
             webClientEvents.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClientEvents_DownloadStringCompleted);
 
             webClientEvents.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
-           // state.ToString()
+            // state.ToString()
             webClientEvents.DownloadStringAsync(new Uri(state.ToString() + "events"));
         }
         #endregion
