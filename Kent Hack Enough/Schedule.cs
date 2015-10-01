@@ -208,8 +208,7 @@ namespace Kent_Hack_Enough
                      {
                          TextBlock txtTitle = new TextBlock();
                          TextBlock txtDescription = new TextBlock();
-                         TextBlock txtStart = new TextBlock();
-                         TextBlock txtEnd = new TextBlock();
+                         TextBlock txtTime = new TextBlock();
                          TextBlock txtLocation = new TextBlock();
                          StackPanel stkDay = new StackPanel();
                          StackPanel stkItemsLeft = new StackPanel();
@@ -287,12 +286,8 @@ namespace Kent_Hack_Enough
                          txtDescription.TextWrapping = TextWrapping.Wrap;
 
 
-                         txtStart.Text = settings.EventsSetting.events[i].start.ToLocalTime().ToString();
-                         txtStart.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-
-                         txtEnd.Text = settings.EventsSetting.events[i].end.ToLocalTime().ToString();
-                         txtEnd.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                         txtEnd.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                         txtTime.Text = settings.EventsSetting.events[i].start.ToString("t") + " - " + settings.EventsSetting.events[i].end.ToString("t");
+                         txtTime.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
 
 
                          txtLocation = parseText(settings.EventsSetting.events[i].location);
@@ -302,7 +297,7 @@ namespace Kent_Hack_Enough
                          txtLocation.TextWrapping = TextWrapping.Wrap;
 
 
-                         stkItemsLeft.Children.Add(txtStart);
+                         stkItemsLeft.Children.Add(txtTime);
                          stkItemsLeft.Children.Add(txtLocation);
 
                          stkItemsRight.Children.Add(txtTitle);
@@ -340,6 +335,7 @@ namespace Kent_Hack_Enough
                 for (int i = 0; i < Result.events.Count(); i++)
                 {
                     Result.events[i].start = Result.events[i].start.ToLocalTime();
+                    Result.events[i].end = Result.events[i].end.ToLocalTime();
                 }
 
                 Result = sortEvent(Result);
