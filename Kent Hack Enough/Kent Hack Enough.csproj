@@ -37,6 +37,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -141,20 +142,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\AppBar\add.png" />
     <Content Include="Assets\AppBar\back.png" />
-    <Content Include="Assets\AppBar\cancel.png" />
     <Content Include="Assets\AppBar\check.png" />
     <Content Include="Assets\AppBar\close.png" />
     <Content Include="Assets\AppBar\download.png" />
-    <Content Include="Assets\AppBar\favs.addto.png" />
-    <Content Include="Assets\AppBar\favs.png" />
-    <Content Include="Assets\AppBar\feature.search.png" />
     <Content Include="Assets\AppBar\feature.settings.png" />
-    <Content Include="Assets\AppBar\folder.png" />
-    <Content Include="Assets\AppBar\microphone.png" />
-    <Content Include="Assets\AppBar\minus.png" />
-    <Content Include="Assets\AppBar\new.png" />
     <Content Include="Assets\AppBar\next.png" />
     <Content Include="Assets\AppBar\questionmark.png" />
     <Content Include="Assets\AppBar\refresh.png" />
@@ -170,11 +162,6 @@
     <Content Include="Assets\CardSuits\spade.png" />
     <Content Include="Assets\CardSuits\spade_white.png" />
     <Content Include="Assets\ApplicationIcon.png" />
-    <Content Include="Assets\SplashScreen.png" />
-    <Content Include="Assets\SquareTile150x150.png" />
-    <Content Include="Assets\SquareTile71x71.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\WideLogo.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
