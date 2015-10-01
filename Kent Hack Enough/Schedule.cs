@@ -63,25 +63,52 @@ namespace Kent_Hack_Enough
         }
 
 
-        public void sortEvent(RootEvents root)
+        public RootEvents sortEvent(RootEvents root)
         {
-            for (int i = 0; i < root.events.Count(); i++)
+            List<Schedule> orderedEVents = root.events;
+
+            for (int j = 0; j < orderedEVents.Count(); j++)
             {
-                for (int j = i; j < root.events.Count(); j++)
+                for (int k = j + 1; k < orderedEVents.Count(); k++)
                 {
-                    if (root.events[i].start > root.events[j].start)
+                    if (orderedEVents[j].start > orderedEVents[k].start)
                     {
-                        root.events[j].start.AddHours(5.0);
-                        root.events.Insert(i, root.events[j]);
+                        orderedEVents.Insert(j, orderedEVents[k]);
+                        orderedEVents.RemoveAt(k + 1);
+                        break;
                     }
                 }
-
-
-                root.events.Insert(i, root.events[i]);
             }
 
-            settings.EventsSetting = root;
-            settings.Save();
+            RootEvents newRoot = new RootEvents();
+            newRoot.events = orderedEVents;
+
+            return newRoot;
+        }
+
+        public void getEventNow()
+        {
+            object obj = new object();
+            string[] tmp = null;
+            bool portAdded = false;
+
+            tmp = settings.APIServerSetting.Split('/');
+
+            for (int i = 0; i < tmp.Length; i++)
+            {
+                if (!portAdded)
+                {
+                    obj = "http://" + tmp[2] + ":" + settings.APIPortSetting;
+                    portAdded = true;
+                    i = 2;
+                }
+                else
+                {
+                    obj = obj + "/" + tmp[i];
+                }
+            }
+
+            Timer = new Timer(TimerCallback2, obj, 0, 0);
         }
 
 
@@ -175,24 +202,6 @@ namespace Kent_Hack_Enough
 
                      string curDayOfWeek = "";
                      int days = 0;
-
-                     List<Schedule> root = settings.EventsSetting.events;
-
-                     for (int j = 0; j < root.Count(); j++)
-                     {
-                         for (int k = j + 1; k < root.Count(); k++)
-                         {
-                             if (root[j].start > root[k].start)
-                             {
-                                 root.Insert(j, root[k]);
-                                 root.RemoveAt(k+1);
-                                 break;
-                             }
-                         }
-                     }
-                     
-                     settings.EventsSetting.events = root;
-                     settings.Save();
 
 
                      for (int i = 0; i < settings.EventsSetting.events.Count(); i++)
@@ -300,8 +309,6 @@ namespace Kent_Hack_Enough
                          stkItemsRight.Children.Add(txtDescription);
 
 
-
-
                          DynamicGrid.Children.Add(stkItemsLeft);
                          DynamicGrid.Children.Add(stkItemsRight);
 
@@ -328,9 +335,6 @@ namespace Kent_Hack_Enough
 
                 var results = JsonConvert.DeserializeObject<dynamic>(e.Result);
 
-                //   var jObj = (JObject)JsonConvert.DeserializeObject(e.Result);
-                //  Sort(jObj);
-
                 RootEvents Result = JsonConvert.DeserializeObject<RootEvents>(e.Result);
 
                 for (int i = 0; i < Result.events.Count(); i++)
@@ -338,13 +342,15 @@ namespace Kent_Hack_Enough
                     Result.events[i].start = Result.events[i].start.ToLocalTime();
                 }
 
-                //if(Result != settings.EventsSetting)
-                //{
+                Result = sortEvent(Result);
+
+                if(Result != settings.EventsSetting)
+                {
                     settings.EventsSetting = Result;
                     settings.Save();
 
                     refreshSchedule();
-                //}
+                }
             }
             catch
             {

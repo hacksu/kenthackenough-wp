@@ -88,7 +88,26 @@
         <Grid x:Name="ContentPanel" Margin="0,0,0,0" Grid.Row="2" Grid.ColumnSpan="4" Background="#FF231F20">
             <phone:Pivot >
                 <phone:PivotItem CacheMode="{x:Null}" Header="Home">
-                    <Grid/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="275"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="15"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Assets/Logo.png" Width="275" Height="275" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+                        <StackPanel x:Name="stkUpdates" Width="175" Height="175" HorizontalAlignment="Left" Margin="25, 0, 0, 0" Grid.Row="1" Grid.RowSpan="2"  Grid.Column="0" Background="#7CFF0000">
+                            
+                        </StackPanel>
+                        <StackPanel x:Name="stkSchedule" Width="175" Height="175" HorizontalAlignment="Right" Margin="0, 0, 25, 0" Grid.Row="1" Grid.RowSpan="2"  Grid.Column="1" Background="#7CFF0000">
+                            
+                        </StackPanel>
+                    </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem CacheMode="{x:Null}"  Header="Updates">
                     <ScrollViewer x:Name="UpdatesScroll" Margin="0,-30, 0, 0">

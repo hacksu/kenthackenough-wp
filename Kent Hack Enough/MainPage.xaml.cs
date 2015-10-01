@@ -32,24 +32,32 @@ namespace Kent_Hack_Enough
         {
             // Check if a Wireless or Data connection exists
             var currentList = new NetworkInterfaceList().Where(i => i.InterfaceState == ConnectState.Connected).Select(i => i.InterfaceSubtype);
-            if (currentList.Contains(NetworkInterfaceSubType.WiFi))
-                //Debug.WriteLine("WiFi");
-            if (currentList.Intersect(new NetworkInterfaceSubType[]
-            {
-                NetworkInterfaceSubType.Cellular_EVDO,
-                NetworkInterfaceSubType.Cellular_3G,
-                NetworkInterfaceSubType.Cellular_HSPA,
-                NetworkInterfaceSubType.Cellular_EVDV,
-            }).Any())
-               // Debug.WriteLine("3G");
-            if (currentList.Intersect(new NetworkInterfaceSubType[]
-            {
-                NetworkInterfaceSubType.Cellular_GPRS,
-                NetworkInterfaceSubType.Cellular_1XRTT,
-                NetworkInterfaceSubType.Cellular_EDGE,
-            }).Any())
-               // Debug.WriteLine("2G");
+            //if (currentList.Contains(NetworkInterfaceSubType.WiFi))
+            //    //Debug.WriteLine("WiFi");
+            //if (currentList.Intersect(new NetworkInterfaceSubType[]
+            //{
+            //    NetworkInteraceSubType.Cellular_EVDO,
+            //    NetworkInterfaceSubType.Cellular_3G,
+            //    NetworkInterfaceSubType.Cellular_HSPA,
+            //    NetworkInterfaceSubType.Cellular_EVDV,
+            //}).Any())
+            //   // Debug.WriteLine("3G");
+            //if (currentList.Intersect(new NetworkInterfaceSubType[]
+            //{
+            //    NetworkInterfaceSubType.Cellular_GPRS,
+            //    NetworkInterfaceSubType.Cellular_1XRTT,
+            //    NetworkInterfaceSubType.Cellular_EDGE,
+            //}).Any())
+            //   // Debug.WriteLine("2G");
 
+
+            // Trigers timer refresh
+            Updates feed = new Updates();
+            feed.getFeed();
+            Event events = new Event();
+            events.getEvent();
+
+            // Forces refresh now
             updateView();
         }
 
@@ -71,9 +79,11 @@ namespace Kent_Hack_Enough
         public void updateView()
         {
             Updates feed = new Updates();
-            feed.getFeed();
+            feed.getFeedNow();
             Event events = new Event();
-            events.getEvent();
+            events.getEventNow();
+            Dash dash = new Dash();
+            dash.refreshDash();
         }
 
 

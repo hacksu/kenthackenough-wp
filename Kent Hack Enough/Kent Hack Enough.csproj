@@ -95,6 +95,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="Dash.cs" />
+    <Compile Include="Dates.cs" />
     <Compile Include="Schedule.cs" />
     <Compile Include="Updates.cs" />
     <Compile Include="LocalizedStrings.cs" />
