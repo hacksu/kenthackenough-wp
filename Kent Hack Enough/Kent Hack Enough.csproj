@@ -153,6 +153,8 @@
     <Content Include="Assets\AppBar\save.png" />
     <Content Include="Assets\AppBar\share.png" />
     <Content Include="Assets\AppBar\sync.png" />
+    <Content Include="Assets\SplashScreen.png" />
+    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\BadgeLogo.png" />
     <Content Include="Assets\CardSuits\clover.png" />
