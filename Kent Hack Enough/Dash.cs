@@ -41,44 +41,72 @@ namespace Kent_Hack_Enough
                         }
                     }
 
-
-                    TextBlock txtMsgUpdate = new TextBlock();
-                    TextBlock txtDateUpdate = new TextBlock();
-                    TextBlock txtMsgSchedule = new TextBlock();
-                    TextBlock txtDateSchedule = new TextBlock();
-
-
-                    txtMsgUpdate = parseText(settings.LiveFeedSetting.messages[updateIndex]);
-                    txtMsgUpdate.Margin = new System.Windows.Thickness(5.0);
-                    txtMsgUpdate.TextWrapping = TextWrapping.Wrap;
-                    txtMsgUpdate.Height = 140;
-
-                    txtDateUpdate.Text = parseDate(settings.LiveFeedSetting.messages[updateIndex].created);
-                    txtDateUpdate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                    txtDateUpdate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-                    txtDateUpdate.Margin = new System.Windows.Thickness(3.0);
-                    txtDateUpdate.FontSize = 13;
-                    Grid.SetRow(txtDateUpdate, 2);
+                    for (int i = 0; i < settings.EventsSetting.events.Count(); i++)
+                    {
+                        if (DateTime.Now > settings.EventsSetting.events[i].start)
+                        {
+                            scheduleIndex = i;
+                            break;
+                        }
+                    }
 
 
-                    txtMsgSchedule.Text = settings.EventsSetting.events[scheduleIndex].title;
-                    txtMsgSchedule.Margin = new System.Windows.Thickness(5.0);
-                    txtMsgSchedule.TextWrapping = TextWrapping.Wrap;
-                    txtMsgSchedule.Height = 140;
+                    TextBlock txtTextUpdate = new TextBlock();
+                    TextBlock txtCreatedUpdate = new TextBlock();
 
-                    txtDateSchedule.Text = parseDate(settings.EventsSetting.events[scheduleIndex].start);
-                    txtDateSchedule.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                    txtDateSchedule.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-                    txtDateSchedule.Margin = new System.Windows.Thickness(3.0);
-                    txtDateSchedule.FontSize = 13;
+                    TextBlock txtTitleSchedule = new TextBlock();
+                    TextBlock txtDescriptionSchedule = new TextBlock();
+                    TextBlock txtLocationSchedule = new TextBlock();
+                    TextBlock txtTimeSchedule = new TextBlock();
 
-                    Grid.SetRow(txtDateSchedule, 2);
 
-                    main.stkUpdates.Children.Add(txtMsgUpdate);
-                    main.stkUpdates.Children.Add(txtDateUpdate);
+                    txtTextUpdate = parseText(settings.LiveFeedSetting.messages[updateIndex]);
+                    txtTextUpdate.Margin = new Thickness(5.0);
+                    txtTextUpdate.TextWrapping = TextWrapping.Wrap;
+                    txtTextUpdate.Height = 140;
 
-                    main.stkSchedule.Children.Add(txtMsgSchedule);
-                    main.stkSchedule.Children.Add(txtDateSchedule);
+                    txtCreatedUpdate.Text = parseDate(settings.LiveFeedSetting.messages[updateIndex].created);
+                    txtCreatedUpdate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                    txtCreatedUpdate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                    txtCreatedUpdate.Margin = new Thickness(3.0);
+                    txtCreatedUpdate.FontSize = 13;
+                    Grid.SetRow(txtCreatedUpdate, 2);
+                    Grid.SetColumn(txtCreatedUpdate, 0);
+
+
+                    txtTitleSchedule.Text = settings.EventsSetting.events[scheduleIndex].title;
+                    txtTitleSchedule.Margin = new Thickness(5.0);
+                    txtTitleSchedule.TextWrapping = TextWrapping.Wrap;
+                    
+
+                    txtDescriptionSchedule.Text = settings.EventsSetting.events[scheduleIndex].description;
+                    txtDescriptionSchedule.Margin = new Thickness(5.0);
+                    txtDescriptionSchedule.TextWrapping = TextWrapping.Wrap;
+
+                    txtLocationSchedule.Text = settings.EventsSetting.events[scheduleIndex].location;
+                    txtLocationSchedule.Margin = new Thickness(5.0);
+                    txtLocationSchedule.TextWrapping = TextWrapping.Wrap;
+                    txtLocationSchedule.HorizontalAlignment = HorizontalAlignment.Right;
+                    txtLocationSchedule.VerticalAlignment = VerticalAlignment.Bottom;
+                    txtLocationSchedule.FontSize = 13;
+                    Grid.SetRow(txtLocationSchedule, 2);
+                    Grid.SetColumn(txtLocationSchedule, 1);
+
+                    txtTimeSchedule.Text = settings.EventsSetting.events[scheduleIndex].start.ToString("t") + " - " + settings.EventsSetting.events[scheduleIndex].end.ToString("t");
+                    txtTimeSchedule.Margin = new Thickness(5, -3, 0, 0);
+                    txtTimeSchedule.FontSize = 13;
+
+                    main.stkUpdates.Children.Add(txtTextUpdate);
+                    main.stkMsgDate.Children.Add(txtCreatedUpdate);
+
+
+                    main.stkSchedule.Children.Add(txtTitleSchedule);
+                    main.stkSchedule.Children.Add(txtTimeSchedule);
+                    main.stkSchedule.Children.Add(txtDescriptionSchedule);
+                    main.stkLocationSchedule.Children.Add(txtLocationSchedule);
+
+
+                    
                 }
                 catch (Exception)
                 {

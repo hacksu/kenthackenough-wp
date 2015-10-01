@@ -92,7 +92,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="275"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -101,11 +101,21 @@
 
                         <Image Source="/Assets/Logo.png" Width="275" Height="275" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
 
-                        <StackPanel x:Name="stkUpdates" Width="175" Height="175" HorizontalAlignment="Left" Margin="25, 0, 0, 0" Grid.Row="1" Grid.RowSpan="2"  Grid.Column="0" Background="#7CFF0000">
+                        <StackPanel x:Name="stkUpdates" Width="180" Height="180" HorizontalAlignment="Left" Margin="25, 0, 0, 0" Grid.Row="1" Grid.RowSpan="2"  Grid.Column="0" Background="#7CFF0000">
                             
                         </StackPanel>
-                        <StackPanel x:Name="stkSchedule" Width="175" Height="175" HorizontalAlignment="Right" Margin="0, 0, 25, 0" Grid.Row="1" Grid.RowSpan="2"  Grid.Column="1" Background="#7CFF0000">
+                        <StackPanel x:Name="stkSchedule" Width="180" Height="180" HorizontalAlignment="Right" Margin="0, 0, 25, 0" Grid.Row="1" Grid.RowSpan="2"  Grid.Column="1" Background="#7CFF0000">
                             
+                        </StackPanel>
+
+                        <StackPanel x:Name="stkMsgDate" HorizontalAlignment="Right" Margin="0, 0, 35, 0" Grid.Row="2" Grid.Column="0">
+
+                            
+                        </StackPanel>
+
+                        <StackPanel x:Name="stkLocationSchedule"  HorizontalAlignment="Right" Margin="0, 0, 35, 0" Grid.Row="2"   Grid.Column="1">
+                            
+
                         </StackPanel>
                     </Grid>
                 </phone:PivotItem>
