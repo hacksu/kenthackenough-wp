@@ -104,28 +104,25 @@
 
                         <Image Source="/Assets/ShortLogo(White and Red).png" Width="Auto"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
 
-
                         <TextBlock Text="Latest Update!" FontSize="25" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="2"/>
-
                         <StackPanel x:Name="stkUpdates" MinHeight="50" Height="Auto" Grid.Row="3"  Grid.Column="0" Grid.ColumnSpan="2" Background="#7CFF0000" Margin="5">
-
-                            
                         </StackPanel>
-
                         <TextBlock Text="Next Event:" FontSize="25" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="4"/>
-
                         <StackPanel x:Name="stkSchedule" MinHeight="50" Height="Auto" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="#7CFF0000" Margin="5">
-
                         </StackPanel>
-                        
-
-
                     </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem CacheMode="{x:Null}"  Header="Updates">
                     <ScrollViewer x:Name="UpdatesScroll" Margin="0,-30, 0, 0">
                         <StackPanel x:Name="UpdatesItems" />
                     </ScrollViewer>
+                </phone:PivotItem>
+                <phone:PivotItem CacheMode="{x:Null}"  Header="TEST">
+                    <RichTextBox>
+                        <Paragraph>
+                            <Hyperlink TargetName="_blank" NavigateUri="http://www.bing.com">THIS IS A TEST</Hyperlink>
+                        </Paragraph>
+                    </RichTextBox>
                 </phone:PivotItem>
                 <phone:PivotItem CacheMode="{x:Null}" Header="Schedule" Background="{x:Null}">
                     <Grid>

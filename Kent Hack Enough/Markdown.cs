@@ -120,48 +120,36 @@ namespace Kent_Hack_Enough
                         def = false;
                     }
                     // LINK
-//                    else if ((msg[i] == '['))
-//                    {
-//                        start = msg.IndexOf('[', i);
-//                        end = msg.IndexOf(']', start);
+                    else if ((msg[i] == '['))
+                    {
+                        start = msg.IndexOf('[', i);
+                        end = msg.IndexOf(']', start);
 
-//                        if(msg[end+1] != '(')
-//                        {
-//                            //break;
-//                        }
-//                        else
-//                        {
-//                            //int startLink = msg.IndexOf('(', end + 1);
-//                            //int endLink = msg.IndexOf(')', startLink);
-//                            //tmp = msg.Substring(start+1, end-1);
-//                            //Run textRun = new Run();
-//                            //textRun.Text = tmp + " ";
-//                            //textRun.FontWeight = FontWeights.Bold;
-//                            //Hyperlink link = new Hyperlink();
+                        if (msg[end + 1] != '(')
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            int startLink = msg.IndexOf('(', end + 1);
+                            int endLink = msg.IndexOf(')', startLink);
+                            tmp = msg.Substring(start + 1, end - 1);
+                            Run textRun = new Run();
+                            textRun.Text = tmp + " ";
+                            textRun.FontWeight = FontWeights.Bold;
+                            Hyperlink link = new Hyperlink();
+                            link.TargetName = "_blank";
+                            link.NavigateUri = new Uri(msg.Substring(startLink + 1, endLink - startLink - 1));
 
-//                            //Hyperlink hyperlink = new Hyperlink(textRun);
-//                            //HyperlinkButton hp = new HyperlinkButton();
+                            result.Inlines.Clear();
+                            result.Inlines.Add(textRun);
+                            result.Inlines.Add(link);
 
-//                            //hp.
-//                            //{
-//                            //    NavigateUri = new Uri(msg.Substring(startLink + 1, endLink - startLink - 1))
-//                            //};
-//                            //hyperlink.RequestNavigate += new System.Windows.Navigation.RequestNavigateEventHandler(hyperlink_RequestNavigate); //to be implemented
-//                            //result.Inlines.Clear();
-//                            //result.Inlines.Add(textRun);
-//                            //result.Inlines.Add(hyperlink);
+                            i = startLink + endLink + 1;
+                            def = false;
+                        }
 
-
-
-//                            //link.NavigateUri = new Uri(msg.Substring(startLink + 1, endLink - startLink - 1));
-////                            result.Inlines.Add(link);
-//                          //  result.Inlines.Add(textRun);
-
-//                           // i = startLink + endLink + 1;
-//                           // def = false;
-//                       }
-                       
-                 //   }
+                    }
                 }
                     
                 catch (Exception ex)

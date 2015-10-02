@@ -92,6 +92,7 @@ namespace Kent_Hack_Enough
             webBrowser.Navigate(new Uri("https://khe.io"));
         }
 
+
         // Application Bar
         //private void BuildLocalizedApplicationBar()
         //{
