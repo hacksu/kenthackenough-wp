@@ -12,6 +12,8 @@ namespace Kent_Hack_Enough
 {
     class Markdown
     {
+        private object hyperlink_RequestNavigate;
+
         public TextBlock parseMarkdown(string msg)
         {
             TextBlock result = new TextBlock();
@@ -30,7 +32,7 @@ namespace Kent_Hack_Enough
 
                 try
                 {
-                    // Single asterisk
+                    // Single asterisk - Italic
                     if ((msg[i] == '*') && (msg[i + 1] != '*'))
                     {
                         start = msg.IndexOf('*', i) + 1;
@@ -45,7 +47,7 @@ namespace Kent_Hack_Enough
                         i = end + 1;
                         def = false;
                     }
-                    // Single underline
+                    // Single underline - Italic
                     else if ((msg[i] == '_') && (msg[i + 1] != '_'))
                     {
                         start = msg.IndexOf('_', i) + 1;
@@ -117,12 +119,55 @@ namespace Kent_Hack_Enough
                         i = end + start + 1;
                         def = false;
                     }
+                    // LINK
+//                    else if ((msg[i] == '['))
+//                    {
+//                        start = msg.IndexOf('[', i);
+//                        end = msg.IndexOf(']', start);
+
+//                        if(msg[end+1] != '(')
+//                        {
+//                            //break;
+//                        }
+//                        else
+//                        {
+//                            //int startLink = msg.IndexOf('(', end + 1);
+//                            //int endLink = msg.IndexOf(')', startLink);
+//                            //tmp = msg.Substring(start+1, end-1);
+//                            //Run textRun = new Run();
+//                            //textRun.Text = tmp + " ";
+//                            //textRun.FontWeight = FontWeights.Bold;
+//                            //Hyperlink link = new Hyperlink();
+
+//                            //Hyperlink hyperlink = new Hyperlink(textRun);
+//                            //HyperlinkButton hp = new HyperlinkButton();
+
+//                            //hp.
+//                            //{
+//                            //    NavigateUri = new Uri(msg.Substring(startLink + 1, endLink - startLink - 1))
+//                            //};
+//                            //hyperlink.RequestNavigate += new System.Windows.Navigation.RequestNavigateEventHandler(hyperlink_RequestNavigate); //to be implemented
+//                            //result.Inlines.Clear();
+//                            //result.Inlines.Add(textRun);
+//                            //result.Inlines.Add(hyperlink);
+
+
+
+//                            //link.NavigateUri = new Uri(msg.Substring(startLink + 1, endLink - startLink - 1));
+////                            result.Inlines.Add(link);
+//                          //  result.Inlines.Add(textRun);
+
+//                           // i = startLink + endLink + 1;
+//                           // def = false;
+//                       }
+                       
+                 //   }
                 }
                     
-                catch (Exception)
+                catch (Exception ex)
                 {
                    // i++;
-                    //   throw;
+                      throw;
                 }
                 i++;
                 
