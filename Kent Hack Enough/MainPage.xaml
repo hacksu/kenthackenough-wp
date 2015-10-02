@@ -90,33 +90,36 @@
                 <phone:PivotItem CacheMode="{x:Null}" Header="Home">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="275"/>
+                            <RowDefinition Height="120"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="30"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="/Assets/Logo.png" Width="275" Height="275" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                        <Image Source="/Assets/ShortLogo(White and Red).png" Width="Auto"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
 
-                        <StackPanel x:Name="stkUpdates" Width="180" Height="180" HorizontalAlignment="Left" Margin="25, 0, 0, 0" Grid.Row="1" Grid.RowSpan="2"  Grid.Column="0" Background="#7CFF0000">
-                            
-                        </StackPanel>
-                        <StackPanel x:Name="stkSchedule" Width="180" Height="180" HorizontalAlignment="Right" Margin="0, 0, 25, 0" Grid.Row="1" Grid.RowSpan="2"  Grid.Column="1" Background="#7CFF0000">
-                            
-                        </StackPanel>
 
-                        <StackPanel x:Name="stkMsgDate" HorizontalAlignment="Right" Margin="0, 0, 35, 0" Grid.Row="2" Grid.Column="0">
+                        <TextBlock Text="Latest Update!" FontSize="25" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="2"/>
+
+                        <StackPanel x:Name="stkUpdates" MinHeight="50" Height="Auto" Grid.Row="3"  Grid.Column="0" Grid.ColumnSpan="2" Background="#7CFF0000" Margin="5">
 
                             
                         </StackPanel>
 
-                        <StackPanel x:Name="stkLocationSchedule"  HorizontalAlignment="Right" Margin="0, 0, 35, 0" Grid.Row="2"   Grid.Column="1">
-                            
+                        <TextBlock Text="Next Event:" FontSize="25" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="4"/>
+
+                        <StackPanel x:Name="stkSchedule" MinHeight="50" Height="Auto" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="#7CFF0000" Margin="5">
 
                         </StackPanel>
+                        
+
+
                     </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem CacheMode="{x:Null}"  Header="Updates">
