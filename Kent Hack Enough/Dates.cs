@@ -22,10 +22,10 @@ namespace Kent_Hack_Enough
             timeDif = 100 - timeDif;
 
 
-            if (dt.ToLocalTime().Day == dtNow.Day)
+            if (dt.Day == dtNow.Day || dtNow.Day == dt.Day + 1)
             {
                 // Same day so lets check the hour
-                if (dt.Hour < dtNow.Hour)
+                if (dt.Hour > dtNow.Hour)
                 {
                     DateTime tmp = new DateTime();
                     tmp.AddMinutes(dt.Minute);
@@ -35,7 +35,7 @@ namespace Kent_Hack_Enough
                         result = "an hour ago";
                         return result;
                     }
-                    result = (dtNow.Hour - dt.Hour).ToString() + " hours ago";
+                    result = (24 - dt.Hour + 1).ToString() + " hours ago";
                 }
                 // Count the minutes
                 else if (((dtNow.Minute - dt.Minute) > 0) && ((dtNow.Minute - dt.Minute) < 60) && (dtNow.Hour == dt.Hour) || (dtNow.Hour == dt.Hour + 1))
@@ -56,18 +56,18 @@ namespace Kent_Hack_Enough
                 }
             }
             // Check to see if in same month
-            else if (dt.Month == dtNow.Month)
+            else if (dt.Month == dtNow.Month || dt.Month == dtNow.Month - 1)
             {
                 // Same month lets check the day
-                if (dt.ToLocalTime().Day < dtNow.Day)
+                //   if (dt.ToLocalTime().Day < dtNow.Day)
+                // {
+                if ((dtNow.ToLocalTime().Day - dt.Day).ToString() == "1")
                 {
-                    if ((dtNow.ToLocalTime().Day - dt.Day).ToString() == "1")
-                    {
-                        result = "a day ago";
-                        return result;
-                    }
-                    result = (dtNow.ToLocalTime().Day - dt.Day).ToString() + " days ago";
+                    result = "a day ago";
+                    return result;
                 }
+                result = (DateTime.DaysInMonth(dtNow.Year, dt.Month) - dt.Day + 1).ToString() + " days ago";
+                //}
             }
             else if (dt.Month != dtNow.Month && dt.Year == dtNow.Year)
             {
