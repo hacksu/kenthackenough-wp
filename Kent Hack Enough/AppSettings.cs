@@ -38,7 +38,7 @@ namespace Kent_Hack_Enough
         const RootMessages LiveFeedDefault = null;
         const RootEvents EventsDefault = null;
         const int APIPortDefault = 80;
-        const string APIServerDefault = "https://api.khe.io/v1.0/";
+        const string APIServerDefault = "http://api.khe.pdilyard.com/v1.0/";
 
         // Constructor that gets the application settings.
         public AppSettings()

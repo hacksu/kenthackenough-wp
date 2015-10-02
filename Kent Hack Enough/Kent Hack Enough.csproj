@@ -99,6 +99,7 @@
     <Compile Include="Dash.cs" />
     <Compile Include="Dates.cs" />
     <Compile Include="Schedule.cs" />
+    <Compile Include="System\Windows\Navigation\RequestNavigateEventHandler.cs" />
     <Compile Include="Updates.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -153,7 +154,9 @@
     <Content Include="Assets\AppBar\save.png" />
     <Content Include="Assets\AppBar\share.png" />
     <Content Include="Assets\AppBar\sync.png" />
+    <Content Include="Assets\shortLogo%28White and Red%29.png" />
     <Content Include="Assets\SplashScreen.png" />
+    <Content Include="ShortLogo.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\BadgeLogo.png" />
@@ -184,7 +187,6 @@
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
-    <Content Include="shortLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">

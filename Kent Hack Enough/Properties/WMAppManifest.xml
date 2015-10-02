@@ -16,9 +16,11 @@
     <Tokens>
       <PrimaryToken TokenID="Kent_Hack_EnoughToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">shortLogo.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">
+          </SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">shortLogo.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">
+          </BackgroundImageURI>
           <Title>Kent Hack Enough</Title>
           <BackContent>
           </BackContent>
