@@ -63,15 +63,13 @@ namespace Kent_Hack_Enough
                     txtTextUpdate = parseText(settings.LiveFeedSetting.messages[updateIndex]);
                     txtTextUpdate.Margin = new Thickness(5.0);
                     txtTextUpdate.TextWrapping = TextWrapping.Wrap;
-                    txtTextUpdate.Height = 140;
 
                     txtCreatedUpdate.Text = parseDate(settings.LiveFeedSetting.messages[updateIndex].created);
-                    txtCreatedUpdate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-                    txtCreatedUpdate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                    txtCreatedUpdate.HorizontalAlignment = HorizontalAlignment.Right;
+                    txtCreatedUpdate.VerticalAlignment = VerticalAlignment.Bottom;
                     txtCreatedUpdate.Margin = new Thickness(3.0);
                     txtCreatedUpdate.FontSize = 13;
-                    Grid.SetRow(txtCreatedUpdate, 2);
-                    Grid.SetColumn(txtCreatedUpdate, 0);
+                    Grid.SetRow(txtCreatedUpdate, 5);
 
 
                     txtTitleSchedule.Text = settings.EventsSetting.events[scheduleIndex].title;
@@ -89,21 +87,20 @@ namespace Kent_Hack_Enough
                     txtLocationSchedule.HorizontalAlignment = HorizontalAlignment.Right;
                     txtLocationSchedule.VerticalAlignment = VerticalAlignment.Bottom;
                     txtLocationSchedule.FontSize = 13;
-                    Grid.SetRow(txtLocationSchedule, 2);
-                    Grid.SetColumn(txtLocationSchedule, 1);
+                    Grid.SetRow(txtLocationSchedule, 7);
 
                     txtTimeSchedule.Text = settings.EventsSetting.events[scheduleIndex].start.ToString("t") + " - " + settings.EventsSetting.events[scheduleIndex].end.ToString("t");
                     txtTimeSchedule.Margin = new Thickness(5, -3, 0, 0);
                     txtTimeSchedule.FontSize = 13;
 
                     main.stkUpdates.Children.Add(txtTextUpdate);
-                    main.stkMsgDate.Children.Add(txtCreatedUpdate);
+                    main.stkUpdates.Children.Add(txtCreatedUpdate);
 
 
                     main.stkSchedule.Children.Add(txtTitleSchedule);
                     main.stkSchedule.Children.Add(txtTimeSchedule);
                     main.stkSchedule.Children.Add(txtDescriptionSchedule);
-                    main.stkLocationSchedule.Children.Add(txtLocationSchedule);
+                    main.stkSchedule.Children.Add(txtLocationSchedule);
 
 
                     
