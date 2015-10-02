@@ -18,11 +18,21 @@ namespace Kent_Hack_Enough
 
             dtNow = DateTime.Now.ToLocalTime();
 
-            int timeDif = dtNow.Hour - dt.Hour - dtNow.Minute + dt.Minute;
-            timeDif = 100 - timeDif;
+            int timeDif = dt.Hour - dtNow.Hour;
+            //timeDif = 100 - timeDif;
+            double span;
+            if(timeDif < 12)
+            {
+                span = 24 - TimeSpan.FromHours(dt.Hour).TotalHours + TimeSpan.FromHours(dtNow.Hour).TotalHours;
+            }
+            else
+            {
+                span = TimeSpan.FromHours(dt.Hour).TotalHours - TimeSpan.FromHours(dtNow.Hour).TotalHours;
+            }
 
 
-            if (dt.Day == dtNow.Day || dtNow.Day == dt.Day + 1)
+
+            if (span < 24)
             {
                 // Same day so lets check the hour
                 if (dt.Hour > dtNow.Hour)
@@ -35,24 +45,19 @@ namespace Kent_Hack_Enough
                         result = "an hour ago";
                         return result;
                     }
-                    result = (24 - dt.Hour + 1).ToString() + " hours ago";
+                    result = span + " hours ago";
                 }
-                // Count the minutes
-                else if (((dtNow.Minute - dt.Minute) > 0) && ((dtNow.Minute - dt.Minute) < 60) && (dtNow.Hour == dt.Hour) || (dtNow.Hour == dt.Hour + 1))
+            }
+            // Count the minutes
+            else if (((dtNow.Minute - dt.Minute) > 0) && ((dtNow.Minute - dt.Minute) < 60) && (dtNow.Hour == dt.Hour))
+            {
+                if ((dtNow.Minute - dt.Minute) <= 1)
                 {
-                    if ((dtNow.Minute - dt.Minute) == 1)
-                    {
-                        result = "a minute ago";
-                    }
-                    else
-                    {
-                        result = (dtNow.Minute - dt.Minute).ToString() + " minutes ago";
-                    }
+                    result = "Just now";
                 }
-                // Looks like this post was just now!
                 else
                 {
-                    result = "just now";
+                    result = (dtNow.Minute - dt.Minute).ToString() + " minutes ago";
                 }
             }
             // Check to see if in same month

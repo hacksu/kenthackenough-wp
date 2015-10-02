@@ -156,7 +156,7 @@ namespace Kent_Hack_Enough
                      main.UpdatesItems.Children.Clear();
                      int j = settings.LiveFeedSetting.messages.Count() - 1;
 
-                     for (int i = j; i >= 0; i--)
+                     for (int i = 0; i <= settings.LiveFeedSetting.messages.Count(); i++)
                      {
                          TextBlock txtMsg = new TextBlock();
                          TextBlock txtDate = new TextBlock();
