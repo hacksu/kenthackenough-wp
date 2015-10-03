@@ -122,32 +122,32 @@ namespace Kent_Hack_Enough
                     // LINK
                     else if ((msg[i] == '['))
                     {
-                        start = msg.IndexOf('[', i);
-                        end = msg.IndexOf(']', start);
+                        //start = msg.IndexOf('[', i);
+                        //end = msg.IndexOf(']', start);
 
-                        if (msg[end + 1] != '(')
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            int startLink = msg.IndexOf('(', end + 1);
-                            int endLink = msg.IndexOf(')', startLink);
-                            tmp = msg.Substring(start + 1, end - 1);
-                            Run textRun = new Run();
-                            textRun.Text = tmp + " ";
-                            textRun.FontWeight = FontWeights.Bold;
-                            Hyperlink link = new Hyperlink();
-                            link.TargetName = "_blank";
-                            link.NavigateUri = new Uri(msg.Substring(startLink + 1, endLink - startLink - 1));
+                        //if (msg[end + 1] != '(')
+                        //{
+                        //    break;
+                        //}
+                        //else
+                        //{
+                        //    int startLink = msg.IndexOf('(', end + 1);
+                        //    int endLink = msg.IndexOf(')', startLink);
+                        //    tmp = msg.Substring(start + 1, end - 1);
+                        //    Run textRun = new Run();
+                        //    textRun.Text = tmp + " ";
+                        //    textRun.FontWeight = FontWeights.Bold;
+                        //    Hyperlink link = new Hyperlink();
+                        //    link.TargetName = "_blank";
+                        //    link.NavigateUri = new Uri(msg.Substring(startLink + 1, endLink - startLink - 1));
 
-                            result.Inlines.Clear();
-                            result.Inlines.Add(textRun);
-                            result.Inlines.Add(link);
+                        //    result.Inlines.Clear();
+                        //    result.Inlines.Add(textRun);
+                        //    result.Inlines.Add(link);
 
-                            i = startLink + endLink + 1;
-                            def = false;
-                        }
+                        //    i = startLink + endLink + 1;
+                        //    def = false;
+                        //}
 
                     }
                 }
