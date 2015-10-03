@@ -100,12 +100,12 @@ namespace Kent_Hack_Enough
             Timer = new Timer(TimerCallback, obj, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
-        public RichTextBox parseText(UpdateMessages msg)
+        public RichTextBox parseText(String msg)
         {
             RichTextBox result = new RichTextBox();
             Markdown md = new Markdown();
 
-            result = md.parseMarkdown(msg.text);
+            result = md.parseMarkdown(msg);
 
             return result;
         }
@@ -169,7 +169,7 @@ namespace Kent_Hack_Enough
                          stkContainer.Margin = new System.Windows.Thickness(5.0);
 
 
-                         txtMsg = parseText(settings.LiveFeedSetting.messages[i]);
+                         txtMsg = parseText(settings.LiveFeedSetting.messages[i].text);
                          txtMsg.Margin = new System.Windows.Thickness(5.0);
                          txtMsg.TextWrapping = TextWrapping.Wrap;
                          

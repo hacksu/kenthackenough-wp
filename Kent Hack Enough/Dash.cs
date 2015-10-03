@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using Windows.UI.Core;
 
@@ -51,20 +52,29 @@ namespace Kent_Hack_Enough
                     }
 
 
+                    Paragraph paraTextUpdate = new Paragraph();
+                    Paragraph paraCreatedUpdate = new Paragraph();
+                    Paragraph paraTitleSchedule = new Paragraph();
+                    Paragraph paraDescriptionSchedule = new Paragraph();
+                    Paragraph paraLocationSchedule = new Paragraph();
+                    Paragraph paraTimeSchedule = new Paragraph();
+
+
                     RichTextBox txtTextUpdate = new RichTextBox();
                     RichTextBox txtCreatedUpdate = new RichTextBox();
-
                     RichTextBox txtTitleSchedule = new RichTextBox();
                     RichTextBox txtDescriptionSchedule = new RichTextBox();
                     RichTextBox txtLocationSchedule = new RichTextBox();
                     RichTextBox txtTimeSchedule = new RichTextBox();
 
+                    Run textRun = new Run();
 
-                    txtTextUpdate = parseText(settings.LiveFeedSetting.messages[updateIndex]);
+
+                    txtTextUpdate = parseText(settings.LiveFeedSetting.messages[updateIndex].text);
                     txtTextUpdate.Margin = new Thickness(5.0);
                     txtTextUpdate.TextWrapping = TextWrapping.Wrap;
 
-                   // txtCreatedUpdate.Text = parseDate(settings.LiveFeedSetting.messages[updateIndex].created);
+                    txtCreatedUpdate = parseDate(settings.LiveFeedSetting.messages[updateIndex].created);
                     txtCreatedUpdate.HorizontalAlignment = HorizontalAlignment.Right;
                     txtCreatedUpdate.VerticalAlignment = VerticalAlignment.Bottom;
                     txtCreatedUpdate.Margin = new Thickness(3.0);
@@ -72,16 +82,16 @@ namespace Kent_Hack_Enough
                     Grid.SetRow(txtCreatedUpdate, 5);
 
 
-                   // txtTitleSchedule.Text = settings.EventsSetting.events[scheduleIndex].title;
+                    txtTitleSchedule = parseText(settings.EventsSetting.events[scheduleIndex].title);
                     txtTitleSchedule.Margin = new Thickness(5.0);
                     txtTitleSchedule.TextWrapping = TextWrapping.Wrap;
                     
 
-                  //  txtDescriptionSchedule.Text = settings.EventsSetting.events[scheduleIndex].description;
+                    txtDescriptionSchedule = parseText(settings.EventsSetting.events[scheduleIndex].description);
                     txtDescriptionSchedule.Margin = new Thickness(5.0);
                     txtDescriptionSchedule.TextWrapping = TextWrapping.Wrap;
 
-                   // txtLocationSchedule.Text = settings.EventsSetting.events[scheduleIndex].location;
+                    txtLocationSchedule = parseText(settings.EventsSetting.events[scheduleIndex].location);
                     txtLocationSchedule.Margin = new Thickness(5.0);
                     txtLocationSchedule.TextWrapping = TextWrapping.Wrap;
                     txtLocationSchedule.HorizontalAlignment = HorizontalAlignment.Right;
@@ -89,7 +99,10 @@ namespace Kent_Hack_Enough
                     txtLocationSchedule.FontSize = 13;
                     Grid.SetRow(txtLocationSchedule, 7);
 
-                  //  txtTimeSchedule.Text = settings.EventsSetting.events[scheduleIndex].start.ToString("t") + " - " + settings.EventsSetting.events[scheduleIndex].end.ToString("t");
+
+                    textRun.Text = settings.EventsSetting.events[scheduleIndex].start.ToString("t") + " - " + settings.EventsSetting.events[scheduleIndex].end.ToString("t");
+                    paraTimeSchedule.Inlines.Add(textRun);
+                    txtTimeSchedule.Blocks.Add(paraTimeSchedule);
                     txtTimeSchedule.Margin = new Thickness(5, -3, 0, 0);
                     txtTimeSchedule.FontSize = 13;
 
@@ -112,12 +125,12 @@ namespace Kent_Hack_Enough
             });
         }
 
-        public RichTextBox parseText(UpdateMessages msg)
+        public RichTextBox parseText(String msg)
         {
             RichTextBox result = new RichTextBox();
             Markdown md = new Markdown();
 
-            result = md.parseMarkdown(msg.text);
+            result = md.parseMarkdown(msg);
 
             return result;
         }
