@@ -117,13 +117,6 @@
                         <StackPanel x:Name="UpdatesItems" />
                     </ScrollViewer>
                 </phone:PivotItem>
-                <phone:PivotItem CacheMode="{x:Null}"  Header="TEST">
-                    <RichTextBox>
-                        <Paragraph>
-                            <Hyperlink TargetName="_blank" NavigateUri="http://www.bing.com">THIS IS A TEST</Hyperlink>
-                        </Paragraph>
-                    </RichTextBox>
-                </phone:PivotItem>
                 <phone:PivotItem CacheMode="{x:Null}" Header="Schedule" Background="{x:Null}">
                     <Grid>
                         <Rectangle Width="3" Height="700" Fill="Red" Margin="0, -30, 0, 0"/>
