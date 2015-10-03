@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using Windows.UI.Core;
 
@@ -99,19 +100,19 @@ namespace Kent_Hack_Enough
             Timer = new Timer(TimerCallback, obj, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
-        public TextBlock parseText(UpdateMessages msg)
+        public RichTextBox parseText(String msg)
         {
-            TextBlock result = new TextBlock();
+            RichTextBox result = new RichTextBox();
             Markdown md = new Markdown();
 
-            result = md.parseMarkdown(msg.text);
+            result = md.parseMarkdown(msg);
 
             return result;
         }
 
-        public string parseDate(DateTime dt)
+        public RichTextBox parseDate(DateTime dt)
         {
-            string result = null;
+            RichTextBox result = new RichTextBox();
             Dates d = new Dates();
 
             result = d.parseDate(dt);
@@ -158,8 +159,8 @@ namespace Kent_Hack_Enough
 
                      for (int i = 0; i <= settings.LiveFeedSetting.messages.Count(); i++)
                      {
-                         TextBlock txtMsg = new TextBlock();
-                         TextBlock txtDate = new TextBlock();
+                         RichTextBox txtMsg = new RichTextBox();
+                         RichTextBox txtDate = new RichTextBox();
                          StackPanel stkContainer = new StackPanel();
 
 
@@ -168,15 +169,15 @@ namespace Kent_Hack_Enough
                          stkContainer.Margin = new System.Windows.Thickness(5.0);
 
 
-                         txtMsg = parseText(settings.LiveFeedSetting.messages[i]);
+                         txtMsg = parseText(settings.LiveFeedSetting.messages[i].text);
                          txtMsg.Margin = new System.Windows.Thickness(5.0);
                          txtMsg.TextWrapping = TextWrapping.Wrap;
                          
 
-                         txtDate.Text = parseDate(settings.LiveFeedSetting.messages[i].created);
+                         txtDate = parseDate(settings.LiveFeedSetting.messages[i].created);
                          txtDate.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                          txtDate.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-                         txtDate.Margin = new System.Windows.Thickness(3.0);
+                         txtDate.Margin = new System.Windows.Thickness(0);
                          txtDate.FontSize = 13;
 
                          stkContainer.Children.Add(txtMsg);
