@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using Windows.UI.Core;
 
@@ -138,12 +139,15 @@ namespace Kent_Hack_Enough
             Timer = new Timer(TimerCallback2, obj, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
-        public TextBlock parseText(string txt)
+        public RichTextBox parseText(string txt)
         {
-            TextBlock result = new TextBlock();
+            Paragraph para = new Paragraph();
+            RichTextBox result = new RichTextBox();
             Markdown md = new Markdown();
 
-            result.Text = txt;
+          //  para.Inlines.Add(txt);
+           // result.Blocks.Add()
+           // result.Text = txt;
 
             // result = md.parseMarkdown(msg.description);
 
@@ -279,7 +283,7 @@ namespace Kent_Hack_Enough
                          txtTitle.TextWrapping = TextWrapping.Wrap;
 
 
-                         txtDescription = parseText(settings.EventsSetting.events[i].description);
+                         txtDescription.Text = settings.EventsSetting.events[i].description;
                          txtDescription.Margin = new Thickness(0, 3, 0, 0);
                          txtDescription.FontSize = 15;
                          txtDescription.Padding = new Thickness(15, 0, 0, 0);
@@ -290,7 +294,7 @@ namespace Kent_Hack_Enough
                          txtTime.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
 
 
-                         txtLocation = parseText(settings.EventsSetting.events[i].location);
+                         txtLocation.Text = settings.EventsSetting.events[i].location;
                          txtLocation.Padding = new Thickness(0, 0, 15, 0);
                          txtLocation.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
                          txtLocation.FontSize = 15;
