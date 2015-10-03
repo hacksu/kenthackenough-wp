@@ -118,7 +118,7 @@ namespace Kent_Hack_Enough
 
                     
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     //   throw;
                 }
@@ -129,7 +129,10 @@ namespace Kent_Hack_Enough
         {
             RichTextBox result = new RichTextBox();
             Markdown md = new Markdown();
-
+            if(msg == null)
+            {
+                return result;
+            }
             result = md.parseMarkdown(msg);
 
             return result;

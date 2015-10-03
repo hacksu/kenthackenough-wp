@@ -30,7 +30,6 @@ namespace Kent_Hack_Enough
 
     public class Updates
     {
-        const string API_SERVER = "http://api.khe.pdilyard.com/v1.0/";
         System.Threading.Timer Timer;
         private AppSettings settings = new AppSettings();
         
@@ -104,6 +103,11 @@ namespace Kent_Hack_Enough
         {
             RichTextBox result = new RichTextBox();
             Markdown md = new Markdown();
+
+            if(msg == null)
+            {
+                return result; 
+            }
 
             result = md.parseMarkdown(msg);
 

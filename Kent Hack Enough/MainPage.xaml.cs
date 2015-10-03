@@ -53,9 +53,11 @@ namespace Kent_Hack_Enough
 
             // Trigers timer refresh
             Updates feed = new Updates();
-            feed.getFeed();
+            feed.getFeedNow();
             Event events = new Event();
-            events.getEvent();
+            events.getEventNow();
+            Dash dash = new Dash();
+            dash.refreshDash();
 
             // Forces refresh now
             updateView();
