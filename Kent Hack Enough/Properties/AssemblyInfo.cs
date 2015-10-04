@@ -6,10 +6,10 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kent Hack Enough")]
+[assembly: AssemblyTitle("KHE 2015")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Kent State University - Hacksu")]
+[assembly: AssemblyCompany("HacKSU")]
 [assembly: AssemblyProduct("Kent Hack Enough")]
 [assembly: AssemblyCopyright("Copyright © Hacksu 2015")]
 [assembly: AssemblyTrademark("")]
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("39debc63-ee02-48a0-b0c7-a9dcc5ae53f0")]
+[assembly: Guid("7A90BC1B-E3B0-42FC-9C6F-DEF198F009A7")]
 
 // Version information for an assembly consists of the following four values:
 //

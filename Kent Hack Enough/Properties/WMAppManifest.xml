@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2014/deployment" AppPlatformVersion="8.1">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{06e36e48-871f-4e60-9992-84f2f38696a3}" Title="KHE 2015" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Blake Warrington" Description="Kent Hack Enough is a student led 36 hour hackathon at Kent State University, taking place October 9-11th, 2015. Participants may use this app to access schedule of events, handy links, and push notifications to stay up to date during the event. " SDOptOut="false" BackUpOptOut="false" Publisher="Kent State University - Hacksu" PublisherID="{922460a1-edf7-49e4-85aa-6c4926dcd44a}" NotificationService="MPN">
+  <App xmlns="" ProductID="{06e36e48-871f-4e60-9992-84f2f38696a3}" Title="KHE 2015" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Blake Warrington" Description="Kent Hack Enough is a student led 36 hour hackathon at Kent State University, taking place October 9-11th, 2015. Participants may use this app to access schedule of events, handy links, and push notifications to stay up to date during the event. " SDOptOut="false" BackUpOptOut="false" Publisher="Kent State University - Hacksu" PublisherID="{0873a55c-7e3e-4925-818a-6ec0773816c5}" NotificationService="MPN">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

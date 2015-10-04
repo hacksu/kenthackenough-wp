@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="39debc63-ee02-48a0-b0c7-a9dcc5ae53f0" Publisher="CN=Blake" Version="1.0.0.0" />
+  <Identity Name="51549HacKSU.KHE2015" Publisher="CN=7A90BC1B-E3B0-42FC-9C6F-DEF198F009A7" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="06e36e48-871f-4e60-9992-84f2f38696a3" PhonePublisherId="922460a1-edf7-49e4-85aa-6c4926dcd44a" />
   <Properties>
     <DisplayName>Kent Hack Enough</DisplayName>
-    <PublisherDisplayName>Blake</PublisherDisplayName>
+    <PublisherDisplayName>HacKSU</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
