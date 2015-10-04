@@ -12,7 +12,6 @@ namespace Kent_Hack_Enough
 {
     class Markdown
     {
-        private object hyperlink_RequestNavigate;
 
         public RichTextBox parseMarkdown(string msg)
         {
@@ -25,10 +24,12 @@ namespace Kent_Hack_Enough
             int end = 0;
             bool def = true;
 
-
+            Paragraph para = new Paragraph();
+            
 
             while (i < msg.Length)
             {
+                Run textRun = new Run();
 
                 try
                 {
@@ -38,13 +39,13 @@ namespace Kent_Hack_Enough
                         start = msg.IndexOf('*', i) + 1;
                         end = msg.IndexOf('*', start);
                         tmp = msg.Substring(start, (end - start));
-                        Paragraph para = new Paragraph();
-                        Run textRun = new Run();
+                        //Paragraph para = new Paragraph();
+                        //Run textRun = new Run();
                         textRun.Text = tmp + " ";
                         textRun.FontStyle = FontStyles.Italic;
 
                         para.Inlines.Add(textRun);
-                        result.Blocks.Add(para);
+                       // result.Blocks.Add(para);
 
                         i = end + 1;
                         def = false;
@@ -56,13 +57,13 @@ namespace Kent_Hack_Enough
                         end = msg.IndexOf('_', start);
                         tmp = msg.Substring(start, (end - start));
 
-                        Paragraph para = new Paragraph();
-                        Run textRun = new Run();
+                       // Paragraph para = new Paragraph();
+                       // Run textRun = new Run();
                         textRun.Text = tmp + " ";
                         textRun.FontStyle = FontStyles.Italic;
 
                         para.Inlines.Add(textRun);
-                        result.Blocks.Add(para);
+                      //  result.Blocks.Add(para);
 
                         i = end + 1;
                         def = false;
@@ -74,7 +75,7 @@ namespace Kent_Hack_Enough
                         end = msg.IndexOf('*', start) - 2;
                         tmp = msg.Substring(start, end);
 
-                        // Bold and italic
+                        //Bold and italic
                         if (tmp.Contains("_"))
                         {
                             string under;
@@ -84,8 +85,8 @@ namespace Kent_Hack_Enough
                             under = tmp.Substring(cur2, tmp.IndexOf('_', cur2));
 
 
-                            Paragraph para = new Paragraph();
-                            Run textRun = new Run();
+                          //  Paragraph para = new Paragraph();
+                          //  Run textRun = new Run();
                             textRun.Text = tmp.Remove(cur2, under.Length) + " ";
                             textRun.FontWeight = FontWeights.Bold;
 
@@ -98,43 +99,43 @@ namespace Kent_Hack_Enough
                             textRun.FontWeight = FontWeights.Bold;
                             textRun.FontStyle = FontStyles.Italic;
                             para.Inlines.Add(textRun);
-                            result.Blocks.Add(para);
+                          //  result.Blocks.Add(para);
 
                             i = i + under.Length;
                             def = false;
                         }
                         else
                         {
-                            Paragraph para = new Paragraph();
-                            Run textRun = new Run();
+                        //    Paragraph para = new Paragraph();
+                        //    Run textRun = new Run();
                             textRun.Text = tmp + " ";
                             textRun.FontWeight = FontWeights.Bold;
 
                             para.Inlines.Add(textRun);
-                            result.Blocks.Add(para);
+                      //      result.Blocks.Add(para);
 
                             i = end + start + 2;
                             def = false;
                         }
-                        }
-                    // Double Underline
+                    }
+                    //Double Underline
                     else if ((msg[i] == '_') && (msg[i + 1] == '_'))
                     {
-                        start = msg.IndexOf('_', i + 1);
-                        end = msg.IndexOf('_', start);
+                        start = msg.IndexOf('_', i) + 2;
+                        end = msg.IndexOf('_', start) - 2;
                         tmp = msg.Substring(start, end);
-                        Paragraph para = new Paragraph();
-                        Run textRun = new Run();
+                        //Paragraph para = new Paragraph();
+                        //Run textRun = new Run();
                         textRun.Text = tmp + " ";
                         textRun.FontWeight = FontWeights.Bold;
 
                         para.Inlines.Add(textRun);
-                        result.Blocks.Add(para);
+                      //  result.Blocks.Add(para);
 
                         i = end + start + 1;
                         def = false;
                     }
-                    // LINK
+                    //LINK
                     else if ((msg[i] == '['))
                     {
                         start = msg.IndexOf('[', i);
@@ -149,19 +150,19 @@ namespace Kent_Hack_Enough
                             int startLink = msg.IndexOf('(', end + 1);
                             int endLink = msg.IndexOf(')', startLink);
                             tmp = msg.Substring(start + 1, end - 1);
-                            Paragraph para = new Paragraph();
-                            Run textRun = new Run();
+                          //  Paragraph para = new Paragraph();
+                          //  Run textRun = new Run();
                             Hyperlink link = new Hyperlink();
                             textRun.Text = tmp + " ";
                             textRun.FontWeight = FontWeights.Bold;
 
-                            
+
                             link.TargetName = "_blank";
                             link.NavigateUri = new Uri(msg.Substring(startLink + 1, endLink - startLink - 1));
                             link.Inlines.Add(textRun);
 
                             para.Inlines.Add(link);
-                            result.Blocks.Add(para);
+                           // result.Blocks.Add(para);
 
                             i = endLink + 1;
                             def = false;
@@ -172,7 +173,7 @@ namespace Kent_Hack_Enough
 
                     if (def)
                     {
-                        Paragraph para = new Paragraph();
+                       // Paragraph para = new Paragraph();
 
                         para.Inlines.Add(msg);
                         result.Blocks.Add(para);
@@ -192,7 +193,7 @@ namespace Kent_Hack_Enough
                     
 
             }
-
+            result.Blocks.Add(para);
                 return result;
 
         }
