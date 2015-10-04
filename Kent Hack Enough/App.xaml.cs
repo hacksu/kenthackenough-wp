@@ -80,7 +80,7 @@ namespace Kent_Hack_Enough
             channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
             {
                 var hub = new NotificationHub("khe", "Endpoint=sb://khe-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=euDegbFhz6zDm9CftiArJWV+Cd2tb8Ey6ZP+ORESWsU=");
-                string[] tags = { "kheMaster" };
+                string[] tags = { "kheDev" };
                 await hub.RegisterNativeAsync(args.ChannelUri.ToString(), tags);
             });
         }
