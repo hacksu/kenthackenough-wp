@@ -69,10 +69,10 @@ namespace Kent_Hack_Enough
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            var channel = HttpNotificationChannel.Find("MyPushChannel");
+            var channel = HttpNotificationChannel.Find("kheMaster");
             if (channel == null)
             {
-                channel = new HttpNotificationChannel("MyPushChannel");
+                channel = new HttpNotificationChannel("kheMaster");
                 channel.Open();
                 channel.BindToShellToast();
             }
@@ -80,7 +80,8 @@ namespace Kent_Hack_Enough
             channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
             {
                 var hub = new NotificationHub("khe", "Endpoint=sb://khe-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=euDegbFhz6zDm9CftiArJWV+Cd2tb8Ey6ZP+ORESWsU=");
-                await hub.RegisterNativeAsync(args.ChannelUri.ToString());
+                string[] tags = { "kheMaster" };
+                await hub.RegisterNativeAsync(args.ChannelUri.ToString(), tags);
             });
         }
 
