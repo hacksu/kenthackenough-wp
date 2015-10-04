@@ -98,7 +98,6 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Dates.cs" />
     <Compile Include="Schedule.cs" />
-    <Compile Include="System\Windows\Navigation\RequestNavigateEventHandler.cs" />
     <Compile Include="Updates.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
