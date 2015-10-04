@@ -96,7 +96,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppSettings.cs" />
-    <Compile Include="Dash.cs" />
     <Compile Include="Dates.cs" />
     <Compile Include="Schedule.cs" />
     <Compile Include="System\Windows\Navigation\RequestNavigateEventHandler.cs" />
@@ -156,7 +155,7 @@
     <Content Include="Assets\AppBar\sync.png" />
     <Content Include="Assets\shortLogo%28White and Red%29.png" />
     <Content Include="Assets\SplashScreen.png" />
-    <Content Include="ShortLogo.png" />
+    <Content Include="Assets\ShortLogo.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\BadgeLogo.png" />

@@ -30,7 +30,6 @@ namespace Kent_Hack_Enough
 
     public class Updates
     {
-        const string API_SERVER = "http://api.khe.pdilyard.com/v1.0/";
         System.Threading.Timer Timer;
         private AppSettings settings = new AppSettings();
         
@@ -104,6 +103,11 @@ namespace Kent_Hack_Enough
         {
             RichTextBox result = new RichTextBox();
             Markdown md = new Markdown();
+
+            if(msg == null)
+            {
+                return result; 
+            }
 
             result = md.parseMarkdown(msg);
 
@@ -180,10 +184,41 @@ namespace Kent_Hack_Enough
                          txtDate.Margin = new System.Windows.Thickness(0);
                          txtDate.FontSize = 13;
 
+
                          stkContainer.Children.Add(txtMsg);
                          stkContainer.Children.Add(txtDate);
 
                          main.UpdatesItems.Children.Add(stkContainer);
+
+
+
+
+                         // Dash Page
+                         main.stkUpdates.Children.Clear();
+
+                         Paragraph paraTextUpdate = new Paragraph();
+                         Paragraph paraCreatedUpdate = new Paragraph();
+
+                         RichTextBox txtTextUpdate = new RichTextBox();
+                         RichTextBox txtCreatedUpdate = new RichTextBox();
+   
+
+                         txtTextUpdate = parseText(settings.LiveFeedSetting.messages[0].text);
+                         txtTextUpdate.Margin = new Thickness(5.0);
+                         txtTextUpdate.TextWrapping = TextWrapping.Wrap;
+
+                         txtCreatedUpdate = parseDate(settings.LiveFeedSetting.messages[0].created);
+                         txtCreatedUpdate.HorizontalAlignment = HorizontalAlignment.Right;
+                         txtCreatedUpdate.VerticalAlignment = VerticalAlignment.Bottom;
+                         txtCreatedUpdate.Margin = new Thickness(3.0);
+                         txtCreatedUpdate.FontSize = 13;
+                         Grid.SetRow(txtCreatedUpdate, 5);
+
+                         main.stkUpdates.Children.Add(txtTextUpdate);
+                         main.stkUpdates.Children.Add(txtCreatedUpdate);
+
+
+
                      }
                  }
                  catch (Exception)
@@ -200,28 +235,6 @@ namespace Kent_Hack_Enough
 
         #region WebCleint
 
-        void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-            try
-            {
-                string data = e.Result;
-
-                var results = JsonConvert.DeserializeObject<dynamic>(e.Result);
-
-                RootMessages Result = JsonConvert.DeserializeObject<RootMessages>(e.Result);
-
-                settings.LiveFeedSetting = Result;
-                settings.Save();
-
-                refreshLiveFeed();
-            }
-            catch
-            {
-                return;
-            }
-
-            toggleProg();
-        }
 
 
         private async void TimerCallback(object state)
@@ -247,7 +260,41 @@ namespace Kent_Hack_Enough
             webClient.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
 
             webClient.DownloadStringAsync(new Uri(state.ToString() + "messages"));
+
         }
+
+
+
+        void webClient_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            try
+            {
+                string data = e.Result;
+
+                var results = JsonConvert.DeserializeObject<dynamic>(e.Result);
+
+                RootMessages Result = JsonConvert.DeserializeObject<RootMessages>(e.Result);
+
+                for (int i = 0; i < Result.messages.Count(); i++)
+                {
+                    Result.messages[i].created = Result.messages[i].created.ToLocalTime();
+                }
+
+                settings.LiveFeedSetting = Result;
+                settings.Save();
+
+                refreshLiveFeed();
+            }
+            catch
+            {
+                
+            }
+
+            toggleProg();
+            return;
+        }
+
+
 
         #endregion
 

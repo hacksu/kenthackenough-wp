@@ -18,12 +18,6 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="appBarRefresh" IconUri="/Assets/AppBar/sync.png" Text="Refresh" Click="appBarRefresh_Click" />
             <shell:ApplicationBarIconButton x:Name="appSettings" IconUri="/Assets/AppBar/feature.settings.png" Text="Settings" Click="appBarSettings_Click" />
-            <!--
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
-            -->
         </shell:ApplicationBar>
 
 

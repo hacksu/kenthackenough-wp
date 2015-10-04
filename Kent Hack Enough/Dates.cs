@@ -28,57 +28,58 @@ namespace Kent_Hack_Enough
 
             if (dt.Day == dtNow.Day)
             {
-                if (dt.Minute >= 40)
+                if(dt.Hour == dtNow.Hour || dt.Hour + 1 == dtNow.Hour)
                 {
-                    span = TimeSpan.FromHours(dtNow.Hour).TotalHours - TimeSpan.FromHours(dt.Hour).TotalHours - 1;
+                    if(((60 - dt.Minute) + dtNow.Minute) < 60){
+                        span = -2;
+                    }
+                    else if (dt.Minute >= 40)
+                    {
+                        span = TimeSpan.FromHours(dtNow.Hour).TotalHours - TimeSpan.FromHours(dt.Hour).TotalHours - 1;
+                    }
+                    else
+                    {
+                        span = TimeSpan.FromHours(dtNow.Hour).TotalHours - TimeSpan.FromHours(dt.Hour).TotalHours;
+                    }
                 }
                 else
                 {
-                    span = TimeSpan.FromHours(dtNow.Hour).TotalHours - TimeSpan.FromHours(dt.Hour).TotalHours;
+                    span = 0;
                 }
-
             }
-            else if (dt.Day + 1 == dtNow.Day)
+            else
             {
-                if (dt.Minute >= 40)
-                {
-                    span = 24 - TimeSpan.FromHours(dt.Hour).TotalHours + TimeSpan.FromHours(dtNow.Hour).TotalHours - 1;
-                }
-                else
-                {
-                    span = 24 - TimeSpan.FromHours(dt.Hour).TotalHours + TimeSpan.FromHours(dtNow.Hour).TotalHours;
-                }
-
+                span = (24 - TimeSpan.FromHours(dtNow.Hour).TotalHours) - TimeSpan.FromHours(dt.Hour).TotalHours;
             }
 
 
-
-            if (span < 24 && span != -1 && dtNow.Hour != dt.Hour)
+            if (span < 24 && span >= -1)
             {
                 // Same day so lets check the hour
-                DateTime tmp = new DateTime();
-                tmp.AddMinutes(dt.Minute);
 
                 if ((dtNow.Hour - dt.Hour) == 1)
                 {
                     para.Inlines.Add("an hour ago");
                     return returnResult(para);
                 }
-                para.Inlines.Add(span + " hours ago");
+                para.Inlines.Add((dtNow.Hour - dt.Hour) + " hours ago");
             }
             // Count the minutes
-            else if (((dtNow.Minute - dt.Minute) > 0) && ((dtNow.Minute - dt.Minute) < 60) && (dtNow.Hour == dt.Hour))
+            else if (span == -2)
             {
-                if ((dtNow.Minute - dt.Minute) <= 1)
+                if (dt.Hour != dtNow.Hour)
+                {
+                    para.Inlines.Add(((60 - dt.Minute) + dtNow.Minute).ToString() + " minutes ago");
+                    return returnResult(para);
+                }
+                else if ((dtNow.Minute - dt.Minute) <= 1)
                 {
                     para.Inlines.Add("Just now");
                     return returnResult(para);
                 }
-                else
-                {
-                    para.Inlines.Add((dtNow.Minute - dt.Minute).ToString() + " minutes ago");
-                    return returnResult(para);
-                }
+
+                para.Inlines.Add((dtNow.Minute - dt.Minute).ToString() + " minutes ago");
+                return returnResult(para);
             }
             // Check to see if in same month
             else if (dt.Month == dtNow.Month)
@@ -92,7 +93,7 @@ namespace Kent_Hack_Enough
             }
             else if (dt.Month == dtNow.Month - 1)
             {
-                para.Inlines.Add((DateTime.DaysInMonth(dtNow.Year, dt.Month) - dt.Day + 1).ToString() + " days ago");
+                para.Inlines.Add(((DateTime.DaysInMonth(dtNow.Year, dt.Month) - dt.Day) + dtNow.Day) +" days ago");
             }
             else if (dt.Month != dtNow.Month && dt.Year == dtNow.Year)
             {
