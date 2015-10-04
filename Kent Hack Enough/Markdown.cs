@@ -30,7 +30,7 @@ namespace Kent_Hack_Enough
             while (i < msg.Length)
             {
                 Run textRun = new Run();
-
+                def = true;
                 try
                 {
                     // Single asterisk - Italic
@@ -39,13 +39,10 @@ namespace Kent_Hack_Enough
                         start = msg.IndexOf('*', i) + 1;
                         end = msg.IndexOf('*', start);
                         tmp = msg.Substring(start, (end - start));
-                        //Paragraph para = new Paragraph();
-                        //Run textRun = new Run();
                         textRun.Text = tmp + " ";
                         textRun.FontStyle = FontStyles.Italic;
 
                         para.Inlines.Add(textRun);
-                       // result.Blocks.Add(para);
 
                         i = end + 1;
                         def = false;
@@ -56,14 +53,10 @@ namespace Kent_Hack_Enough
                         start = msg.IndexOf('_', i) + 1;
                         end = msg.IndexOf('_', start);
                         tmp = msg.Substring(start, (end - start));
-
-                       // Paragraph para = new Paragraph();
-                       // Run textRun = new Run();
                         textRun.Text = tmp + " ";
                         textRun.FontStyle = FontStyles.Italic;
 
                         para.Inlines.Add(textRun);
-                      //  result.Blocks.Add(para);
 
                         i = end + 1;
                         def = false;
@@ -72,8 +65,8 @@ namespace Kent_Hack_Enough
                    else if ((msg[i] == '*') && (msg[i + 1] == '*'))
                     {
                         start = msg.IndexOf('*', i) + 2;
-                        end = msg.IndexOf('*', start) - 2;
-                        tmp = msg.Substring(start, end);
+                        end = msg.IndexOf('*', start);
+                        tmp = msg.Substring(start, (end - start));
 
                         //Bold and italic
                         if (tmp.Contains("_"))
@@ -84,14 +77,10 @@ namespace Kent_Hack_Enough
                             cur2 = tmp.IndexOf('_', i) + 2;
                             under = tmp.Substring(cur2, tmp.IndexOf('_', cur2));
 
-
-                          //  Paragraph para = new Paragraph();
-                          //  Run textRun = new Run();
                             textRun.Text = tmp.Remove(cur2, under.Length) + " ";
                             textRun.FontWeight = FontWeights.Bold;
 
                             para.Inlines.Add(textRun);
-
 
                             textRun = null;
 
@@ -99,22 +88,19 @@ namespace Kent_Hack_Enough
                             textRun.FontWeight = FontWeights.Bold;
                             textRun.FontStyle = FontStyles.Italic;
                             para.Inlines.Add(textRun);
-                          //  result.Blocks.Add(para);
-
+                       
                             i = i + under.Length;
                             def = false;
                         }
                         else
                         {
-                        //    Paragraph para = new Paragraph();
-                        //    Run textRun = new Run();
+                       
                             textRun.Text = tmp + " ";
                             textRun.FontWeight = FontWeights.Bold;
 
                             para.Inlines.Add(textRun);
-                      //      result.Blocks.Add(para);
-
-                            i = end + start + 2;
+                      
+                            i = end + 2;
                             def = false;
                         }
                     }
@@ -122,17 +108,14 @@ namespace Kent_Hack_Enough
                     else if ((msg[i] == '_') && (msg[i + 1] == '_'))
                     {
                         start = msg.IndexOf('_', i) + 2;
-                        end = msg.IndexOf('_', start) - 2;
-                        tmp = msg.Substring(start, end);
-                        //Paragraph para = new Paragraph();
-                        //Run textRun = new Run();
+                        end = msg.IndexOf('_', start);
+                        tmp = msg.Substring(start, (end - start));
                         textRun.Text = tmp + " ";
                         textRun.FontWeight = FontWeights.Bold;
 
                         para.Inlines.Add(textRun);
-                      //  result.Blocks.Add(para);
 
-                        i = end + start + 1;
+                        i = end + 2;
                         def = false;
                     }
                     //LINK
@@ -150,8 +133,7 @@ namespace Kent_Hack_Enough
                             int startLink = msg.IndexOf('(', end + 1);
                             int endLink = msg.IndexOf(')', startLink);
                             tmp = msg.Substring(start + 1, end - 1);
-                          //  Paragraph para = new Paragraph();
-                          //  Run textRun = new Run();
+                          
                             Hyperlink link = new Hyperlink();
                             textRun.Text = tmp + " ";
                             textRun.FontWeight = FontWeights.Bold;
@@ -162,25 +144,17 @@ namespace Kent_Hack_Enough
                             link.Inlines.Add(textRun);
 
                             para.Inlines.Add(link);
-                           // result.Blocks.Add(para);
-
+                          
                             i = endLink + 1;
                             def = false;
                         }
 
                     }
 
-
                     if (def)
                     {
-                       // Paragraph para = new Paragraph();
-
-                        para.Inlines.Add(msg);
-                        result.Blocks.Add(para);
-                        return result;
+                        para.Inlines.Add(msg[i].ToString());
                     }
-                        
-
                 }
 
                 catch (Exception ex)
@@ -193,6 +167,17 @@ namespace Kent_Hack_Enough
                     
 
             }
+
+            if (def)
+            {
+                Paragraph para2 = new Paragraph();
+
+                para2.Inlines.Add(msg);
+                result.Blocks.Add(para2);
+                return result;
+            }
+
+
             result.Blocks.Add(para);
                 return result;
 
