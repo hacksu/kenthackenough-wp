@@ -88,7 +88,7 @@ namespace Kent_Hack_Enough
                 return true;
             }
 
-            if (currentList.Contains(NetworkInterfaceSubType.Cellular_EVDO) || currentList.Contains(NetworkInterfaceSubType.Cellular_3G) || currentList.Contains(NetworkInterfaceSubType.Cellular_HSPA) || currentList.Contains(NetworkInterfaceSubType.Cellular_LTE) || currentList.Contains(NetworkInterfaceSubType.Cellular_EDGE))
+            if (currentList.Contains(NetworkInterfaceSubType.Cellular_EVDO) || currentList.Contains(NetworkInterfaceSubType.Cellular_3G) || currentList.Contains(NetworkInterfaceSubType.Cellular_HSPA) || currentList.Contains(NetworkInterfaceSubType.Cellular_LTE) || currentList.Contains(NetworkInterfaceSubType.Cellular_EDGE) || currentList.Contains(NetworkInterfaceSubType.Desktop_PassThru) || currentList.Contains(NetworkInterfaceSubType.Unknown))
             {
                 webBrowser.Navigate(new Uri("https://khe.io/about"));
                 return true;

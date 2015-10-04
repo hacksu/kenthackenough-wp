@@ -30,7 +30,7 @@ namespace Kent_Hack_Enough
             {
                 if(dt.Hour == dtNow.Hour || dt.Hour + 1 == dtNow.Hour)
                 {
-                    if(((60 - dt.Minute) + dtNow.Minute) < 60){
+                    if(((60 - dt.Minute) + dtNow.Minute) < 60 || dt.Hour == dtNow.Hour){
                         span = -2;
                     }
                     else if (dt.Minute >= 40)
@@ -46,10 +46,13 @@ namespace Kent_Hack_Enough
                 {
                     span = 0;
                 }
+            }else if((dt.Day + 1) == dtNow.Day)
+            {
+                span = (24 - TimeSpan.FromHours(dtNow.Hour).TotalHours) - TimeSpan.FromHours(dt.Hour).TotalHours;
             }
             else
             {
-                span = (24 - TimeSpan.FromHours(dtNow.Hour).TotalHours) - TimeSpan.FromHours(dt.Hour).TotalHours;
+                span = -3;
             }
 
 
@@ -62,7 +65,14 @@ namespace Kent_Hack_Enough
                     para.Inlines.Add("an hour ago");
                     return returnResult(para);
                 }
-                para.Inlines.Add((dtNow.Hour - dt.Hour) + " hours ago");
+                if (dtNow.Day == dt.Day)
+                {
+                    para.Inlines.Add((dtNow.Hour - dt.Hour) + " hours ago");
+                }
+                else
+                {
+                    para.Inlines.Add(span + " hours ago");
+                }
             }
             // Count the minutes
             else if (span == -2)
