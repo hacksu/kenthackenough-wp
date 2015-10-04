@@ -32,19 +32,16 @@ namespace Kent_Hack_Enough
 
                     int scheduleIndex = 0;
                     int updateIndex = 0;
+                    DateTime myDate = new DateTime(2015, 10, 10, 6, 30, 0);
+
+                    //while(settings.LiveFeedSetting.messages.Count <= 0 || settings.EventsSetting.events.Count <= 0)
+                    //{
+
+                    //}
 
                     for (int i = 0; i < settings.EventsSetting.events.Count(); i++)
                     {
-                        if (DateTime.Now > settings.EventsSetting.events[i].start)
-                        {
-                            scheduleIndex = i;
-                            break;
-                        }
-                    }
-
-                    for (int i = 0; i < settings.EventsSetting.events.Count(); i++)
-                    {
-                        if (DateTime.Now > settings.EventsSetting.events[i].start)
+                        if (DateTime.Now < settings.EventsSetting.events[i].start)
                         {
                             scheduleIndex = i;
                             break;

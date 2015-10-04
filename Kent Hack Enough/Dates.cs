@@ -62,7 +62,7 @@ namespace Kent_Hack_Enough
                     para.Inlines.Add("an hour ago");
                     return returnResult(para);
                 }
-                para.Inlines.Add(span + " hours ago");
+                para.Inlines.Add((dtNow.Hour - dt.Hour) + " hours ago");
             }
             // Count the minutes
             else if (span == -2)

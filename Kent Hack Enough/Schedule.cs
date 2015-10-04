@@ -139,17 +139,15 @@ namespace Kent_Hack_Enough
             Timer = new Timer(TimerCallback2, obj, 0, Convert.ToInt16(settings.RefreshIntervalSetting) * 1000);
         }
 
-        public RichTextBox parseText(string txt)
+        public RichTextBox parseText(string msg)
         {
-            Paragraph para = new Paragraph();
             RichTextBox result = new RichTextBox();
             Markdown md = new Markdown();
-
-          //  para.Inlines.Add(txt);
-           // result.Blocks.Add()
-           // result.Text = txt;
-
-            // result = md.parseMarkdown(msg.description);
+            if (msg == null)
+            {
+                return result;
+            }
+            result = md.parseMarkdown(msg);
 
             return result;
         }
@@ -313,9 +311,76 @@ namespace Kent_Hack_Enough
 
 
                          days++;
+
+
+
+
                      }
 
                      main.ScheduleItems.Children.Add(DynamicGrid);
+
+
+
+                     // DASH
+                     main.stkSchedule.Children.Clear();
+
+                     int scheduleIndex = 0;
+
+                     for (int i = 0; i < settings.EventsSetting.events.Count(); i++)
+                     {
+                         if (DateTime.Now < settings.EventsSetting.events[i].start)
+                         {
+                             scheduleIndex = i;
+                             break;
+                         }
+                     }
+
+
+                     Paragraph paraTitleSchedule = new Paragraph();
+                     Paragraph paraDescriptionSchedule = new Paragraph();
+                     Paragraph paraLocationSchedule = new Paragraph();
+                     Paragraph paraTimeSchedule = new Paragraph();
+
+                     RichTextBox txtTitleSchedule = new RichTextBox();
+                     RichTextBox txtDescriptionSchedule = new RichTextBox();
+                     RichTextBox txtLocationSchedule = new RichTextBox();
+                     RichTextBox txtTimeSchedule = new RichTextBox();
+
+                     Run textRun = new Run();
+
+
+
+                     txtTitleSchedule = parseText(settings.EventsSetting.events[scheduleIndex].title);
+                     txtTitleSchedule.Margin = new Thickness(5.0);
+                     txtTitleSchedule.TextWrapping = TextWrapping.Wrap;
+
+
+                     txtDescriptionSchedule = parseText(settings.EventsSetting.events[scheduleIndex].description);
+                     txtDescriptionSchedule.Margin = new Thickness(5.0);
+                     txtDescriptionSchedule.TextWrapping = TextWrapping.Wrap;
+
+                     txtLocationSchedule = parseText(settings.EventsSetting.events[scheduleIndex].location);
+                     txtLocationSchedule.Margin = new Thickness(5.0);
+                     txtLocationSchedule.TextWrapping = TextWrapping.Wrap;
+                     txtLocationSchedule.HorizontalAlignment = HorizontalAlignment.Right;
+                     txtLocationSchedule.VerticalAlignment = VerticalAlignment.Bottom;
+                     txtLocationSchedule.FontSize = 13;
+                     Grid.SetRow(txtLocationSchedule, 7);
+
+
+                     textRun.Text = settings.EventsSetting.events[scheduleIndex].start.ToString("t") + " - " + settings.EventsSetting.events[scheduleIndex].end.ToString("t");
+                     paraTimeSchedule.Inlines.Add(textRun);
+                     txtTimeSchedule.Blocks.Add(paraTimeSchedule);
+                     txtTimeSchedule.Margin = new Thickness(5, -3, 0, 0);
+                     txtTimeSchedule.FontSize = 13;
+
+                     main.stkSchedule.Children.Add(txtTitleSchedule);
+                     main.stkSchedule.Children.Add(txtTimeSchedule);
+                     main.stkSchedule.Children.Add(txtDescriptionSchedule);
+                     main.stkSchedule.Children.Add(txtLocationSchedule);
+
+
+
                  }
                  catch (Exception ex)
                  {
@@ -383,8 +448,9 @@ namespace Kent_Hack_Enough
             webClientEvents.DownloadStringCompleted += new DownloadStringCompletedEventHandler(webClientEvents_DownloadStringCompleted);
 
             webClientEvents.Headers[HttpRequestHeader.IfModifiedSince] = DateTime.UtcNow.ToString();
-            // state.ToString()
+
             webClientEvents.DownloadStringAsync(new Uri(state.ToString() + "events"));
+            
         }
         #endregion
     }

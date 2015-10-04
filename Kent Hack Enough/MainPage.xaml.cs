@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Windows.Threading;
 using System.Windows.Media;
 using Microsoft.Phone.Net.NetworkInformation;
+using System.Threading.Tasks;
 
 namespace Kent_Hack_Enough
 {  
@@ -31,36 +32,16 @@ namespace Kent_Hack_Enough
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             // Check if a Wireless or Data connection exists
-            var currentList = new NetworkInterfaceList().Where(i => i.InterfaceState == ConnectState.Connected).Select(i => i.InterfaceSubtype);
-            //if (currentList.Contains(NetworkInterfaceSubType.WiFi))
-            //    //Debug.WriteLine("WiFi");
-            //if (currentList.Intersect(new NetworkInterfaceSubType[]
-            //{
-            //    NetworkInteraceSubType.Cellular_EVDO,
-            //    NetworkInterfaceSubType.Cellular_3G,
-            //    NetworkInterfaceSubType.Cellular_HSPA,
-            //    NetworkInterfaceSubType.Cellular_EVDV,
-            //}).Any())
-            //   // Debug.WriteLine("3G");
-            //if (currentList.Intersect(new NetworkInterfaceSubType[]
-            //{
-            //    NetworkInterfaceSubType.Cellular_GPRS,
-            //    NetworkInterfaceSubType.Cellular_1XRTT,
-            //    NetworkInterfaceSubType.Cellular_EDGE,
-            //}).Any())
-            //   // Debug.WriteLine("2G");
+            if (checkInternet())
+            {
 
-
-            // Trigers timer refresh
-            Updates feed = new Updates();
-            feed.getFeedNow();
-            Event events = new Event();
-            events.getEventNow();
-            Dash dash = new Dash();
-            dash.refreshDash();
-
-            // Forces refresh now
-            updateView();
+                // Trigers timer refresh
+                Updates feed = new Updates();
+                feed.getFeed();
+                Event events = new Event();
+                events.getEvent();
+            }
+           
         }
 
         void appBarSettings_Click(object sender, EventArgs e)
@@ -70,47 +51,58 @@ namespace Kent_Hack_Enough
 
         private void appBarRefresh_Click(object sender, EventArgs e)
         {
-            updateView();
+            if (checkInternet())
+            {
+                updateFeed();
+                updateSchedule();
+            }
         }
 
         private void panorama_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            updateView();
+            if (checkInternet())
+            {
+                updateFeed();
+                updateSchedule();
+            }
         }
 
-        public void updateView()
+        public void updateFeed()
         {
             Updates feed = new Updates();
             feed.getFeedNow();
-            Event events = new Event();
-            events.getEventNow();
-            Dash dash = new Dash();
-            dash.refreshDash();
         }
 
+        public void updateSchedule()
+        {
+            Event events = new Event();
+            events.getEventNow();
+        }
+
+        private bool checkInternet()
+        {
+            var currentList = new NetworkInterfaceList().Where(i => i.InterfaceState == ConnectState.Connected).Select(i => i.InterfaceSubtype);
+            if (currentList.Contains(NetworkInterfaceSubType.WiFi))
+            {
+                webBrowser.Navigate(new Uri("https://khe.io/about"));
+                return true;
+            }
+
+            if (currentList.Contains(NetworkInterfaceSubType.Cellular_EVDO) || currentList.Contains(NetworkInterfaceSubType.Cellular_3G) || currentList.Contains(NetworkInterfaceSubType.Cellular_HSPA) || currentList.Contains(NetworkInterfaceSubType.Cellular_LTE) || currentList.Contains(NetworkInterfaceSubType.Cellular_EDGE))
+            {
+                webBrowser.Navigate(new Uri("https://khe.io/about"));
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Please connect to a cellular network or wireless network", "Unable to reach internet", MessageBoxButton.OK);
+            }
+            return false;
+        }
 
         private void webBrowser_Loaded(object sender, RoutedEventArgs e)
         {
-            webBrowser.Navigate(new Uri("https://khe.io"));
+            webBrowser.Navigate(new Uri("https://khe.io/about"));
         }
-
-
-        // Application Bar
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
-        //    ApplicationBar = new ApplicationBar();
-
-        //    // Create a new button and set the text value to the localized string from AppResources.
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/feature.settings.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
-
-        //    // Create a new menu item with the localized string from AppResources.
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
-
-
     }
 }
