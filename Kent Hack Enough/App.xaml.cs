@@ -7,6 +7,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Kent_Hack_Enough.Resources;
+using Microsoft.Phone.Notification;
+using Microsoft.WindowsAzure.Messaging;
 
 namespace Kent_Hack_Enough
 {
@@ -67,12 +69,26 @@ namespace Kent_Hack_Enough
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            var channel = HttpNotificationChannel.Find("MyPushChannel");
+            if (channel == null)
+            {
+                channel = new HttpNotificationChannel("MyPushChannel");
+                channel.Open();
+                channel.BindToShellToast();
+            }
+
+            channel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(async (o, args) =>
+            {
+                var hub = new NotificationHub("khe", "Endpoint=sb://khe-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=euDegbFhz6zDm9CftiArJWV+Cd2tb8Ey6ZP+ORESWsU=");
+                await hub.RegisterNativeAsync(args.ChannelUri.ToString());
+            });
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+           
         }
 
         // Code to execute when the application is deactivated (sent to background)

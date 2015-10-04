@@ -206,6 +206,7 @@ namespace Kent_Hack_Enough
                          txtTextUpdate = parseText(settings.LiveFeedSetting.messages[0].text);
                          txtTextUpdate.Margin = new Thickness(5.0);
                          txtTextUpdate.TextWrapping = TextWrapping.Wrap;
+                         txtTextUpdate.Height = main.stkUpdates.Height - 15;
 
                          txtCreatedUpdate = parseDate(settings.LiveFeedSetting.messages[0].created);
                          txtCreatedUpdate.HorizontalAlignment = HorizontalAlignment.Right;
