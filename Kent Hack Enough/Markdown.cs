@@ -132,7 +132,7 @@ namespace Kent_Hack_Enough
                         {
                             int startLink = msg.IndexOf('(', end + 1);
                             int endLink = msg.IndexOf(')', startLink);
-                            tmp = msg.Substring(start + 1, end - 1);
+                            tmp = msg.Substring(start + 1, (end- start -1));
                           
                             Hyperlink link = new Hyperlink();
                             textRun.Text = tmp + " ";
@@ -168,14 +168,14 @@ namespace Kent_Hack_Enough
 
             }
 
-            if (def)
-            {
-                Paragraph para2 = new Paragraph();
+            //if (def)
+            //{
+            //    Paragraph para2 = new Paragraph();
 
-                para2.Inlines.Add(msg);
-                result.Blocks.Add(para2);
-                return result;
-            }
+            //    para2.Inlines.Add(msg);
+            //    result.Blocks.Add(para2);
+            //    return result;
+            //}
 
 
             result.Blocks.Add(para);
